@@ -39,4 +39,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function clients()
+    {
+        return $this->hasMany(
+            Company::class,
+            foreignKey: 'account_manager_id'
+        );
+    }
 }
