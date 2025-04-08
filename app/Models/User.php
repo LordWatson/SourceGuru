@@ -47,4 +47,9 @@ class User extends Authenticatable
             foreignKey: 'account_manager_id'
         );
     }
+
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
 }
