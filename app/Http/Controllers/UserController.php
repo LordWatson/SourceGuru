@@ -12,7 +12,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        /*
+         * get the users
+         * their roles
+         * and their clients (we'll add a count on the index table)
+         * */
+        $users = User::with(['role', 'clients'])
+            ->orderBy('role_id')
+            ->paginate(10);
+
+        // Pass the paginated users to the 'users.index' view.
+        return view('users.users-index', compact('users'));
     }
 
     /**

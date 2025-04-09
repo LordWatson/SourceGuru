@@ -14,17 +14,38 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // create an admin user
-        $admin = User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'role_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $users = [
+            [
+                'name' => 'Super Admin',
+                'email' => 'super@admin.com',
+                'role_id' => 1,
+            ],
+            [
+                'name' => 'Admin User',
+                'email' => 'admin@user.com',
+                'role_id' => 2,
+            ],
+            [
+                'name' => 'Standard User',
+                'email' => 'standard@user.com',
+                'role_id' => 3,
+            ],
+            [
+                'name' => 'Customer User',
+                'email' => 'customerd@user.com',
+                'role_id' => 4,
+            ],
+        ];
 
-        // create 10 users
-        User::factory(10)->create();
+        foreach ($users as $userData) {
+            User::create(array_merge($userData, [
+                'password' => Hash::make('password'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]));
+        }
+
+        // Create 10 standard users
+        User::factory(10)->create(['role_id' => 3]);
     }
 }

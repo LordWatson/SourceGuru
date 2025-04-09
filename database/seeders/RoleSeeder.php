@@ -15,19 +15,24 @@ class RoleSeeder extends Seeder
     {
         $rolesArray = [
             [
-                'name' => 'user',
-                'description' => 'User can view, edit, and delete entities created by themselves.',
-                'level' => 1,
+                'name' => 'super admin',
+                'description' => 'Super Admin is given special privileges.',
+                'level' => 10123,
             ],
             [
                 'name' => 'admin',
                 'description' => 'Admin can view, edit, and delete entities created by anyone.',
-                'level' => 10123,
+                'level' => 9932,
+            ],
+            [
+                'name' => 'user',
+                'description' => 'User can view, edit, and delete entities created by themselves.',
+                'level' => 2,
             ],
             [
                 'name' => 'customer',
                 'description' => 'Customer can view entities that are assigned to them.',
-                'level' => 2,
+                'level' => 1,
             ]
         ];
 
