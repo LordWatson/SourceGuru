@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <ul class="divide-y divide-gray-200">
                         @foreach($users as $user)
-                            <li class="py-4 flex items-center justify-between hover:bg-gray-100 cursor-pointer border-b border-gray-200">
+                            <li class="py-4 flex items-center justify-between hover:bg-gray-100">
                                 <div class="flex items-center">
                                     <!-- User Avatar -->
                                     <div class="w-10 h-10 rounded-full bg-gray-400 flex justify-center items-center text-white mr-4">
@@ -19,7 +19,11 @@
                                     </div>
                                     <!-- User Info -->
                                     <div>
-                                        <p class="text-lg font-medium text-gray-800">{{ $user->name }}</p>
+                                        <p class="text-lg font-medium text-gray-800">
+                                            <a href="{{ route('users.show', ['user' => $user->id]) }}">
+                                                {{ $user->name }}
+                                            </a>
+                                        </p>
                                         <p class="text-sm text-gray-500">{{ ucwords($user->role->name) }}</p>
                                     </div>
                                 </div>
