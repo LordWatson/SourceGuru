@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Users\UpdateUserAction;
+use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\Users\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -46,25 +50,29 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('profile.edit', [
+        return view('users.users-edit', [
             'user' => $user,
         ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
+     * @throws \Exception
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction)
     {
-        //
+        // validate the request
+        $validated = $request->validated();
+
+        // trigger the user action
+        try {
+            $user = $updateUserAction->execute(array_merge($validated, ['id' => $user->id]));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+        // redirect to the users show / edit page
+        return Redirect::to("/users/{$user->id}")->with('status', 'user-updated');
     }
 
     /**

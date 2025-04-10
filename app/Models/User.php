@@ -40,6 +40,16 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    /**
+     * check if the user is of admin level
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role->level > 100;
+    }
+
     public function clients()
     {
         return $this->hasMany(
