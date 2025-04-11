@@ -6,8 +6,10 @@ use App\Actions\ActivityLog\CreateActivityLog;
 use App\Actions\Users\UpdateUserAction;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -51,8 +53,16 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        /*
+         * get roles of equal or lower level to the current user
+         * stops an Admin from being able to assign someone to a Super Admin level
+         * */
+        $currentUserLevel = Auth::user()->role->level;
+        $roles = Role::where('level', '<=', $currentUserLevel)->get();
+
         return view('users.users-edit', [
             'user' => $user,
+            'roles' => $roles,
         ]);
     }
 
@@ -80,6 +90,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        // check the user is allowed to delete the resource
+        if(!Auth::user()->isAdmin()) return Redirect::back()->withErrors(['error' => 'You do not have permission to delete this user.']);
+
+        // delete the resource
+        $user->delete();
+
+        // return to users index
+        return Redirect::to('/users')->with('status', 'user-deleted');
     }
 }

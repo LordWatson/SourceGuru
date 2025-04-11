@@ -39,7 +39,7 @@ class UpdateUserRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],
-            // other validation rules...
+            'role_id' => 'sometimes|exists:roles,id',
         ];
     }
 }
