@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\ActivityLog\CreateActivityLog;
 use App\Actions\Users\UpdateUserAction;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
@@ -59,17 +60,16 @@ class UserController extends Controller
      * Update the specified resource in storage.
      * @throws \Exception
      */
-    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction)
+    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction, CreateActivityLog $createActivityLog)
     {
         // validate the request
         $validated = $request->validated();
 
         // trigger the user action
-        try {
-            $user = $updateUserAction->execute(array_merge($validated, ['id' => $user->id]));
-        } catch (\Exception $e) {
-            throw $e;
-        }
+        $action = $updateUserAction->execute(array_merge($validated, ['id' => $user->id]));
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to update user.']);
 
         // redirect to the users show / edit page
         return Redirect::to("/users/{$user->id}")->with('status', 'user-updated');

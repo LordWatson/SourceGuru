@@ -16,38 +16,62 @@ class UpdateUserAction
         //
     }
 
-    public function execute(array $data) : User
+    public function execute(array $data): array
     {
-        try{
+        try {
             DB::beginTransaction();
 
-            // get the user
+            // get the user.
             $user = User::find($data['id']);
 
-            // remove the id from the data array
+            // remove the id from the data array.
             unset($data['id']);
 
-            // update the fields
+            // update the fields.
+            $originalData = $user->getOriginal();
             $user->update($data);
 
-            $activityLog = [
-                'model' => User::class,
-                'model_id' => $user->id,
-                'event' => 'updated',
-                'original' => json_encode($user->getOriginal()),
-                'changes' => json_encode($user->getChanges()),
-                'status_code' => 201,
-            ];
-
-            $this->createActivityLog->execute($activityLog);
+            // log the update activity.
+            $this->logActivity($user, $originalData, 201);
 
             DB::commit();
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
 
-            throw $e;
+            // log the failed update.
+            $originalData = $user->getOriginal() ?? null;
+            $this->logActivity($user, $originalData, 500, $e->getMessage());
+
+            return [
+                'success' => false
+            ];
         }
 
-        return $user->fresh();;
+        return [
+            'user' => $user->fresh(),
+            'success' => true,
+        ];
+    }
+
+    /**
+     * Log User Activity.
+     */
+    private function logActivity(
+        ?User $user,
+        ?array $originalData,
+        int $statusCode,
+        ?string $message = null
+    ): void {
+        $activityLog = [
+            'model' => User::class,
+            'model_id' => $user?->id,
+            'event' => 'updated',
+            'original' => $originalData ? json_encode($originalData) : null,
+            'changes' => $user ? json_encode($user->getChanges()) : null,
+            'status_code' => $statusCode,
+            'message' => $message,
+        ];
+
+        $this->createActivityLog->execute($activityLog);
     }
 }
