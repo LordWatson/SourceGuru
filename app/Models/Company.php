@@ -13,4 +13,9 @@ class Company extends Model
             foreignKey: 'account_manager_id',
         );
     }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
+    }
 }
