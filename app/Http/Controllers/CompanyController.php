@@ -47,8 +47,10 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        // eager load
-        $company->load(['accountManager', 'quotes']);
+        // eager load account manager, quotes, and products through quotes
+        $company->load(['accountManager', 'quotes' => function($query) {
+            $query->with('products');
+        }]);
 
         return view('companies.companies-edit', [
             'company' => $company,
