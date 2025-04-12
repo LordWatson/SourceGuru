@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    public function accountManager()
+    public function accountManager(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(
             User::class,
@@ -14,7 +14,7 @@ class Company extends Model
         );
     }
 
-    public function quotes()
+    public function quotes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Quote::class);
     }

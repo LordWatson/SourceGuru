@@ -27,7 +27,7 @@
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-            @foreach($quotes as $quote)
+            @foreach($data['quotes'] as $quote)
                 @php
                     $class = '';
                     if (in_array($quote->status, ['accepted', 'completed'])) {

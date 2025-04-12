@@ -35,7 +35,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function role()
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
@@ -50,7 +50,7 @@ class User extends Authenticatable
         return $this->role->level > 100;
     }
 
-    public function clients()
+    public function clients(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(
             Company::class,
@@ -58,12 +58,12 @@ class User extends Authenticatable
         );
     }
 
-    public function activityLogs()
+    public function activityLogs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ActivityLog::class);
     }
 
-    public function quotes()
+    public function quotes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Quote::class);
     }

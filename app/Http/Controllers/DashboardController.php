@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\QuoteStatusEnum;
 use App\Models\Quote;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $quotes = Quote::orderByDesc('id')->with(['company', 'user'])->paginate(5);
+        $data = [];
 
-        return view('dashboard', compact('quotes'));
+        $data['quotes'] = Quote::orderByDesc('id')->with(['company', 'user'])->paginate(5);
+        $data['totalQuotes'] = Quote::count();
+        $data['thisMonth'] = Quote::thisMonth()->count();
+        $data['pendingQuotes'] = Quote::pending()->count();
+
+        return view('dashboard', compact('data'));
     }
 }

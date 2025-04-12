@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuoteItem extends Model
 {
-    public function quote()
+    public function quote(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Quote::class);
     }
@@ -14,7 +14,7 @@ class QuoteItem extends Model
     /*
      * populates the 'total' column whenever a quote item is saved
      * */
-    protected static function booted()
+    protected static function booted(): void
     {
         static::saving(function ($item) {
             $item->total_sell_price = $item->quantity * $item->unit_sell_price;
