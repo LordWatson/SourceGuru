@@ -22,7 +22,7 @@
                     Status
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
-                    Total
+                    Total Sell Price
                 </th>
             </tr>
             </thead>
@@ -51,7 +51,7 @@
                             {{ __( ucfirst($quote->status) ) }}
                         </x-quote-status-label>
                     </td>
-                    <td class="px-4 py-2 text-sm text-gray-900">£120.00</td>
+                    <td class="px-4 py-2 text-sm text-gray-900">£{{ $quote->total_sell_price }}</td>
                 </tr>
             @endforeach
             </tbody>

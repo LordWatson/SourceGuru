@@ -15,7 +15,12 @@ class DashboardController extends Controller
     {
         $data = [];
 
-        $data['quotes'] = Quote::orderByDesc('id')->with(['company', 'user'])->paginate(5);
+        // need to eager load products, so I can access the accessor
+        $quotes = Quote::with(['user', 'company', 'products'])->paginate(5);
+        // make visible total_sell_price
+        $quotes->getCollection()->makeVisible(['total_sell_price']);
+        $data['quotes'] = $quotes;
+
         $data['totalQuotes'] = Quote::count();
         $data['thisMonth'] = Quote::thisMonth()->count();
         $data['pendingQuotes'] = Quote::pending()->count();
