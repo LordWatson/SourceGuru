@@ -38,7 +38,7 @@
                         $class = 'bg-yellow-100 text-yellow-800';
                     }
                 @endphp
-                <tr>
+                <tr class="hover:bg-gray-100">
                     <td class="px-4 py-2 text-sm text-gray-900">#{{ $quote->id }}</td>
                     <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->user->name }}</td>
                     <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->company->name }}</td>
