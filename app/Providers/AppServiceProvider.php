@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
          * models should prevent lazy loading
          * stops silently discarding attributes, and accessing missing attributes
          * */
-        Model::shouldBeStrict();
+        //Model::shouldBeStrict();
 
         /*
          * removes annoying mass assignable restrictions

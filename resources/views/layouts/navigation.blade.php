@@ -12,9 +12,25 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <!-- Dashboard -->
+                    <x-nav-link :href="route('dashboard')" :active="request()->is('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <!-- Quotes -->
+                    <x-nav-link :href="route('quotes.index')" :active="request()->is('quotes')">
+                        {{ __('Quotes') }}
+                    </x-nav-link>
+
+                    @if(Auth::user()->role->level > 2)
+                        <!-- Companies -->
+                        <x-nav-link :href="route('companies.index')" :active="request()->is('companies')">
+                            {{ __('Companies') }}
+                        </x-nav-link>
+                        <!-- Users -->
+                        <x-nav-link :href="route('users.index')" :active="request()->is('users')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -39,8 +55,14 @@
                         </x-dropdown-link>
 
                         @if(Auth::user()->role->level > 2)
+                            <!-- Users Nav Links -->
                             <x-dropdown-link :href="route('users.index')">
                                 {{ __('Users') }}
+                            </x-dropdown-link>
+
+                            <!-- Companies Nav Links -->
+                            <x-dropdown-link :href="route('companies.index')">
+                                {{ __('Companies') }}
                             </x-dropdown-link>
                         @endif
 

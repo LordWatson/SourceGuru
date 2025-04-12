@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
@@ -12,7 +14,16 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        /*
+         * get the users
+         * their roles
+         * and their clients (we'll add a count on the index table)
+         * */
+        $companies = Company::with(['accountManager', 'quotes'])
+            ->paginate(10);
+
+        // Pass the paginated users to the 'users.index' view.
+        return view('companies.companies-index', compact('companies'));
     }
 
     /**
@@ -36,15 +47,13 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
-    }
+        // eager load
+        $company->load(['accountManager', 'quotes']);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Company $company)
-    {
-        //
+        return view('companies.companies-edit', [
+            'company' => $company,
+            'users' => User::all(),
+        ]);
     }
 
     /**
