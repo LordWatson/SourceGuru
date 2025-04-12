@@ -10,6 +10,9 @@
                     Quote ID
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
+                    Quoted By
+                </th>
+                <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
                     Customer Name
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
@@ -24,28 +27,33 @@
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-            <tr>
-                <td class="px-4 py-2 text-sm text-gray-900">#001</td>
-                <td class="px-4 py-2 text-sm text-gray-900">Green PLC</td>
-                <td class="px-4 py-2 text-sm text-gray-900">2023-10-01</td>
-                <td class="px-4 py-2 text-sm">
-                    <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Approved
-                    </span>
-                </td>
-                <td class="px-4 py-2 text-sm text-gray-900">£120.00</td>
-            </tr>
-            <tr>
-                <td class="px-4 py-2 text-sm text-gray-900">#002</td>
-                <td class="px-4 py-2 text-sm text-gray-900">Klocko Inc</td>
-                <td class="px-4 py-2 text-sm text-gray-900">2023-10-02</td>
-                <td class="px-4 py-2 text-sm">
-                    <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                        Pending
-                    </span>
-                </td>
-                <td class="px-4 py-2 text-sm text-gray-900">£85.00</td>
-            </tr>
+            @foreach($quotes as $quote)
+                @php
+                    $class = '';
+                    if (in_array($quote->status, ['accepted', 'completed'])) {
+                        $class = 'bg-green-100 text-green-800';
+                    } elseif (in_array($quote->status, ['rejected', 'expired'])) {
+                        $class = 'bg-red-100 text-red-800';
+                    } elseif (in_array($quote->status, ['sent', 'draft'])) {
+                        $class = 'bg-yellow-100 text-yellow-800';
+                    }
+                @endphp
+                <tr>
+                    <td class="px-4 py-2 text-sm text-gray-900">#{{ $quote->id }}</td>
+                    <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->user->name }}</td>
+                    <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->company->name }}</td>
+                    <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->created_at->format('Y-m-d') }}</td>
+                    <td class="px-4 py-2 text-sm">
+                        <x-quote-status-label
+                            :status="$quote->status"
+                            :class="$class"
+                        >
+                            {{ __( ucfirst($quote->status) ) }}
+                        </x-quote-status-label>
+                    </td>
+                    <td class="px-4 py-2 text-sm text-gray-900">£120.00</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

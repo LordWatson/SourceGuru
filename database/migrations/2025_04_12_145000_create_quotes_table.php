@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('company_id')->constrained();
-            $table->date('completed_date');
+            $table->date('completed_date')->nullable();
             $table->date('expired_date')->nullable();
             $table->string('status')->default('draft');
             $table->text('notes')->nullable();
-            $table->decimal('pre_tax_total', 10, 2);
             $table->decimal('tax', 10, 2)->default(0);
             $table->timestamps();
         });
