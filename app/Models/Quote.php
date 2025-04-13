@@ -9,6 +9,7 @@ class Quote extends Model
 {
     protected $casts = [
         'expired_date' => 'date',
+        'created_at' => 'datetime:Y-m-d',
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

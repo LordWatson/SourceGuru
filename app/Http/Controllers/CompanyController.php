@@ -45,16 +45,29 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Company $company)
+    public function show(Request $request, Company $company)
     {
         // eager load account manager, quotes, and products through quotes
         $company->load(['accountManager', 'quotes' => function($query) {
-            $query->with('products');
+            $query->with('user');
+            $query->with('company');
         }]);
+
+        // get the quotes assigned to this company and paginate them
+        $quotes = $company->quotes()->with(['user'])->paginate(5);
+
+        // check if the request is an AJAX call (for infinite scrolling)
+        if ($request->ajax()) {
+            // return quotes in JSON format
+            return response()->json([
+                'quotes' => $quotes,
+            ]);
+        }
 
         return view('companies.companies-edit', [
             'company' => $company,
             'users' => User::all(),
+            'quotes' => $quotes,
         ]);
     }
 

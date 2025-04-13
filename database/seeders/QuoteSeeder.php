@@ -26,6 +26,7 @@ class QuoteSeeder extends Seeder
             DB::table('quotes')->insert([
                 'user_id' => $faker->numberBetween(2, 5),
                 'company_id' => $faker->numberBetween(1, 10),
+                'quote_name' => $faker->text(20),
                 'completed_date' => $completedDate ? $completedDate->format('Y-m-d') : null,
                 'expired_date' => $expiredDate ? $expiredDate->format('Y-m-d') : null,
                 'status' => $faker->randomElement($statusOptions),

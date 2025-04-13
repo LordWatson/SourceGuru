@@ -13,7 +13,7 @@
                     Quoted By
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
-                    Customer Name
+                    Company Name
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
                     Date

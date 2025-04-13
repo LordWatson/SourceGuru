@@ -21,11 +21,12 @@
                         {{ __('Quotes') }}
                     </x-nav-link>
 
+                    <!-- Companies -->
+                    <x-nav-link :href="route('companies.index')" :active="request()->is('companies')">
+                        {{ __('Companies') }}
+                    </x-nav-link>
+
                     @if(Auth::user()->role->level > 2)
-                        <!-- Companies -->
-                        <x-nav-link :href="route('companies.index')" :active="request()->is('companies')">
-                            {{ __('Companies') }}
-                        </x-nav-link>
                         <!-- Users -->
                         <x-nav-link :href="route('users.index')" :active="request()->is('users')">
                             {{ __('Users') }}
@@ -54,15 +55,15 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        <!-- Companies Nav Links -->
+                        <x-dropdown-link :href="route('companies.index')">
+                            {{ __('Companies') }}
+                        </x-dropdown-link>
+
                         @if(Auth::user()->role->level > 2)
                             <!-- Users Nav Links -->
                             <x-dropdown-link :href="route('users.index')">
                                 {{ __('Users') }}
-                            </x-dropdown-link>
-
-                            <!-- Companies Nav Links -->
-                            <x-dropdown-link :href="route('companies.index')">
-                                {{ __('Companies') }}
                             </x-dropdown-link>
                         @endif
 

@@ -18,6 +18,8 @@
                     @include('companies.partials.delete-companies-form')
                 </div>
             </div>
+
+            @include('companies.partials.companies-quotes-table')
         </div>
     </div>
 </x-app-layout>

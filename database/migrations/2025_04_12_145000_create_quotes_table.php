@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('company_id')->constrained();
+            $table->string('quote_name');
             $table->date('completed_date')->nullable();
             $table->date('expired_date')->nullable();
             $table->string('status')->default('draft');
