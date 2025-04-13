@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\QuoteStatusEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Quote extends Model
@@ -27,22 +28,25 @@ class Quote extends Model
         return $this->hasMany(QuoteItem::class);
     }
 
-    // sum the unit_sell_price of all associated products
-    public function getTotalSellPriceAttribute(): float
+    public function totalSellPrice(): Attribute
     {
-        return $this->products->sum('unit_sell_price');
+        return new Attribute(
+            get: fn ($value) => $this->products->sum('unit_sell_price')
+        );
     }
 
-    // sum the unit_buy_price of all associated products
-    public function getTotalBuyPriceAttribute(): float
+    public function totalBuyPrice(): Attribute
     {
-        return $this->products->sum('unit_buy_price');
+        return new Attribute(
+            get: fn ($value) => $this->products->sum('unit_buy_price')
+        );
     }
 
-    // sum the revenue by subtracting the buy price from the sell price
-    public function getRevenueAttribute(): float
+    public function revenue(): Attribute
     {
-        return $this->getTotalSellPriceAttribute() - $this->getTotalBuyPriceAttribute();
+        return new Attribute(
+            get: fn ($value) => $this->total_sell_price - $this->total_buy_price
+        );
     }
 
     // scopes
