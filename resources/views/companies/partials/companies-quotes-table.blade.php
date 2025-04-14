@@ -3,7 +3,7 @@
         <h3 class="font-semibold text-lg text-gray-800">Quotes</h3>
     </div>
     <div class="p-6" id="quotes-table">
-        <div class="max-h-96 overflow-y-auto overflow-x-auto">
+        <div class="max-h-96 overflow-y-auto overflow-x-auto" id="quotes-table-div">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                 <tr class="bg-gray-50 text-left">

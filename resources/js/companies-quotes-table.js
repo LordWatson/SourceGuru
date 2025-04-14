@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("quotes-container");
 
     const loadMoreQuotes = async () => {
-        // mo more pages to load
+        // no more pages to load
         if (currentPage >= lastPage) return;
 
         document.getElementById("loading-more").classList.remove("hidden");
@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         } catch (error) {
             console.error("Error loading more quotes:", error);
-            // handle CORS or other errors
         } finally {
             document.getElementById("loading-more").classList.add("hidden");
         }
@@ -55,9 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // listener for infinite scroll
-    window.addEventListener("scroll", () => {
-        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    // infinite scroll gets triggered when user scrolls on the table div, rather than the page
+    const quoteTableDiv = document.getElementById("quotes-table-div");
+
+    quoteTableDiv.addEventListener("scroll", () => {
+        const { scrollTop, scrollHeight, clientHeight } = quoteTableDiv;
         if (scrollTop + clientHeight >= scrollHeight - 50) {
             loadMoreQuotes();
         }
