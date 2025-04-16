@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Company\CreateCompanyAction;
 use App\Actions\Company\UpdateCompanyAction;
+use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Models\User;
@@ -24,6 +26,7 @@ class CompanyController extends Controller
          * */
         $companies = Company::with(['accountManager', 'quotes'])
             ->select('id', 'name', 'account_manager_id')
+            ->orderBy('name', 'asc')
             ->paginate(10);
 
         // Pass the paginated users to the 'users.index' view.
@@ -35,15 +38,29 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::orderBy('name', 'asc')
+            ->select('id', 'name')
+            ->get();
+
+        return view('companies.companies-create', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateCompanyRequest $request, CreateCompanyAction $createCompanyAction)
     {
-        //
+        // validate the request
+        $validated = $request->validated();
+
+        // trigger the user action
+        $action = $createCompanyAction->execute($validated);
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to create company.']);
+
+        // redirect to the users show / edit page
+        return Redirect::to("/companies/{$action['company']->id}")->with('status', 'company-created');
     }
 
     /**

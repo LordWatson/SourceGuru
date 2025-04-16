@@ -9,10 +9,6 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
     <form method="post" action="{{ route('companies.update', ['company' => $company->id]) }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
@@ -57,6 +53,12 @@
                 @endforeach
             </select>
             <x-input-error class="mt-2" :messages="$errors->get('account_manager_id')" />
+        </div>
+
+        <div>
+            <x-input-label for="notes" :value="__('Notes')" />
+            <x-text-area-input id="notes" name="notes" type="notes" class="mt-1 block w-full" :value="old('notes', $company->notes)" placeholder="Closed every Friday, discounted shipping...">{{ __($company->notes) }}</x-text-area-input>
+            <x-input-error class="mt-2" :messages="$errors->get('notes')" />
         </div>
 
         @if(Auth::user()->isAdmin())

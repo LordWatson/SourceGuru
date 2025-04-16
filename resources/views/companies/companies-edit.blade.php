@@ -28,12 +28,10 @@
 
 
 <script>
-    document.getElementById('primary_contact_phone').addEventListener('input', function (e) {
-        e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Allow only digits
-    });
-
     @if(!Auth::user()->isAdmin())
         // apply readonly to all inputs
         document.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
     @endif
 </script>
+
+@vite(['resources/js/companies.js'])

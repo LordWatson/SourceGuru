@@ -4,7 +4,7 @@ namespace App\Http\Requests\Companies;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCompanyRequest extends FormRequest
+class CreateCompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,12 @@ class UpdateCompanyRequest extends FormRequest
     {
 
         return [
-            'name' => 'sometimes|string|max:255',
-            'primary_contact_name' => 'sometimes|string|max:255',
-            'primary_contact_email' => 'sometimes|email|max:255',
-            'address' => 'sometimes|string|max:255',
-            'primary_contact_phone' => 'sometimes|integer',
-            'account_manager_id' => 'sometimes|exists:users,id',
+            'name' => 'required|string|max:255',
+            'primary_contact_name' => 'required|string|max:255',
+            'primary_contact_email' => 'required|email|max:255',
+            'address' => 'required|string|max:255',
+            'primary_contact_phone' => 'required|string|regex:/^\+?[0-9]{7,15}$/',
+            'account_manager_id' => 'required|exists:users,id',
             'notes' => 'sometimes|max:255',
         ];
     }

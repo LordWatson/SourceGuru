@@ -33,7 +33,7 @@ class UpdateCompanyAction
             $company->update($data);
 
             // log the update activity
-            $this->logActivity($company, $originalData, 201);
+            $this->logActivity(company: $company, originalData: $originalData, statusCode: 201);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -41,7 +41,7 @@ class UpdateCompanyAction
 
             // log the failed update
             $originalData = $company->getOriginal() ?? null;
-            $this->logActivity($company, $originalData, 500, $e->getMessage());
+            $this->logActivity(company: $company, originalData:  $originalData, statusCode: 500, message:  $e->getMessage());
 
             return [
                 'success' => false
@@ -64,9 +64,9 @@ class UpdateCompanyAction
         ?string $message = null
     ): void {
         $activityLog = [
-            'model' => User::class,
+            'model' => Company::class,
             'model_id' => $company?->id,
-            'event' => 'updated',
+            'event' => 'update',
             'original' => $originalData ? json_encode($originalData) : null,
             'changes' => $company ? json_encode($company->getChanges()) : null,
             'status_code' => $statusCode,
