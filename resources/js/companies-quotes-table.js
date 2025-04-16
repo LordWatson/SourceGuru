@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <td class="px-4 py-2 text-sm text-gray-900">${quote.user.name}</td>
                         <td class="px-4 py-2 text-sm text-gray-900">${quote.created_at}</td>
                         <td class="px-4 py-2 text-sm">
-                            <span class="px-2 py-1 rounded ${getStatusClass(quote.status)}" style="text-transform: capitalize;">${quote.status}</span>
+                            <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full ${getStatusClass(quote.status)}" style="text-transform: capitalize;">${quote.status}</span>
                         </td>
                     </tr>
                 `;

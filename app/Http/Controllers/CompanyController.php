@@ -20,6 +20,7 @@ class CompanyController extends Controller
          * and their clients (we'll add a count on the index table)
          * */
         $companies = Company::with(['accountManager', 'quotes'])
+            ->select('id', 'name', 'account_manager_id')
             ->paginate(10);
 
         // Pass the paginated users to the 'users.index' view.
@@ -66,7 +67,7 @@ class CompanyController extends Controller
 
         return view('companies.companies-edit', [
             'company' => $company,
-            'users' => User::all(),
+            'users' => User::orderBy('name', 'asc')->select('id', 'name')->get(),
             'quotes' => $quotes,
         ]);
     }

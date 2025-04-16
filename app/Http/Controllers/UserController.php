@@ -25,6 +25,7 @@ class UserController extends Controller
          * and their clients (we'll add a count on the index table)
          * */
         $users = User::with(['role', 'clients'])
+            ->select('id', 'name', 'role_id')
             ->orderBy('role_id')
             ->paginate(10);
 
@@ -58,7 +59,9 @@ class UserController extends Controller
          * stops an Admin from being able to assign someone to a Super Admin level
          * */
         $currentUserLevel = Auth::user()->role->level;
-        $roles = Role::where('level', '<=', $currentUserLevel)->get();
+        $roles = Role::where('level', '<=', $currentUserLevel)
+            ->select('id', 'name')
+            ->get();
 
         return view('users.users-edit', [
             'user' => $user,
