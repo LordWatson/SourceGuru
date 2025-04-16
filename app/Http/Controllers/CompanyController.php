@@ -48,11 +48,7 @@ class CompanyController extends Controller
      */
     public function show(Request $request, Company $company)
     {
-        // eager load account manager, quotes, and products through quotes
-        $company->load(['accountManager', 'quotes' => function($query) {
-            $query->with('user');
-            $query->with('company');
-        }]);
+        $company->load(['quotes.user']);
 
         // get the quotes assigned to this company and paginate them
         $quotes = $company->quotes()->with(['user'])->paginate(10);
