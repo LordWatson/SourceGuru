@@ -73,7 +73,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      * @throws \Exception
      */
-    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction, CreateActivityLog $createActivityLog)
+    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction)
     {
         // validate the request
         $validated = $request->validated();

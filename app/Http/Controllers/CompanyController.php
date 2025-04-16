@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Company\UpdateCompanyAction;
+use App\Http\Requests\Companies\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CompanyController extends Controller
 {
@@ -71,9 +74,19 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company, UpdateCompanyAction $updateCompanyAction)
     {
-        //
+        // validate the request
+        $validated = $request->validated();
+
+        // trigger the user action
+        $action = $updateCompanyAction->execute(array_merge($validated, ['id' => $company->id]));
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to update user.']);
+
+        // redirect to the users show / edit page
+        return Redirect::to("/companies/{$company->id}")->with('status', 'company-updated');
     }
 
     /**

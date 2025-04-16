@@ -18,11 +18,11 @@ class UpdateUserAction
 
     public function execute(array $data): array
     {
+        // get the user.
+        $user = User::findOrFail($data['id']);
+
         try {
             DB::beginTransaction();
-
-            // get the user.
-            $user = User::find($data['id']);
 
             // remove the id from the data array.
             unset($data['id']);
