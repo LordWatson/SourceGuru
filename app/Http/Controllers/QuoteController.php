@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Quotes\FilterQuotesAction;
 use App\Actions\Search\ParseSearchQueryAction;
+use App\Enums\QuoteStatusEnum;
 use App\Models\Quote;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,7 @@ class QuoteController extends Controller
 
         return view('quotes.quotes-index', [
             'quotes' => $quotes,
+            'statuses' => QuoteStatusEnum::cases()
         ]);
     }
 

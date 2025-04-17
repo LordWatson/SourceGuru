@@ -15,10 +15,21 @@ class DashboardController extends Controller
     {
         $data = [];
 
-        // need to eager load products, so I can access the accessor
-        $quotes = Quote::with(['user', 'company', 'products'])->paginate(5);
-        // make visible total_sell_price
-        $quotes->getCollection()->makeVisible(['total_sell_price']);
+        /*
+         * eager load user, company
+         * only grab their ids and names
+         *
+         * eager load products
+         * only grab quote_id, unit_sell_price
+         * u_s_p is required to call total_sell_price
+         * */
+        $quotes = Quote::with(['user:id,name', 'company:id,name', 'products:quote_id,unit_sell_price'])
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->take(5)
+            ->get();
+        $quotes->makeVisible(['total_sell_price']);
+
         $data['quotes'] = $quotes;
 
         $data['totalQuotes'] = Quote::count();
