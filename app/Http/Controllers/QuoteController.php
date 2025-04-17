@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Search\ParseSearchQueryAction;
 use App\Models\Quote;
 use Illuminate\Http\Request;
 
@@ -10,37 +11,46 @@ class QuoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, ParseSearchQueryAction $searchAction)
     {
         $search = $request->input('search');
+        $filters = $searchAction->execute($search);
 
-        /*
-         * get the quotes
-         * the company it's quoted for
-         * the user that quoted it
-         *
-         * if the search bar has been used, filter with the value
-         * */
         $quotes = Quote::with(['company:id,name', 'user:id,name'])
             ->select('id', 'user_id', 'company_id', 'quote_name', 'status', 'created_at')
-            ->when($search, function ($query, $search) {
-                $query->where(function ($query) use ($search) {
-                    $query->whereHas('company', function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%");
-                    });
-                    $query->orWhereHas('user', function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%");
-                    });
-                    $query->orWhere('quote_name', 'like', "%{$search}%");
-                    $query->orWhere('status', 'like', "%{$search}%");
+            ->when(isset($filters['company']), function ($query) use ($filters) {
+                $query->whereHas('company', function ($q) use ($filters) {
+                    $q->where('name', 'like', "%{$filters['company']}%");
                 });
+            })
+            ->when(isset($filters['user']), function ($query) use ($filters) {
+                $query->whereHas('user', function ($q) use ($filters) {
+                    $q->where('name', 'like', "%{$filters['user']}%");
+                });
+            })
+            ->when(isset($filters['status']), function ($query) use ($filters) {
+                $query->where('status', 'like', "%{$filters['status']}%");
+            })
+            ->when(empty($filters), function ($query) use ($search) {
+                if ($search) {
+                    // Default fallback search if no filters like "company:" or "user:" are found
+                    $query->where(function ($query) use ($search) {
+                        $query->whereHas('company', function ($q) use ($search) {
+                            $q->where('name', 'like', "%{$search}%");
+                        });
+                        $query->orWhereHas('user', function ($q) use ($search) {
+                            $q->where('name', 'like', "%{$search}%");
+                        });
+                        $query->orWhere('quote_name', 'like', "%{$search}%");
+                        $query->orWhere('status', 'like', "%{$search}%");
+                    });
+                }
             })
             ->orderBy('id', 'desc')
             ->paginate(50);
 
         // check if the request is an AJAX call (for infinite scrolling)
         if ($request->ajax()) {
-            // return quotes in JSON format
             return response()->json([
                 'quotes' => $quotes,
             ]);
