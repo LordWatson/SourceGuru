@@ -22,9 +22,8 @@ class CompanyController extends Controller
         $search = $request->input('search');
 
         /*
-         * get the users
-         * their roles
-         * and their clients (we'll add a count on the index table)
+         * get the companies
+         * their account manager, and quotes
          *
          * if the search bar has been used, filter with the value
          * */

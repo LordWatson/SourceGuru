@@ -31,6 +31,11 @@
                         <x-nav-link :href="route('users.index')" :active="request()->is('users')">
                             {{ __('Users') }}
                         </x-nav-link>
+
+                        <!-- Reports -->
+                        <x-nav-link :href="route('reports.index')" :active="request()->is('reports')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -39,7 +44,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
 
                 @php
-                    $searchableRoutes = ['users.index', 'companies.index', 'quotes.index'];
+                    $searchableRoutes = ['users.index', 'companies.index', 'quotes.index', 'reports.index'];
                 @endphp
 
                 @if(in_array(Route::currentRouteName(), $searchableRoutes))
@@ -84,6 +89,11 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        <!-- Quotes Nav Links -->
+                        <x-dropdown-link :href="route('quotes.index')">
+                            {{ __('Quotes') }}
+                        </x-dropdown-link>
+
                         <!-- Companies Nav Links -->
                         <x-dropdown-link :href="route('companies.index')">
                             {{ __('Companies') }}
@@ -93,6 +103,11 @@
                             <!-- Users Nav Links -->
                             <x-dropdown-link :href="route('users.index')">
                                 {{ __('Users') }}
+                            </x-dropdown-link>
+
+                            <!-- Reports Nav Links -->
+                            <x-dropdown-link :href="route('reports.index')">
+                                {{ __('Reports') }}
                             </x-dropdown-link>
                         @endif
 

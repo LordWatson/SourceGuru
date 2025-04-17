@@ -20,7 +20,7 @@ class QuoteItemSeeder extends Seeder
         $quoteIds = Quote::pluck('id')->toArray();
 
         // seed 300 quote items
-        for ($i = 0; $i < 300; $i++) {
+        for ($i = 0; $i < 3000; $i++) {
             // randomly pick a quote_id
             $quoteId = $faker->randomElement($quoteIds);
             // random quantity between 1 and 100

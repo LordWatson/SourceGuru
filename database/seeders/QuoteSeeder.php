@@ -19,7 +19,7 @@ class QuoteSeeder extends Seeder
 
         $statusOptions = array_map(fn($status) => $status->value, QuoteStatusEnum::cases());
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $completedDate = $faker->optional()->dateTimeBetween('-1 year', 'now');
             $expiredDate = $faker->optional()->dateTimeBetween('now', '+1 year');
 
