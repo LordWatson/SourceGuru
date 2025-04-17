@@ -62,4 +62,3 @@
     const CURRENT_PAGE_PLACEHOLDER = {{ $quotes->currentPage() }};
     const LAST_PAGE_PLACEHOLDER = {{ $quotes->lastPage() }};
 </script>
-@vite(['resources/js/quotes.js'])
