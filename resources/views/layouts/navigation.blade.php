@@ -38,27 +38,33 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
 
-                <!-- Search Bar -->
-                <div class="relative">
-                    <form method="GET" action="{{ route(Route::currentRouteName()) }}">
-                        <input
-                            type="text"
-                            name="search"
-                            value="{{ request('search') }}"
-                            class="h-10 w-56 px-4 text-sm leading-5 border rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            placeholder="Search..."
-                        >
+                @php
+                    $searchableRoutes = ['users.index', 'companies.index', 'quotes.index'];
+                @endphp
 
-                        <button
-                            type="submit"
-                            class="absolute inset-y-0 right-0 px-3 text-gray-600 hover:text-gray-800"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M11 2a8 8 0 016.32 12.9l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387A8 8 0 1111 2zm-6 8a6 6 0 1012 0 6 6 0 00-12 0z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                    </form>
-                </div>
+                @if(in_array(Route::currentRouteName(), $searchableRoutes))
+                    <!-- Search Bar -->
+                    <div class="relative">
+                        <form method="GET" action="{{ route(Route::currentRouteName()) }}">
+                            <input
+                                type="text"
+                                name="search"
+                                value="{{ request('search') }}"
+                                class="h-10 w-56 px-4 text-sm leading-5 border rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                placeholder="Search..."
+                            >
+
+                            <button
+                                type="submit"
+                                class="absolute inset-y-0 right-0 px-3 text-gray-600 hover:text-gray-800"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M11 2a8 8 0 016.32 12.9l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387A8 8 0 1111 2zm-6 8a6 6 0 1012 0 6 6 0 00-12 0z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                @endif
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

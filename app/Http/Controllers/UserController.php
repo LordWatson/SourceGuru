@@ -28,7 +28,7 @@ class UserController extends Controller
          *
          * if the search bar has been used, filter with the value
          * */
-        $users = User::with(['role', 'clients'])
+        $users = User::with(['role:name,id', 'clients:account_manager_id'])
             ->select('id', 'name', 'role_id')
             ->when($search, function ($query, $search) {
                 $query->where('name', 'like', "%{$search}%");

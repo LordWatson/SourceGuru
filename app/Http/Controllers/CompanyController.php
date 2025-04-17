@@ -20,6 +20,7 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+
         /*
          * get the users
          * their roles
@@ -27,7 +28,7 @@ class CompanyController extends Controller
          *
          * if the search bar has been used, filter with the value
          * */
-        $companies = Company::with(['accountManager', 'quotes'])
+        $companies = Company::with(['accountManager:id,name', 'quotes:company_id'])
             ->select('id', 'name', 'account_manager_id')
             ->when($search, function ($query, $search) {
                 $query->where('name', 'like', "%{$search}%");
@@ -77,7 +78,7 @@ class CompanyController extends Controller
         $company->load(['quotes.user']);
 
         // get the quotes assigned to this company and paginate them
-        $quotes = $company->quotes()->with(['user'])->paginate(10);
+        $quotes = $company->quotes()->with(['user:id,name'])->paginate(10);
 
         // check if the request is an AJAX call (for infinite scrolling)
         if ($request->ajax()) {
