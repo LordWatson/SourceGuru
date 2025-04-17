@@ -12,8 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             currentPage++;
 
-            // axios CORS configuration
-            const response = await axios.get(`?page=${currentPage}`, {
+            // get current URL and check for the search parameter
+            const params = new URLSearchParams(window.location.search);
+            let url = `?page=${currentPage}`;
+
+            // if the search parameter exists, include it in the URL
+            if (params.has("search")) {
+                const searchValue = params.get("search");
+                url += `&search=${encodeURIComponent(searchValue)}`;
+            }
+
+            // axios GET request
+            const response = await axios.get(url, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
