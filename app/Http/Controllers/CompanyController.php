@@ -17,15 +17,21 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
         /*
          * get the users
          * their roles
          * and their clients (we'll add a count on the index table)
+         *
+         * if the search bar has been used, filter with the value
          * */
         $companies = Company::with(['accountManager', 'quotes'])
             ->select('id', 'name', 'account_manager_id')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
             ->orderBy('name', 'asc')
             ->paginate(10);
 
