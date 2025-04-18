@@ -14,9 +14,14 @@
             <!-- Recent Quotes Section -->
             @include('dashboard.partials.recent-quotes-table')
 
+            <!-- Charts Section -->
+            @include('dashboard.partials.performance-chart')
+
             <!-- Dashboard Actions Section -->
-            @include('dashboard.partials.dashboard-actions')
+{{--            @include('dashboard.partials.dashboard-actions')--}}
 
         </div>
     </div>
 </x-app-layout>
+
+@vite(['resources/js/dashboard.js'])

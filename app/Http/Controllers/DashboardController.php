@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Users\GetTopQuoteUsersAction;
 use App\Enums\QuoteStatusEnum;
 use App\Models\Quote;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(GetTopQuoteUsersAction $getTopQuoteUsersAction)
     {
         $data = [];
 
@@ -37,6 +40,15 @@ class DashboardController extends Controller
         $data['thisMonth'] = Quote::thisMonth()->count();
         $data['thisMonthChange'] = Quote::thisMonth()->count() - Quote::lastMonth()->count();
         $data['pendingQuotes'] = Quote::pending()->count();
+
+        /*
+         * cached query, reloads every 10 minutes
+         *
+         * get the 3 users with the most quotes created this month, that are not of a status of expired or rejected
+         * */
+        $data['quoteUsers'] = Cache::remember('dashboard_quote_users', 10, function () use($getTopQuoteUsersAction) {
+            return $getTopQuoteUsersAction->execute(3);
+        });
 
         return view('dashboard', compact('data'));
     }

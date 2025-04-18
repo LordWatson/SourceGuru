@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies\Companies;
+namespace App\Policies;
 
 use App\Models\Company;
 use App\Models\User;
@@ -12,7 +12,7 @@ class CompanyPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**

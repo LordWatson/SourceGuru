@@ -55,7 +55,8 @@
                                 type="text"
                                 name="search"
                                 value="{{ request('search') }}"
-                                class="h-10 w-56 px-4 text-sm leading-5 border rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                class="h-10 px-4 text-sm leading-5 border rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                style="width: 20rem;"
                                 placeholder="Search..."
                             >
 
