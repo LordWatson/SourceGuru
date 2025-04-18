@@ -32,8 +32,10 @@ class DashboardController extends Controller
 
         $data['quotes'] = $quotes;
 
-        $data['totalQuotes'] = Quote::count();
+        $data['totalQuotes'] = Quote::thisYear()->count();
+        $data['totalQuotesChange'] = Quote::thisYear()->count() - Quote::lastYear()->count();
         $data['thisMonth'] = Quote::thisMonth()->count();
+        $data['thisMonthChange'] = Quote::thisMonth()->count() - Quote::lastMonth()->count();
         $data['pendingQuotes'] = Quote::pending()->count();
 
         return view('dashboard', compact('data'));

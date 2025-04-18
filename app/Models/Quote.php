@@ -65,6 +65,40 @@ class Quote extends Model
     }
 
     /**
+     * filter quotes created this year
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeThisYear($query): mixed
+    {
+        return $query->whereYear('created_at', now()->year);
+    }
+
+    /**
+     * filter quotes created last month
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeLastMonth($query): mixed
+    {
+        return $query->whereMonth('created_at', now()->subMonth()->month)
+            ->whereYear('created_at', now()->subMonth()->year);
+    }
+
+    /**
+     * filter quotes created last year
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeLastYear($query): mixed
+    {
+        return $query->whereYear('created_at', now()->subYear()->year);
+    }
+
+    /**
      * filter quotes with pending statuses
      *
      * @param $query
