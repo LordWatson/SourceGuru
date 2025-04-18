@@ -17,8 +17,9 @@ class ParseSearchQueryAction
     /**
      * Parse the search query into filters.
      *
-     * @param string|null $query
-     * @return array
+     * @param string|null $query A search query string in the format key=value.
+     * @return array<string, string> An associative array with keys like "user" and "status".
+     * @example ['user' => 'admin', 'status' => 'sent']
      */
     public function execute(?string $query) : array
     {
@@ -27,7 +28,9 @@ class ParseSearchQueryAction
         }
 
         $filters = [];
-        $pattern = '/(\w+)="([^"]+)"|(\w+)=([^ ]+)/'; // Match key="value" OR key=value
+
+        // match key=value
+        $pattern = '/(\w+)="([^"]+)"|(\w+)=([^ ]+)/';
         preg_match_all($pattern, $query, $matches, PREG_SET_ORDER);
 
         foreach ($matches as $match) {

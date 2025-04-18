@@ -3,6 +3,7 @@
 namespace App\Actions\Quotes;
 
 use App\Models\Quote;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class FilterQuotesAction
 {
@@ -16,7 +17,12 @@ class FilterQuotesAction
         //
     }
 
-    public function execute($filters, $search)
+    /**
+     * @param $filters
+     * @param $search
+     * @return LengthAwarePaginator
+     */
+    public function execute($filters, $search): LengthAwarePaginator
     {
         return Quote::with(['company:id,name', 'user:id,name'])
             ->select('id', 'user_id', 'company_id', 'quote_name', 'status', 'created_at')

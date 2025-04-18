@@ -16,9 +16,22 @@ class QuoteController extends Controller
     public function index(Request $request, ParseSearchQueryAction $searchAction, FilterQuotesAction $filterAction)
     {
         $search = $request->input('search');
+
+        /*
+         * search action returns an array of the filters / search query the user has input
+         * eg. ['user' => 'admin', 'status' => 'sent']
+         * */
         $filters = $searchAction->execute($search);
+
+        /*
+         * filter action returns a paginated collection of the Quotes with the filters / search query (if any) applied
+         * the action uses scopes in applied in ->when method
+         * */
         $quotes = $filterAction->execute($filters, $search);
 
+        /*
+         * load more quotes on this infinite scroll table
+         * */
         if ($request->ajax()) {
             return response()->json([
                 'quotes' => $quotes,
