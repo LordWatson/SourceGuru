@@ -15,6 +15,11 @@ class QuoteController extends Controller
      */
     public function index(Request $request, ParseSearchQueryAction $searchAction, FilterQuotesAction $filterAction)
     {
+        /*
+         * eg. 'Nike'
+         * Or
+         * eg. 'company=Nike user=admin status=sent'
+         * */
         $search = $request->input('search');
 
         /*
