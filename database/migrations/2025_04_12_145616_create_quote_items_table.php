@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('product_source');
-            $table->decimal('quantity', 10, 2)->default(1);
+            $table->integer('quantity')->default(1);
             $table->decimal('unit_buy_price', 10, 2);
             $table->decimal('total_buy_price', 10, 2);
             $table->decimal('unit_sell_price', 10, 2);

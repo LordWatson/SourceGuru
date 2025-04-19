@@ -24,7 +24,7 @@ class QuoteItemSeeder extends Seeder
             // randomly pick a quote_id
             $quoteId = $faker->randomElement($quoteIds);
             // random quantity between 1 and 100
-            $quantity = $faker->randomFloat(2, 1, 100);
+            $quantity = $faker->randomNumber(2, true);
             // random unit buy price between 10 and 500
             $unitBuyPrice = $faker->randomFloat(2, 10, 500);
             // random unit sell price 10% to 50% higher than unit buy price
