@@ -32,14 +32,14 @@ class Quote extends Model
     public function totalSellPrice(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => $this->products->sum('unit_sell_price')
+            get: fn ($value) => $this->products->sum('total_sell_price')
         );
     }
 
     public function totalBuyPrice(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => $this->products->sum('unit_buy_price')
+            get: fn ($value) => $this->products->sum('total_buy_price')
         );
     }
 

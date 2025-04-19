@@ -26,7 +26,7 @@ class DashboardController extends Controller
          * only grab quote_id, unit_sell_price
          * u_s_p is required to call total_sell_price
          * */
-        $quotes = Quote::with(['user:id,name', 'company:id,name', 'products:quote_id,unit_sell_price'])
+        $quotes = Quote::with(['user:id,name', 'company:id,name', 'products:quote_id,total_sell_price'])
             ->where('user_id', auth()->id())
             ->latest()
             ->take(5)
