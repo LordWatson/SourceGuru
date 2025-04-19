@@ -21,3 +21,11 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    // a user can't change the role of a user ranked higher than them
+    @if(Auth::user()->role->level < $user->role->level)
+        // apply readonly to all inputs
+        document.querySelectorAll('select').forEach(el => el.disabled = true);
+    @endif
+</script>
