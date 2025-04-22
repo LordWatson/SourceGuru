@@ -50,6 +50,13 @@ class Quote extends Model
         );
     }
 
+    public function expiresIn(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => round(now()->diffInDays($this->created_at) + 30),
+        );
+    }
+
     // scopes
 
     /**

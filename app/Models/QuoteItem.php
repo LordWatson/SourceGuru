@@ -18,7 +18,7 @@ class QuoteItem extends Model
     {
         static::saving(function ($item) {
             $item->total_sell_price = $item->quantity * $item->unit_sell_price;
-            $item->total_buy_price = $item->quantity * $item->unit_sell_price;
+            $item->total_buy_price = $item->quantity * $item->unit_buy_price;
         });
     }
 }
