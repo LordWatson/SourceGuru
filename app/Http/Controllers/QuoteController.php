@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Actions\Quotes\FilterQuotesAction;
 use App\Actions\Search\ParseSearchQueryAction;
 use App\Enums\QuoteStatusEnum;
+use App\Models\Company;
 use App\Models\Quote;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class QuoteController extends Controller
@@ -70,15 +72,13 @@ class QuoteController extends Controller
      */
     public function show(Quote $quote)
     {
-        //
-    }
+        $quote->load(['company:id,name', 'user:id,name', 'products']);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Quote $quote)
-    {
-        //
+        return view('quotes.quotes-edit', [
+            'quote' => $quote,
+            'companies' => Company::orderBy('name', 'asc')->select('id', 'name')->get(),
+            'users' => User::orderBy('name', 'asc')->select('id', 'name')->get(),
+        ]);
     }
 
     /**
