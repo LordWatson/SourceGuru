@@ -74,8 +74,6 @@ class QuoteController extends Controller
     {
         $quote->load(['company:id,name', 'user:id,name', 'products']);
 
-        //dd($quote->total_sell_price, $quote->total_buy_price, $quote->revenue);
-
         return view('quotes.quotes-edit', [
             'quote' => $quote,
             'companies' => Company::orderBy('name', 'asc')->select('id', 'name')->get(),
