@@ -22,6 +22,7 @@ class QuoteSeeder extends Seeder
         for ($i = 0; $i < 1000; $i++) {
             $completedDate = $faker->optional()->dateTimeBetween('-1 year', 'now');
             $expiredDate = $faker->optional()->dateTimeBetween('now', '+1 year');
+            $createdDate = $faker->dateTimeBetween('-6 months', 'now');
 
             DB::table('quotes')->insert([
                 'user_id' => $faker->numberBetween(2, 5),
@@ -32,7 +33,7 @@ class QuoteSeeder extends Seeder
                 'status' => $faker->randomElement($statusOptions),
                 'notes' => $faker->optional()->text(),
                 //'tax' => $faker->randomFloat(2, 0, 25),
-                'created_at' => now(),
+                'created_at' => $createdDate,
                 'updated_at' => now(),
             ]);
         }

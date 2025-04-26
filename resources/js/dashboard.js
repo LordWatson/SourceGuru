@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    /*
+    * user quotes chart
+    * */
+
     // get the names, and the quote counts
     const labels = quoteUsers.map(user => user.name);
     const data = quoteUsers.map(user => user.quotes_count);
@@ -27,6 +32,48 @@ document.addEventListener("DOMContentLoaded", () => {
             scales: {
                 y: {
                     beginAtZero: true
+                }
+            }
+        }
+    });
+
+    /*
+    * monthly quotes chart
+    * */
+
+    // Get the canvas element
+    const monthlyChart = document.getElementById('monthlyQuotes').getContext('2d');
+
+    // create the chart
+    new Chart(monthlyChart, {
+        type: 'line',
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                label: 'Count of Quotes',
+                data: quoteCounts,
+                // line colour
+                borderColor: 'rgb(255,225,0)',
+                // under the line fill colour
+                backgroundColor: 'rgba(255,225,0,0.08)',
+                // line width
+                borderWidth: 2,
+                // fill under the line?
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true },
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Month' },
+                },
+                y: {
+                    title: { display: true, text: 'Number of Quotes' },
+                    beginAtZero: true,
                 }
             }
         }

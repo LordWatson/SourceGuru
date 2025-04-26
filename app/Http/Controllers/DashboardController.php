@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Quotes\GetMonthlyQuotesAction;
 use App\Actions\Users\GetTopQuoteUsersAction;
-use App\Enums\QuoteStatusEnum;
 use App\Models\Quote;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
@@ -14,7 +12,7 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(GetTopQuoteUsersAction $getTopQuoteUsersAction)
+    public function index(GetTopQuoteUsersAction $getTopQuoteUsersAction, GetMonthlyQuotesAction $getMonthlyQuotesAction)
     {
         $data = [];
 
@@ -48,6 +46,17 @@ class DashboardController extends Controller
          * */
         $data['quoteUsers'] = Cache::remember('dashboard_quote_users', 10, function () use($getTopQuoteUsersAction) {
             return $getTopQuoteUsersAction->execute(3);
+        });
+
+        /*
+         * cached query, reloads every 10 minutes
+         *
+         * get an array indexed by month, and a count of the quotes in that month
+         * eg
+         * ['January' => 10, 'February' => 15]
+         * */
+        $data['monthlyQuoteCounts'] = Cache::remember('dashboard_monthly_quotes', 10, function () use($getMonthlyQuotesAction) {
+            return $getMonthlyQuotesAction->execute(3);
         });
 
         return view('dashboard', compact('data'));

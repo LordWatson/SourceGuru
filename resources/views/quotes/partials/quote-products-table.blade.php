@@ -52,12 +52,18 @@
                             Edit
                             </span>
                             |
-                            <span class="text-red-900 cursor-pointer hover:text-red-900  pl-1" onclick="deleteProduct({{ $product->id }})">
-                            Delete
-                            </span>
+                            <x-delete-action
+                                x-data="{{ $product }}"
+                                x-on:click.prevent="$dispatch('open-modal', 'confirm-quote-items-deletion-{{ $product->id }}')"
+                            >
+                                {{ __('Delete') }}
+                            </x-delete-action>
+
+                            @include('quotes.partials.delete-quote-item-modal', ['product' => $product])
                         </p>
                     </td>
                 </tr>
+
             @endforeach
             </tbody>
         </table>

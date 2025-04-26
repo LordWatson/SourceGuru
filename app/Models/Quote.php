@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\QuoteStatusEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -56,6 +57,7 @@ class Quote extends Model
             get: fn ($value) => round(now()->diffInDays($this->created_at) + 30),
         );
     }
+
 
     // scopes
 
