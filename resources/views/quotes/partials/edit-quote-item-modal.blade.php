@@ -1,5 +1,5 @@
 <x-modal name="edit-quote-item-{{ $product->id }}" focusable>
-    <form method="post" action="{{ route('quote-items.edit', $product->id) }}" class="p-6">
+    <form method="post" action="{{ route('quote-items.update', $product->id) }}" class="p-6">
         @csrf
         @method('put')
 
