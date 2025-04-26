@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Actions\Company;
+namespace App\Actions\QuoteItem;
 
 use App\Actions\ActivityLog\CreateActivityLog;
-use App\Models\Company;
+use App\Models\QuoteItem;
 use Illuminate\Support\Facades\DB;
 
-class UpdateCompanyAction
+class UpdateQuoteItemAction
 {
     /**
      * Create a new class instance.
@@ -18,8 +18,8 @@ class UpdateCompanyAction
 
     public function execute(array $data): array
     {
-        // get the company
-        $company = Company::findOrFail($data['id']);
+        // get the quote item
+        $quoteItem = QuoteItem::findOrFail($data['id']);
 
         try {
             DB::beginTransaction();
@@ -28,19 +28,19 @@ class UpdateCompanyAction
             unset($data['id']);
 
             // update the fields
-            $originalData = $company->getOriginal();
-            $company->update($data);
+            $originalData = $quoteItem->getOriginal();
+            $quoteItem->update($data);
 
             // log the update activity
-            $this->logActivity(company: $company, originalData: $originalData, statusCode: 201);
+            $this->logActivity(quoteItem: $quoteItem, originalData: $originalData, statusCode: 201);
 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
 
             // log the failed update
-            $originalData = $company->getOriginal() ?? null;
-            $this->logActivity(company: $company, originalData:  $originalData, statusCode: 500, message:  $e->getMessage());
+            $originalData = $quoteItem->getOriginal() ?? null;
+            $this->logActivity(quoteItem: $quoteItem, originalData:  $originalData, statusCode: 500, message:  $e->getMessage());
 
             return [
                 'success' => false
@@ -48,7 +48,7 @@ class UpdateCompanyAction
         }
 
         return [
-            'company' => $company->fresh(),
+            'company' => $quoteItem->fresh(),
             'success' => true,
         ];
     }
@@ -57,17 +57,17 @@ class UpdateCompanyAction
      * Log User Activity.
      */
     private function logActivity(
-        ?Company $company,
+        ?QuoteItem $quoteItem,
         ?array $originalData,
         int $statusCode,
         ?string $message = null
     ): void {
         $activityLog = [
-            'model' => Company::class,
-            'model_id' => $company?->id,
+            'model' => QuoteItem::class,
+            'model_id' => $quoteItem?->id,
             'event' => 'update',
             'original' => $originalData ? json_encode($originalData) : null,
-            'changes' => $company ? json_encode($company->getChanges()) : null,
+            'changes' => $quoteItem ? json_encode($quoteItem->getChanges()) : null,
             'status_code' => $statusCode,
             'message' => $message,
         ];

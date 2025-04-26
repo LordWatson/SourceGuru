@@ -111,7 +111,7 @@ class CompanyController extends Controller
         $action = $updateCompanyAction->execute(array_merge($validated, ['id' => $company->id]));
 
         // handle error
-        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to update user.']);
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to update company.']);
 
         // redirect to the users show / edit page
         return Redirect::to("/companies/{$company->id}")->with('status', 'company-updated');
