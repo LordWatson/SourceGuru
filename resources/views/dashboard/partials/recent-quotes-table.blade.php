@@ -1,6 +1,6 @@
 <div class="bg-white overflow-hidden rounded-lg shadow-md mb-6">
     <div class="px-6 py-4 border-b">
-        <h3 class="font-semibold text-lg text-gray-800">Recent Quotes</h3>
+        <h3 class="font-semibold text-lg text-gray-800">My Recent Quotes</h3>
     </div>
     <div class="p-6">
         <table class="min-w-full divide-y divide-gray-200">

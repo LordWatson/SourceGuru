@@ -1,7 +1,7 @@
 <x-modal name="edit-quote-item-{{ $product->id }}" focusable>
     <form method="post" action="{{ route('quote-items.update', $product->id) }}" class="p-6">
         @csrf
-        @method('put')
+        @method('patch')
 
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Update Product') }}
