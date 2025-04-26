@@ -48,7 +48,7 @@ class UpdateQuoteItemAction
         }
 
         return [
-            'company' => $quoteItem->fresh(),
+            'quote_item' => $quoteItem->fresh(),
             'success' => true,
         ];
     }
