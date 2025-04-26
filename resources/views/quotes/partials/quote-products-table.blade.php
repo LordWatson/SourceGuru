@@ -48,9 +48,12 @@
                     <td class="px-4 py-2 text-sm text-gray-900">£{{ number_format($product->total_sell_price, 2) }}</td>
                     <td class="px-4 py-2 text-sm">
                         <p>
-                            <span class="text-blue-900 cursor-pointer hover:text-blue-900 pr-1" onclick="editProduct({{ $product->id }})">
-                            Edit
-                            </span>
+                            <x-edit-action
+                                x-data="{{ $product }}"
+                                x-on:click.prevent="$dispatch('open-modal', 'edit-quote-item-{{ $product->id }}')"
+                            >
+                                {{ __('Edit') }}
+                            </x-edit-action>
                             |
                             <x-delete-action
                                 x-data="{{ $product }}"
@@ -59,13 +62,20 @@
                                 {{ __('Delete') }}
                             </x-delete-action>
 
+                            @include('quotes.partials.edit-quote-item-modal', ['product' => $product])
+
                             @include('quotes.partials.delete-quote-item-modal', ['product' => $product])
                         </p>
                     </td>
                 </tr>
-
             @endforeach
             </tbody>
         </table>
+        <!-- Add Product Link -->
+        <div class="mt-4">
+            <a href="#" class="text-blue-900 hover:text-blue-700 font-medium">
+                + Add Product
+            </a>
+        </div>
     </div>
 </div>
