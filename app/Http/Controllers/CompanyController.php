@@ -71,7 +71,12 @@ class CompanyController extends Controller
         if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to create company.']);
 
         // redirect to the users show / edit page
-        return Redirect::to("/companies/{$action['company']->id}")->with('status', 'company-created');
+        return Redirect::to("/companies/{$action['company']->id}")
+            ->with('status', [
+                'type' => 'create',
+                'message' => 'Company created',
+                'colour' => 'green',
+            ]);
     }
 
     /**
@@ -114,7 +119,12 @@ class CompanyController extends Controller
         if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to update company.']);
 
         // redirect to the users show / edit page
-        return Redirect::to("/companies/{$company->id}")->with('status', 'company-updated');
+        return Redirect::to("/companies/{$company->id}")
+            ->with('status', [
+                'type' => 'update',
+                'message' => 'Company updated',
+                'colour' => 'green',
+            ]);
     }
 
     /**
@@ -130,6 +140,10 @@ class CompanyController extends Controller
 
         // return to companies index
         return Redirect::to('/companies')
-            ->with('status', 'company-deleted');
+            ->with('status', [
+                'type' => 'delete',
+                'message' => 'Company deleted',
+                'colour' => 'red',
+            ]);
     }
 }

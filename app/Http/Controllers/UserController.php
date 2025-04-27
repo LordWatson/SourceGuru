@@ -100,7 +100,12 @@ class UserController extends Controller
         if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to update user.']);
 
         // redirect to the users show / edit page
-        return Redirect::to("/users/{$user->id}")->with('status', 'user-updated');
+        return Redirect::to("/users/{$user->id}")
+            ->with('status', [
+                'type' => 'update',
+                'message' => 'User updated',
+                'colour' => 'green',
+            ]);
     }
 
     /**
@@ -116,6 +121,11 @@ class UserController extends Controller
         $user->delete();
 
         // return to users index
-        return Redirect::to('/users')->with('status', 'user-deleted');
+        return Redirect::to('/users')
+            ->with('status', [
+                'type' => 'delete',
+                'message' => 'User deleted',
+                'colour' => 'red',
+            ]);
     }
 }

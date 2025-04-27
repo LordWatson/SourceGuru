@@ -29,7 +29,12 @@ class QuoteItemController extends Controller
         if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to add product.']);
 
         // redirect to the users show / edit page
-        return Redirect::to("/quotes/{$action['quoteitem']->quote_id}")->with('status', 'product-created');
+        return Redirect::to("/quotes/{$action['quoteitem']->quote_id}")
+            ->with('status', [
+                'type' => 'create',
+                'message' => 'Product added',
+                'colour' => 'green',
+            ]);
     }
 
     /**
@@ -50,7 +55,12 @@ class QuoteItemController extends Controller
             ]);
 
         // redirect to the quote show / edit page
-        return Redirect::to("/quotes/{$quoteItem->quote_id}")->with('status', 'product-updated');
+        return Redirect::to("/quotes/{$quoteItem->quote_id}")
+            ->with('status', [
+                'type' => 'update',
+                'message' => 'Product updated',
+                'colour' => 'green',
+            ]);
     }
 
     /**
@@ -64,6 +74,11 @@ class QuoteItemController extends Controller
         $quoteItem->delete();
 
         // return to quote
-        return Redirect::to("/quotes/{$quoteId}")->with('status', 'product-deleted');
+        return Redirect::to("/quotes/{$quoteId}")->with('status', 'product-deleted')
+            ->with('status', [
+                'type' => 'delete',
+                'message' => 'Product deleted',
+                'colour' => 'red',
+            ]);
     }
 }

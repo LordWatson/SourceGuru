@@ -61,6 +61,10 @@
                 </div>
             @endif
 
+            @if(session('status') && isset(session('status')['message'], session('status')['type'], session('status')['colour']))
+                @include('components.session-status-toaster')
+            @endif
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
