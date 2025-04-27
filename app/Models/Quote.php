@@ -179,4 +179,24 @@ class Quote extends Model
             $query->orWhere('status', 'like', "%$search%");
         });
     }
+
+    /**
+     * Scope to get quote status statistics
+     */
+    public function scopeStatusStats(Builder $query, ?string $timeRange = null): Builder
+    {
+        return $query->selectRaw('status, COUNT(*) as count')
+            ->when($timeRange, function ($q) use ($timeRange) {
+                // Add time filtering if needed
+                $now = now();
+                return match ($timeRange) {
+                    'week' => $q->where('created_at', '>=', $now->startOfWeek()),
+                    'month' => $q->where('created_at', '>=', $now->startOfMonth()),
+                    'year' => $q->where('created_at', '>=', $now->startOfYear()),
+                    default => $q,
+                };
+            })
+            ->groupBy('status')
+            ->orderByRaw("FIELD(status, 'draft', 'sent', 'accepted', 'rejected', 'expired', 'completed')");
+    }
 }

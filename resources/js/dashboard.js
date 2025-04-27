@@ -15,14 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
             // user the users names as the labels for the chart
             labels: labels,
             datasets: [{
-                label: 'Quote Count',
+                label: 'Count',
                 // user the quote counts for the data / bars in the chart
                 data: data,
                 backgroundColor: [
                     'rgba(62,200,191,0.24)'
                 ],
                 borderColor: [
-                    'rgba(51,168,160,0.36)'
+                    'rgb(51,168,160)'
                 ],
                 borderWidth: 1
             }]
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         data: {
             labels: monthlyLabels,
             datasets: [{
-                label: 'Count of Quotes',
+                label: 'Count',
                 data: quoteCounts,
                 // line colour
                 borderColor: 'rgb(255,225,0)',
@@ -74,6 +74,67 @@ document.addEventListener("DOMContentLoaded", () => {
                 y: {
                     title: { display: true, text: 'Number of Quotes' },
                     beginAtZero: true,
+                }
+            }
+        }
+    });
+
+    /*
+    * quotes by status
+    * */
+    const quoteStatusChart = document.getElementById('statusStats').getContext('2d');
+
+    new Chart(quoteStatusChart, {
+        type: 'bar', // or 'pie' if you prefer
+        data: {
+            labels: statusStats.map(item => item.status),
+            datasets: [{
+                label: 'Count',
+                data: statusStats.map(item => item.count),
+                borderColor: [
+                    // draft - indigo
+                    'rgb(99,102,241)',
+                    // sent - blue
+                    'rgb(59,130,246)',
+                    // accepted - emerald
+                    'rgb(16,185,129)',
+                    // rejected - red
+                    'rgb(239,68,68)',
+                    // expired - amber
+                    'rgb(245,158,11)',
+                    // completed - violet
+                    'rgb(139,92,246)',
+                ],
+                backgroundColor: [
+                    // draft - indigo
+                    'rgba(99,102,241,0.2)',
+                    // sent - blue
+                    'rgba(59,130,246,0.2)',
+                    // accepted - emerald
+                    'rgba(16,185,129,0.2)',
+                    // rejected - red
+                    'rgba(239,68,68,0.2)',
+                    // expired - amber
+                    'rgba(245,158,11,0.2)',
+                    // completed - violet
+                    'rgba(139,92,246,0.2)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const data = statusStats[context.dataIndex];
+                            return `${data.status}: ${data.count} (${data.percentage}%)`;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'right',
                 }
             }
         }

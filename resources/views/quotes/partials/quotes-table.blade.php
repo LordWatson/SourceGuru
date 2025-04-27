@@ -39,8 +39,12 @@
                     <a href="{{ route('quotes.show', ['quote' => $quote->id]) }}">#{{ $quote->id }}</a>
                 </td>
                 <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->quote_name }}</td>
-                <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->company->name }}</td>
-                <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->user->name }}</td>
+                <td class="px-4 py-2 text-sm text-gray-900">
+                    <a href="{{ route('companies.show', ['company' => $quote->company->id]) }}">{{ $quote->company->name }}</a>
+                </td>
+                <td class="px-4 py-2 text-sm text-gray-900">
+                    <a href="{{ route('users.show', ['user' => $quote->user->id]) }}">{{ $quote->user->name }}</a>
+                </td>
                 <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->created_at->format('Y-m-d') }}</td>
                 <td class="px-4 py-2 text-sm">
                     <x-quote-status-label :status="$quote->status" :class="$class">

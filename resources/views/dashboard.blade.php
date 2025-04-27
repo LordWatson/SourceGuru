@@ -22,8 +22,15 @@
                 @include('dashboard.partials.monthly-chart')
             </div>
 
-            <!-- Dashboard Actions Section -->
-            @include('dashboard.partials.dashboard-actions')
+            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2 gap-6 mb-6">
+
+                <!-- Charts Section -->
+                @include('dashboard.partials.status-stats-chart')
+
+                <!-- Dashboard Actions Section -->
+                @include('dashboard.partials.dashboard-actions')
+            </div>
+
 
         </div>
     </div>
