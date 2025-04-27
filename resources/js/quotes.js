@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-        let currentPage = CURRENT_PAGE_PLACEHOLDER;
-        const lastPage = LAST_PAGE_PLACEHOLDER;
+    let currentPage = CURRENT_PAGE_PLACEHOLDER;
+    const lastPage = LAST_PAGE_PLACEHOLDER;
 
     const container = document.getElementById("quotes-container");
 

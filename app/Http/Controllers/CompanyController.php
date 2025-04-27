@@ -87,7 +87,7 @@ class CompanyController extends Controller
         $company->load(['quotes.user']);
 
         // get the quotes assigned to this company and paginate them
-        $quotes = $company->quotes()->with(['user:id,name'])->paginate(10);
+        $quotes = $company->quotes()->with(['user:id,name'])->orderByDesc('id')->paginate(10);
 
         // check if the request is an AJAX call (for infinite scrolling)
         if ($request->ajax()) {
