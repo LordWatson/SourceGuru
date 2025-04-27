@@ -44,6 +44,26 @@
         </div>
 
         <div>
+            <x-input-label for="status" :value="__('Quote Status')" />
+            <select
+                required
+                id="quote_status"
+                name="status"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+                @foreach($statuses as $status)
+                    <option
+                        value="{{ $status->value }}"
+                        {{ $quote->status === $status->value ? 'selected' : '' }}
+                    >
+                        {{ ucfirst($status->name) }}
+                    </option>
+                @endforeach
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('status')" />
+        </div>
+
+        <div>
             <x-input-label for="notes" :value="__('Notes')" />
             <x-text-area-input id="notes" name="notes" type="notes" class="mt-1 block w-full" :value="old('notes', $quote->notes)">{{ __($quote->notes) }}</x-text-area-input>
             <x-input-error class="mt-2" :messages="$errors->get('notes')" />

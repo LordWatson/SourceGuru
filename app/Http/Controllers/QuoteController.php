@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Actions\Quotes\CreateQuoteAction;
 use App\Actions\Quotes\FilterQuotesAction;
+use App\Actions\Quotes\UpdateQuoteAction;
 use App\Actions\Search\ParseSearchQueryAction;
 use App\Enums\QuoteStatusEnum;
 use App\Http\Requests\Quotes\CreateQuoteRequest;
+use App\Http\Requests\Quotes\UpdateQuoteRequest;
 use App\Models\Company;
 use App\Models\Quote;
 use App\Models\User;
@@ -99,19 +101,37 @@ class QuoteController extends Controller
     {
         $quote->load(['company:id,name', 'user:id,name', 'products']);
 
+        $statuses = QuoteStatusEnum::cases();
+
         return view('quotes.quotes-edit', [
             'quote' => $quote,
             'companies' => Company::orderBy('name', 'asc')->select('id', 'name')->get(),
             'users' => User::orderBy('name', 'asc')->select('id', 'name')->get(),
+            'statuses' => $statuses,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Quote $quote)
+    public function update(UpdateQuoteRequest $request, Quote $quote, UpdateQuoteAction $updateQuoteAction)
     {
-        //
+        // validate the request
+        $validated = $request->validated();
+
+        // trigger the update action
+        $action = $updateQuoteAction->execute(array_merge($validated, ['id' => $quote->id]));
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to update quote.']);
+
+        // redirect to the quote show / edit page
+        return Redirect::to("/quotes/{$quote->id}")
+            ->with('status', [
+                'type' => 'update',
+                'message' => 'Quote updated',
+                'colour' => 'green',
+            ]);
     }
 
     /**
@@ -119,6 +139,15 @@ class QuoteController extends Controller
      */
     public function destroy(Quote $quote)
     {
-        //
+        // delete the resource
+        $quote->delete();
+
+        // return to quotes index
+        return Redirect::to('/quotes')
+            ->with('status', [
+                'type' => 'delete',
+                'message' => 'Quote deleted',
+                'colour' => 'red',
+            ]);
     }
 }
