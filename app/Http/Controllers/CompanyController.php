@@ -64,7 +64,7 @@ class CompanyController extends Controller
         // validate the request
         $validated = $request->validated();
 
-        // trigger the user action
+        // trigger the company action
         $action = $createCompanyAction->execute($validated);
 
         // handle error
@@ -122,6 +122,14 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        // check the user is allowed to delete the resource
+        if(!Auth::user()->isAdmin()) return Redirect::back()->withErrors(['error' => 'You do not have permission to delete this company.']);
+
+        // delete the resource
+        $company->delete();
+
+        // return to companies index
+        return Redirect::to('/companies')
+            ->with('status', 'company-deleted');
     }
 }

@@ -23,7 +23,7 @@
             </div>
 
             <!-- Dashboard Actions Section -->
-{{--            @include('dashboard.partials.dashboard-actions')--}}
+            @include('dashboard.partials.dashboard-actions')
 
         </div>
     </div>

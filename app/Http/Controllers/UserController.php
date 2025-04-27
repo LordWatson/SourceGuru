@@ -109,7 +109,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         // check the user is allowed to delete the resource
-        if(!Auth::user()->isAdmin()) return Redirect::back()->withErrors(['error' => 'You do not have permission to delete this user.']);
+        if(!Auth::user()->isAdmin()) return Redirect::back()
+            ->withErrors(['error' => 'You do not have permission to delete this user.']);
 
         // delete the resource
         $user->delete();

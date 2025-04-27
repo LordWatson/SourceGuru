@@ -71,11 +71,17 @@
             @endforeach
             </tbody>
         </table>
+
         <!-- Add Product Link -->
         <div class="mt-4">
-            <a href="#" class="text-blue-900 hover:text-blue-700 font-medium">
-                + Add Product
-            </a>
+            <x-edit-action
+                x-data="{{ $product }}"
+                x-on:click.prevent="$dispatch('open-modal', 'add-quote-item')"
+            >
+                {{ __('+ Add Product') }}
+            </x-edit-action>
+
+            @include('quotes.partials.add-quote-item-modal', ['quoteId' => $quote->id])
         </div>
     </div>
 </div>
