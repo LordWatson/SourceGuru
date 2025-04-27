@@ -75,7 +75,7 @@
         <!-- Add Product Link -->
         <div class="mt-4">
             <x-edit-action
-                x-data="{{ $product }}"
+                x-data="{{ $quote }}"
                 x-on:click.prevent="$dispatch('open-modal', 'add-quote-item')"
             >
                 {{ __('+ Add Product') }}

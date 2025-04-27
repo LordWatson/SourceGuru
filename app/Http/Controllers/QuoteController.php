@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Quotes\CreateQuoteAction;
 use App\Actions\Quotes\FilterQuotesAction;
 use App\Actions\Search\ParseSearchQueryAction;
 use App\Enums\QuoteStatusEnum;
+use App\Http\Requests\Quotes\CreateQuoteRequest;
 use App\Models\Company;
 use App\Models\Quote;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class QuoteController extends Controller
 {
@@ -56,15 +60,36 @@ class QuoteController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::orderBy('name', 'asc')
+            ->select('id', 'name')
+            ->get();
+
+        $statuses = QuoteStatusEnum::cases();
+
+        return view('quotes.quote-create', compact(['companies', 'statuses']));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateQuoteRequest $request, CreateQuoteAction $createQuoteAction)
     {
-        //
+        // validate the request
+        $validated = $request->validated();
+
+        // trigger the company action
+        $action = $createQuoteAction->execute(array_merge($validated, ['user_id' => Auth::id()]));
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to create quote']);
+
+        // redirect to the users show / edit page
+        return Redirect::to("/quotes/{$action['quote']->id}")
+            ->with('status', [
+                'type' => 'create',
+                'message' => 'Quote created',
+                'colour' => 'green',
+            ]);
     }
 
     /**

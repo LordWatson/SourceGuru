@@ -1,6 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let currentPage = CURRENT_PAGE_PLACEHOLDER;
-    const lastPage = LAST_PAGE_PLACEHOLDER;
+    /*
+    * show / hide completed_date and expired_date fields depending on the quote_status
+    * */
+    const statusField = document.getElementById("quote_status");
+    const completedDateField = document.getElementById("completed_date_field");
+    const expiredDateField = document.getElementById("expired_date_field");
+
+    // Function to toggle visibility based on status
+    const toggleDateFields = () => {
+        console.log(321);
+        const selectedStatus = statusField.value;
+
+        if (selectedStatus === "completed") {
+            completedDateField.classList.remove("hidden");
+            expiredDateField.classList.add("hidden");
+        } else if (selectedStatus === "expired") {
+            expiredDateField.classList.remove("hidden");
+            completedDateField.classList.add("hidden");
+        }
+    };
+
+    // Initial call to set the correct visibility on page load
+    toggleDateFields();
+
+    // Add an event listener to the status field to handle changes
+    statusField.addEventListener("change", toggleDateFields);
+
+    if (typeof CURRENT_PAGE_PLACEHOLDER !== "undefined") {
+        let currentPage = CURRENT_PAGE_PLACEHOLDER;
+        const lastPage = LAST_PAGE_PLACEHOLDER;
+    }
     const container = document.getElementById("quotes-container");
 
     const loadMoreQuotes = async () => {
@@ -67,13 +96,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // infinite scroll gets triggered when user scrolls on the table div, rather than the page
-    const quoteTableDiv = document.getElementById("quotes-table-div");
+    if (typeof CURRENT_PAGE_PLACEHOLDER !== "undefined") {
+        // infinite scroll gets triggered when user scrolls on the table div, rather than the page
+        const quoteTableDiv = document.getElementById("quotes-table-div");
 
-    quoteTableDiv.addEventListener("scroll", () => {
-        const { scrollTop, scrollHeight, clientHeight } = quoteTableDiv;
-        if (scrollTop + clientHeight >= scrollHeight - 50) {
-            loadMoreQuotes();
-        }
-    });
+        quoteTableDiv.addEventListener("scroll", () => {
+            const { scrollTop, scrollHeight, clientHeight } = quoteTableDiv;
+            if (scrollTop + clientHeight >= scrollHeight - 50) {
+                loadMoreQuotes();
+            }
+        });
+    }
 });
