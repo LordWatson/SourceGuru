@@ -18,7 +18,7 @@ class CreateActivityLog
 
     public function execute(array $data) : ActivityLog
     {
-        $data['user_id'] = auth()->id() ?? null;
+        $data['user_id'] = auth()->id() ?? 1;
         $data['ip_address'] = request()->ip();
         $data['user_agent'] = request()->userAgent() ?? null;
         $data['path'] = request()->path();

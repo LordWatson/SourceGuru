@@ -16,7 +16,7 @@ abstract class CreateAction
     /**
      * Execute the create operation.
      */
-    public function execute(array $data): array
+    public function execute(array $data, string $message = 'Record created successfully'): array
     {
         try {
             // begin a db transaction
@@ -28,7 +28,8 @@ abstract class CreateAction
             // log the creation success
             $this->logActivity(
                 model: $model,
-                statusCode: 201
+                statusCode: 201,
+                message: $message
             );
 
             // commit the transaction

@@ -16,7 +16,7 @@ abstract class UpdateAction
     /**
      * Execute the update operation.
      */
-    public function execute(array $data): array
+    public function execute(array $data, string $message = 'Record updated successfully'): array
     {
         // get the record
         $model = $this->getModelInstance($data['id']);
@@ -38,7 +38,8 @@ abstract class UpdateAction
             $this->logActivity(
                 model: $model,
                 originalData: $originalData,
-                statusCode: 201
+                statusCode: 201,
+                message: $message
             );
 
             // commit the changes
