@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Actions\ActivityLog\CreateActivityLog;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -44,7 +45,7 @@ abstract class UpdateAction
 
             // commit the changes
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // undo the db transaction
             DB::rollBack();
 

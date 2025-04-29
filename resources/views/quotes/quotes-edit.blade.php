@@ -38,6 +38,8 @@
 
             @include('quotes.partials.quote-products-table')
 
+            @include('quotes.partials.quote-actions')
+
             @if(Auth::user()->isAdmin())
                 <div class="p-4 sm:p-8 bg-white shadow-md sm:rounded-lg">
                     <div class="max-w-xl">

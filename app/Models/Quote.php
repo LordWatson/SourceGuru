@@ -58,6 +58,13 @@ class Quote extends Model
         );
     }
 
+    public function proposal(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => '',
+        );
+    }
+
 
     // scopes
 

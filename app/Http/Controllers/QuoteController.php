@@ -68,7 +68,10 @@ class QuoteController extends Controller
 
         $statuses = QuoteStatusEnum::cases();
 
-        return view('quotes.quote-create', compact(['companies', 'statuses']));
+        return view('quotes.quote-create', compact([
+            'companies',
+            'statuses'
+        ]));
     }
 
     /**
@@ -100,6 +103,7 @@ class QuoteController extends Controller
     public function show(Quote $quote)
     {
         $quote->load(['company:id,name', 'user:id,name', 'products']);
+        $quote->with(['proposal']);
 
         $statuses = QuoteStatusEnum::cases();
 
