@@ -30,6 +30,16 @@ class Quote extends Model
         return $this->hasMany(QuoteItem::class);
     }
 
+    // a quote has a proposal
+    public function proposal(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Proposal::class);
+    }
+
+
+     // attributes
+
+
     public function totalSellPrice(): Attribute
     {
         return new Attribute(
@@ -55,13 +65,6 @@ class Quote extends Model
     {
         return new Attribute(
             get: fn ($value) => round(now()->diffInDays($this->created_at) + 30),
-        );
-    }
-
-    public function proposal(): Attribute
-    {
-        return new Attribute(
-            get: fn ($value) => '',
         );
     }
 
