@@ -8,18 +8,9 @@
                 </h2>
             </div>
 
-            @php
-                $class = '';
-                if (in_array($quote->status, ['accepted', 'completed'])) {
-                    $class = 'bg-green-100 text-green-800';
-                } elseif (in_array($quote->status, ['rejected', 'expired'])) {
-                    $class = 'bg-red-100 text-red-800';
-                } elseif (in_array($quote->status, ['sent', 'draft'])) {
-                    $class = 'bg-yellow-100 text-yellow-800';
-                }
-            @endphp
-
-            <x-quote-status-label :status="$quote->status" :class="$class">
+            <x-quote-status-label
+                :status="$quote->status"
+                class="bg-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-100 text-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-800">
                 {{ __(ucfirst($quote->status)) }}
             </x-quote-status-label>
         </div>

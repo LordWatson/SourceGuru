@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             quotes.forEach((quote) => {
                 const row = `
                     <tr class="hover:bg-gray-100">
-                        <td class="px-4 py-2 text-sm text-gray-900">#${quote.id}</td>
+                        <td class="px-4 py-2 text-sm text-gray-900"><a href="/quotes/${quote.id}">#${quote.id}</a></td>
                         <td class="px-4 py-2 text-sm text-gray-900">${quote.quote_name}</td>
                         <td class="px-4 py-2 text-sm text-gray-900">${quote.user.name}</td>
                         <td class="px-4 py-2 text-sm text-gray-900">${quote.created_at}</td>
@@ -45,8 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const getStatusClass = (status) => {
-        if (["accepted", "completed"].includes(status)) {
+        if (["completed"].includes(status)) {
             return "bg-green-100 text-green-800";
+        } else if (["accepted"].includes(status)) {
+            return "bg-blue-100 text-blue-800";
         } else if (["rejected", "expired"].includes(status)) {
             return "bg-red-100 text-red-800";
         } else {

@@ -10,4 +10,13 @@ enum QuoteStatusEnum: string
     case Rejected = 'rejected';
     case Expired = 'expired';
     case Completed = 'completed';
+
+    public function colour(): string {
+        return match($this) {
+            QuoteStatusEnum::Draft, QuoteStatusEnum::Sent => 'yellow',
+            QuoteStatusEnum::Accepted => 'blue',
+            QuoteStatusEnum::Rejected, QuoteStatusEnum::Expired => 'red',
+            QuoteStatusEnum::Completed => 'green',
+        };
+    }
 }

@@ -59,10 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const getStatusClass = (status) => {
-        if (["accepted", "completed"].includes(status)) {
+        if (["completed"].includes(status)) {
             return "bg-green-100 text-green-800";
         } else if (["rejected", "expired"].includes(status)) {
             return "bg-red-100 text-red-800";
+        } else if (["accepted"].includes(status)) {
+            return "bg-blue-100 text-blue-800";
         } else {
             return "bg-yellow-100 text-yellow-800";
         }
