@@ -19,4 +19,13 @@ enum QuoteStatusEnum: string
             QuoteStatusEnum::Completed => 'green',
         };
     }
+
+    public function labelClass(): string {
+        return match($this) {
+            QuoteStatusEnum::Draft, QuoteStatusEnum::Sent => 'bg-yellow-100 text-yellow-800',
+            QuoteStatusEnum::Accepted => 'bg-blue-100 text-blue-800',
+            QuoteStatusEnum::Rejected, QuoteStatusEnum::Expired => 'bg-red-100 text-red-800',
+            QuoteStatusEnum::Completed => 'bg-green-100 text-green-800',
+        };
+    }
 }

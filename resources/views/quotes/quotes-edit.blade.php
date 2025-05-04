@@ -10,7 +10,8 @@
 
             <x-quote-status-label
                 :status="$quote->status"
-                class="bg-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-100 text-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-800">
+                class="{{ \App\Enums\QuoteStatusEnum::from($quote->status)->labelClass() }}"
+            >
                 {{ __(ucfirst($quote->status)) }}
             </x-quote-status-label>
         </div>
