@@ -35,7 +35,7 @@
             <x-input-label for="user_id" :value="__('Quoted By')" />
             <select id="user_id" name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 @foreach($users as $user)
-                    <option value="{{ $user->id }}" {{ $user->id == $quote->company_id ? 'selected' : '' }}>
+                    <option value="{{ $user->id }}" {{ $user->id == $quote->user_id ? 'selected' : '' }}>
                         {{ ucwords($user->name) }}
                     </option>
                 @endforeach
