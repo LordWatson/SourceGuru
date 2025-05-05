@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\QuoteItemController;
 use App\Http\Controllers\UserController;
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('quotes', QuoteController::class);
     Route::resource('quote-items', QuoteItemController::class);
+    Route::resource('proposals', ProposalController::class);
 
     Route::resource('users', UserController::class);
     Route::resource('companies', CompanyController::class);

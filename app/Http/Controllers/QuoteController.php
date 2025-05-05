@@ -102,7 +102,7 @@ class QuoteController extends Controller
      */
     public function show(Quote $quote)
     {
-        $quote->load(['company:id,name', 'user:id,name', 'products', 'proposal:id,quote_id,signed_ip']);
+        $quote->load(['company:id,name', 'user:id,name', 'products', 'proposal:id,quote_id,signed_ip,url']);
 
         $statuses = QuoteStatusEnum::cases();
 

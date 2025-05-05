@@ -1,13 +1,13 @@
 <x-modal id="attach-proposal" name="attach-proposal" focusable>
     <form
         method="post"
-        action="{{ route('quotes.update', $quote->id) }}"
+        action="{{ route('proposals.store') }}"
         enctype="multipart/form-data"
         id="proposal-form"
         class="p-6"
     >
         @csrf
-        @method('patch')
+        @method('post')
 
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Attach Proposal') }}
@@ -17,6 +17,7 @@
             {{ __('Proposal must be in PDF format. This proposal will be sent to the customer to check and approve.') }}
         </p>
 
+        <input type="hidden" name="quote_id" value="{{ $quote->id }}">
         <div class="flex flex-col space-y-4">
             <!-- Name -->
             <div>
