@@ -57,6 +57,20 @@
                 <x-text-input id="unit_sell_price" name="unit_sell_price" type="number" step="0.01" class="mt-1 block w-full" required />
                 <x-input-error :messages="$errors->get('unit_sell_price')" class="mt-2" />
             </div>
+
+            <!-- Emission Benchmark -->
+            <div>
+                <x-input-label for="emission_benchmark" :value="__('Emission Benchmark (kg)')" />
+                <x-text-input id="emission_benchmark" name="emission_benchmark" type="number" step="0.01" class="mt-1 block w-full"  />
+                <x-input-error :messages="$errors->get('emission_benchmark')" class="mt-2" />
+            </div>
+
+            <!-- Emission Result -->
+            <div>
+                <x-input-label for="emission_result" :value="__('Emission Result (kg)')" />
+                <x-text-input id="emission_result" name="emission_result" type="number" step="0.01" class="mt-1 block w-full" />
+                <x-input-error :messages="$errors->get('emission_result')" class="mt-2" />
+            </div>
         </div>
 
         <div class="mt-6 flex justify-end">

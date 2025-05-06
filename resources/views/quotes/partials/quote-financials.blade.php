@@ -29,17 +29,29 @@
         </p>
     </div>
 
-    <!-- Expires -->
-    <div class="bg-white p-6 rounded-lg shadow-md">
-        <h3 class="text-sm font-semibold text-gray-500 flex items-center">
-            Expires In
-        </h3>
-        <p class="mt-1 text-3xl font-bold text-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-500 flex items-center">
-            @if($quote->status == \App\Enums\QuoteStatusEnum::Expired->value)
-                {{ ucfirst(\App\Enums\QuoteStatusEnum::Expired->value) }}
-            @else
-                {{ $quote->expires_in }} days
-            @endif
-        </p>
-    </div>
+    @if($quote->status == \App\Enums\QuoteStatusEnum::Completed->value)
+        <!-- Completed -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-sm font-semibold text-gray-500 flex items-center">
+                Completed
+            </h3>
+            <p class="mt-1 text-3xl font-bold text-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-500 flex items-center">
+                {{ $quote->completed_date }}
+            </p>
+        </div>
+    @else
+        <!-- Expires -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-sm font-semibold text-gray-500 flex items-center">
+                Expires In
+            </h3>
+            <p class="mt-1 text-3xl font-bold text-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-500 flex items-center">
+                @if($quote->status == \App\Enums\QuoteStatusEnum::Expired->value)
+                    {{ ucfirst(\App\Enums\QuoteStatusEnum::Expired->value) }}
+                @else
+                    {{ $quote->expires_in }} days
+                @endif
+            </p>
+        </div>
+    @endif
 </div>

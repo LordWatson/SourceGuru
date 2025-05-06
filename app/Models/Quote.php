@@ -68,8 +68,32 @@ class Quote extends Model
         );
     }
 
+    public function totalEmissionBenchmark(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => $this->products->sum('emission_benchmark')
+        );
+    }
+
+    public function totalEmissionResult(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => $this->products->sum('emission_result')
+        );
+    }
+
+    public function totalEmissionSaving(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => $this->total_emission_benchmark == 0
+                ? 0 // avoid division by zero
+                : round((($this->total_emission_result - $this->total_emission_benchmark) / $this->total_emission_benchmark) * 100, 2)
+        );
+    }
+
 
     // scopes
+
 
     /**
      * filter quotes created this month

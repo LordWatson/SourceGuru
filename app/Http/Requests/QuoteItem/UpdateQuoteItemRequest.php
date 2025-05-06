@@ -29,6 +29,8 @@ class UpdateQuoteItemRequest extends FormRequest
             'quantity' => 'required|integer|min:1',
             'unit_buy_price' => 'required|numeric|min:0',
             'unit_sell_price' => 'required|numeric|min:0',
+            'emission_benchmark' => 'required|numeric|min:0',
+            'emission_result' => 'required|numeric|min:0',
         ];
     }
 }
