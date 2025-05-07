@@ -2,7 +2,7 @@
     <div class="px-6 py-4 border-b">
         <h3 class="font-semibold text-lg text-gray-800">Quote Actions</h3>
     </div>
-    <div class="p-6 grid grid-cols-8 gap-4">
+    <div class="p-6 grid grid-cols-10 gap-4">
 
         <!-- Attach Proposal Action -->
         <x-edit-action
@@ -52,6 +52,18 @@
                 Generate Invoice
             </a>
         @endif
+
+        <!-- Duplicate -->
+        <x-edit-action
+            class="text-black inline-flex items-center justify-center px-4 py-8 col-span-2 row-span-2 border rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 {{ $quote->proposal ? 'border-green-500 bg-green-50' : 'border-gray-200' }}"
+            x-data="{{ $quote }}"
+            x-on:click.prevent="$dispatch('open-modal', 'duplicate-quote')"
+            style="color: black;"
+        >
+            {{ __('Duplicate Quote') }}
+        </x-edit-action>
+
+        @include('quotes.partials.duplicate-quote-modal', ['quote' => $quote])
 
     </div>
 </div>
