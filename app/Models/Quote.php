@@ -149,7 +149,7 @@ class Quote extends Model
      */
     public function scopePending($query): mixed
     {
-        return $query->whereIn('status', [QuoteStatusEnum::Draft, QuoteStatusEnum::Sent]);
+        return $query->whereIn('status', [QuoteStatusEnum::Draft, QuoteStatusEnum::Sent, QuoteStatusEnum::Accepted]);
     }
 
     /**

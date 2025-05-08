@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Quotes\CreateQuoteAction;
+use App\Actions\Quotes\DuplicateQuoteAction;
 use App\Actions\Quotes\FilterQuotesAction;
 use App\Actions\Quotes\UpdateQuoteAction;
 use App\Actions\Search\ParseSearchQueryAction;
@@ -151,6 +152,25 @@ class QuoteController extends Controller
                 'type' => 'delete',
                 'message' => 'Quote deleted',
                 'colour' => 'red',
+            ]);
+    }
+
+    /**
+     * Duplicate the specified quote.
+     */
+    public function duplicate(Quote $quote, DuplicateQuoteAction $duplicateQuoteAction)
+    {
+        $action = $duplicateQuoteAction->execute($quote);
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to duplicate quote.']);
+
+        // redirect to the quote show / edit page
+        return Redirect::to("/quotes/{$action['quote']->id}")
+            ->with('status', [
+                'type' => 'update',
+                'message' => 'Quote updated',
+                'colour' => 'green',
             ]);
     }
 }

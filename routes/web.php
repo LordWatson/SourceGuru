@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('quotes', QuoteController::class);
+    Route::post('/quotes/{quote}/duplicate', [QuoteController::class, 'duplicate'])->name('quotes.duplicate');
+
     Route::resource('quote-items', QuoteItemController::class);
     Route::resource('proposals', ProposalController::class);
 

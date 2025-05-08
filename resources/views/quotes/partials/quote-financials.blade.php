@@ -29,29 +29,45 @@
         </p>
     </div>
 
-    @if($quote->status == \App\Enums\QuoteStatusEnum::Completed->value)
-        <!-- Completed -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-sm font-semibold text-gray-500 flex items-center">
-                Completed
-            </h3>
-            <p class="mt-1 text-3xl font-bold text-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-500 flex items-center">
-                {{ $quote->completed_date }}
-            </p>
-        </div>
-    @else
-        <!-- Expires -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-sm font-semibold text-gray-500 flex items-center">
-                Expires In
-            </h3>
-            <p class="mt-1 text-3xl font-bold text-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-500 flex items-center">
-                @if($quote->status == \App\Enums\QuoteStatusEnum::Expired->value)
-                    {{ ucfirst(\App\Enums\QuoteStatusEnum::Expired->value) }}
-                @else
-                    {{ $quote->expires_in }} days
-                @endif
-            </p>
-        </div>
-    @endif
+    <!-- Status Overview -->
+    @php
+        // map statuses and the data they display
+        # TODO: move this to the enum
+        $statusMapping = [
+            \App\Enums\QuoteStatusEnum::Completed->value => [
+                'label' => 'Completed',
+                'content' => $quote->completed_date,
+            ],
+            \App\Enums\QuoteStatusEnum::Shipped->value => [
+                'label' => 'Shipped',
+                'content' => 'Shipped',
+            ],
+            \App\Enums\QuoteStatusEnum::Expired->value => [
+                'label' => 'Expires In',
+                'content' => ucfirst(\App\Enums\QuoteStatusEnum::Expired->value),
+            ],
+            \App\Enums\QuoteStatusEnum::Rejected->value => [
+                'label' => 'Rejected',
+                'content' => ucfirst(\App\Enums\QuoteStatusEnum::Rejected->value),
+            ],
+        ];
+
+        // default
+        $defaultStatus = [
+            'label' => 'Expires In',
+            'content' => $quote->expires_in . ' days',
+        ];
+
+        // get the correct block or the default one
+        $statusBlock = $statusMapping[$quote->status] ?? $defaultStatus;
+    @endphp
+
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-sm font-semibold text-gray-500 flex items-center">
+            {{ $statusBlock['label'] }}
+        </h3>
+        <p class="mt-1 text-3xl font-bold text-{{ \App\Enums\QuoteStatusEnum::from($quote->status)->colour() }}-500 flex items-center">
+            {{ $statusBlock['content'] }}
+        </p>
+    </div>
 </div>
