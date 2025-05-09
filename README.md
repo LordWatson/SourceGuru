@@ -28,5 +28,3 @@
 
 [Dashboard](https://github.com/user-attachments/assets/7c2e0f3d-b776-4940-ba80-ed72313a7cb0)
 
-[Quote Show](https://github.com/user-attachments/assets/aabef4de-d5b3-45ec-802a-45ab8f84a5a5)
-
