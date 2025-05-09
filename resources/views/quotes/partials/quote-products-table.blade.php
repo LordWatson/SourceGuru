@@ -19,16 +19,16 @@
                     Quantity
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
-                    Unit Buy Price
+                    Unit Buy
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
-                    Unit Sell Price
+                    Unit Sell
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
-                    Total Buy Price
+                    Total Buy
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
-                    Total Sell Price
+                    Total Sell
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
                     Actions
@@ -54,7 +54,14 @@
                             >
                                 {{ __('Edit') }}
                             </x-edit-action>
-                            |
+                            <span class="text-gray-400">|</span>
+                            <x-duplicate-action
+                                x-data="{{ $product }}"
+                                x-on:click.prevent="$dispatch('open-modal', 'duplicate-quote-item-{{ $product->id }}')"
+                            >
+                                {{ __('Duplicate') }}
+                            </x-duplicate-action>
+                            <span class="text-gray-400">|</span>
                             <x-delete-action
                                 x-data="{{ $product }}"
                                 x-on:click.prevent="$dispatch('open-modal', 'confirm-quote-items-deletion-{{ $product->id }}')"
@@ -63,6 +70,8 @@
                             </x-delete-action>
 
                             @include('quotes.partials.edit-quote-item-modal', ['product' => $product])
+
+                            @include('quotes.partials.duplicate-quote-item-modal', ['product' => $product])
 
                             @include('quotes.partials.delete-quote-item-modal', ['product' => $product])
                         </p>

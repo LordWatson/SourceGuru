@@ -81,4 +81,30 @@ class QuoteItemController extends Controller
                 'colour' => 'red',
             ]);
     }
+
+    /**
+     * Duplicate the specified quote.
+     */
+    public function duplicate(QuoteItem $quoteItem, CreateQuoteItemAction $createQuoteItemAction)
+    {
+        // replicate the existing product
+        $newQuoteItem = $quoteItem->replicate()->toArray();
+
+        // unset some things we don't want copied over
+        unset($newQuoteItem['id'], $newQuoteItem['completed_at'], $newQuoteItem['expired_date'], $newQuoteItem['created_at'], $newQuoteItem['updated_at']);
+
+        // use the create quote item action to create the new product
+        $action = $createQuoteItemAction->execute($newQuoteItem);
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to duplicate quote item.']);
+
+        // redirect to the quote show / edit page
+        return Redirect::to("/quotes/{$quoteItem->quote_id}")
+            ->with('status', [
+                'type' => 'update',
+                'message' => 'Product duplicated',
+                'colour' => 'green',
+            ]);
+    }
 }

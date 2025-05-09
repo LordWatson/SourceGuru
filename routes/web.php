@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/quotes/{quote}/duplicate', [QuoteController::class, 'duplicate'])->name('quotes.duplicate');
 
     Route::resource('quote-items', QuoteItemController::class);
+    Route::post('/quote-items/{quoteItem}/duplicate', [QuoteItemController::class, 'duplicate'])->name('quote-items.duplicate');
+
     Route::resource('proposals', ProposalController::class);
 
     Route::resource('users', UserController::class);

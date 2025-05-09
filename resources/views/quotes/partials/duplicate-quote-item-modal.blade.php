@@ -1,14 +1,13 @@
-<x-modal name="confirm-quote-items-deletion-{{ $product->id }}" :show="$errors->quoteDeletion->isNotEmpty()" focusable>
-    <form method="post" action="{{ route('quote-items.destroy', $product->id) }}" class="p-6">
+<x-modal name="duplicate-quote-item-{{ $product->id }}" :show="$errors->quoteDeletion->isNotEmpty()" focusable>
+    <form method="post" action="{{ route('quote-items.duplicate', $product->id) }}" class="p-6">
         @csrf
-        @method('delete')
 
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Are you sure you want to delete this product?') }}
+            {{ __('Duplicate this product?') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __('Removing this product will reduce the revenue of the quote.') }}
+            {{ __('Duplicating this product will add another instance of this product to the quote.') }}
         </p>
 
         <!-- Product Summary Section -->
@@ -35,9 +34,9 @@
                 {{ __('Cancel') }}
             </x-secondary-button>
 
-            <x-danger-button class="ms-3">
-                {{ __('Delete Product') }}
-            </x-danger-button>
+            <x-primary-button class="ms-3">
+                {{ __('Duplicate') }}
+            </x-primary-button>
         </div>
     </form>
 </x-modal>
