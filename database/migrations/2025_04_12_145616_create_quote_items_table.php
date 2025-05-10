@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\QuoteItemStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->decimal('total_buy_price', 10, 2);
             $table->decimal('unit_sell_price', 10, 2);
             $table->decimal('total_sell_price', 10, 2);
+            $table->string('status')->default(QuoteItemStatusEnum::Quoted->value);
             $table->decimal('emission_benchmark', 10, 2)->nullable();
             $table->decimal('emission_result', 10, 2)->nullable();
             $table->timestamps();
