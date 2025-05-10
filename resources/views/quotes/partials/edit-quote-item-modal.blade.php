@@ -80,3 +80,5 @@
         </div>
     </form>
 </x-modal>
+
+@vite(['resources/js/quote-items.js'])

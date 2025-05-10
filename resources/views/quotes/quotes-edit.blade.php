@@ -45,12 +45,3 @@
     </div>
 </x-app-layout>
 
-
-<script>
-    @if(!Auth::user()->isAdmin())
-        // apply readonly to all inputs
-        document.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
-    @endif
-</script>
-
-@vite(['resources/js/quotes.js'])

@@ -26,7 +26,7 @@
                     type="file"
                     name="proposal"
                     id="proposal-file"
-                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 cursor-pointer"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-100 focus:outline-none cursor-pointer"
                 />
                 <x-input-error :messages="$errors->get('proposal')" class="mt-2" />
             </div>

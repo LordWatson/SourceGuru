@@ -32,7 +32,7 @@ class DuplicateQuoteAction
         $data['quote_name'] = $data['quote_name'] . ' (copy)';
 
         // unset some things we don't want copied over
-        unset($data['id'], $data['completed_at'], $data['expired_date'], $data['created_at'], $data['updated_at']);
+        unset($data['id'], $data['completed_at'], $data['expired_date'], $data['created_at'], $data['updated_at'], $data['status']);
 
         try {
             // begin a db transaction

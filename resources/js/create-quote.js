@@ -12,12 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (selectedStatus === "completed") {
             completedDateField.classList.remove("hidden");
             expiredDateField.classList.add("hidden");
+            document.getElementById("expired_date").value = "";
         } else if (selectedStatus === "expired") {
             expiredDateField.classList.remove("hidden");
             completedDateField.classList.add("hidden");
+            document.getElementById("completed_date").value = "";
         }else{
             completedDateField.classList.add("hidden");
             expiredDateField.classList.add("hidden");
+            document.getElementById("completed_date").value = "";
+            document.getElementById("expired_date").value = "";
         }
     };
 

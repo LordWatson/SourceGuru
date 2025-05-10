@@ -25,8 +25,8 @@ class CreateQuoteRequest extends FormRequest
         return [
             'company_id' => 'required|exists:companies,id',
             'quote_name' => 'required|string|max:255',
-            'completed_date' => 'nullable|date',
-            'expired_date' => 'nullable|date',
+            'completed_date' => 'nullable|date|required_if:status,completed',
+            'expired_date' => 'nullable|date|required_if:status,expired',
             'status' => 'required|string',
             'notes' => 'nullable|string',
             //'tax' => 'required|numeric|min:0'
