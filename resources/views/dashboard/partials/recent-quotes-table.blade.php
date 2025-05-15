@@ -29,7 +29,9 @@
             <tbody class="bg-white divide-y divide-gray-200">
             @foreach($data['quotes'] as $quote)
                 <tr class="hover:bg-gray-100">
-                    <td class="px-4 py-2 text-sm text-gray-900">#{{ $quote->id }}</td>
+                    <td class="px-4 py-2 text-sm text-gray-900">
+                        <a href="{{ route('quotes.show', ['quote' => $quote->id]) }}">#{{ $quote->id }}</a>
+                    </td>
                     <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->user->name }}</td>
                     <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->company->name }}</td>
                     <td class="px-4 py-2 text-sm text-gray-900">{{ $quote->created_at->format('Y-m-d') }}</td>
