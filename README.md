@@ -26,11 +26,15 @@
 - Node.js & npm
 - MySQL or another supported database!
 
-## Cloning
+### Cloning
+
+To play around with the software, follow the below steps:
+
 - php artisan migrate:fresh --seed
 - Login with:
     admin@user.com
     password
 
+## Screenshots
 [Dashboard](https://github.com/user-attachments/assets/7c2e0f3d-b776-4940-ba80-ed72313a7cb0)
 
