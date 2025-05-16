@@ -38,7 +38,7 @@ class CompanyController extends Controller
             ->orderBy('name', 'asc')
             ->paginate(10);
 
-        // Pass the paginated users to the 'users.index' view.
+        // Pass the paginated companies to the 'companies.index' view.
         return view('companies.companies-index', compact('companies'));
     }
 
@@ -70,7 +70,7 @@ class CompanyController extends Controller
         // handle error
         if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to create company.']);
 
-        // redirect to the users show / edit page
+        // redirect to the companies show / edit page
         return Redirect::to("/companies/{$action['company']->id}")
             ->with('status', [
                 'type' => 'create',

@@ -83,13 +83,13 @@ class QuoteController extends Controller
         // validate the request
         $validated = $request->validated();
 
-        // trigger the company action
+        // trigger the quote action
         $action = $createQuoteAction->execute(array_merge($validated, ['user_id' => Auth::id()]));
 
         // handle error
         if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to create quote']);
 
-        // redirect to the users show / edit page
+        // redirect to the quotes show / edit page
         return Redirect::to("/quotes/{$action['quote']->id}")
             ->with('status', [
                 'type' => 'create',
