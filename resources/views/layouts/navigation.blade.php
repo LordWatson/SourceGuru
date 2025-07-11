@@ -26,6 +26,11 @@
                         {{ __('Companies') }}
                     </x-nav-link>
 
+                    <!-- Products -->
+                    <x-nav-link :href="route('products.index')" :active="request()->is('products')">
+                        {{ __('Products') }}
+                    </x-nav-link>
+
                     @if(Auth::user()->role->level > 2)
                         <!-- Users -->
                         <x-nav-link :href="route('users.index')" :active="request()->is('users')">
@@ -44,7 +49,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
 
                 @php
-                    $searchableRoutes = ['users.index', 'companies.index', 'quotes.index', 'reports.index'];
+                    $searchableRoutes = ['users.index', 'companies.index', 'quotes.index', 'reports.index', 'products.index'];
                 @endphp
 
                 @if(in_array(Route::currentRouteName(), $searchableRoutes))

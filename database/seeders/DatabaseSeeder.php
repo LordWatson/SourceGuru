@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class,
             QuoteSeeder::class,
             QuoteItemSeeder::class,
+            ProductTypeSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }
