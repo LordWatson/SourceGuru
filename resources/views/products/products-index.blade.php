@@ -13,12 +13,13 @@
                 <div class="p-6 text-gray-900">
                     <!-- Product Types List -->
                     <ul x-data="{ openTypeIndex: null }" class="divide-y divide-gray-200">
-                        @foreach ($productTypes as $index => $productType)
+                        @foreach($productTypes as $index => $productType)
                             <li class="py-4">
                                 <!-- Product Type -->
                                 <div
                                     @click="openTypeIndex = openTypeIndex === {{ $index }} ? null : {{ $index }}"
-                                    class="cursor-pointer flex items-center justify-between hover:bg-gray-100 px-4 py-2">
+                                    class="cursor-pointer flex items-center justify-between hover:bg-gray-100 px-4 py-2"
+                                >
                                     <p class="text-lg font-medium text-gray-800">
                                         {{ $productType->name }}
                                     </p>
@@ -28,7 +29,7 @@
 
                                 <!-- Product SubTypes -->
                                 <ul x-show="openTypeIndex === {{ $index }}" class="ml-4 divide-y divide-gray-200" x-collapse>
-                                    @foreach ($productType->subTypes as $productSubType)
+                                    @foreach($productType->subTypes as $productSubType)
                                         <li class="py-2 flex items-center justify-between hover:bg-gray-100">
                                             <!-- Product SubType -->
                                             <div class="cursor-pointer flex items-center justify-between px-4 py-2 w-full">

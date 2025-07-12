@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Products\FilterProductTypesAction;
 use App\Actions\Quotes\FilterQuotesAction;
 use App\Actions\Search\ParseSearchQueryAction;
 use App\Models\Product;
@@ -20,14 +21,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, FilterProductTypesAction $filterProductTypesAction)
     {
         $search = $request->input('search');
 
-        // Get all ProductTypes with their ProductSubTypes and Products
-        $productTypes = ProductType::with(['subTypes.products'])->get();
+        $productTypes = $filterProductTypesAction->execute($search);
 
-        // Return the data to the view
         return view('products.products-index', compact('productTypes'));
     }
 

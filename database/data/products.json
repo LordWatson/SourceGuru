@@ -1,0 +1,802 @@
+[
+  {
+    "name": "Roy Inc Unlimited Data Plan Model-938Kr",
+    "description": "Woman message team expert wear join various new majority financial themselves north letter than nation.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Unlimited Data Plan",
+    "unit_buy_price": 292.61,
+    "unit_sell_price": 353.06
+  },
+  {
+    "name": "Hickman-Graham Business Mobile Contract Model-215Is",
+    "description": "Subject detail feel nice population challenge feel camera decade interesting suggest impact include ten.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Business Mobile Contract",
+    "unit_buy_price": 142.26,
+    "unit_sell_price": 168.35
+  },
+  {
+    "name": "Smith-Fuller Virtual Numbers Model-777st",
+    "description": "Within same citizen for necessary government expert.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "Virtual Numbers",
+    "unit_buy_price": 339.58,
+    "unit_sell_price": 430.57
+  },
+  {
+    "name": "Bailey-Sullivan Hosted VoIP Model-215ia",
+    "description": "Ball listen more order defense smile site sit sit same.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "Hosted VoIP",
+    "unit_buy_price": 167.67,
+    "unit_sell_price": 216.74
+  },
+  {
+    "name": "Perry, Gutierrez and Parker PoE Switch Model-819Wi",
+    "description": "Financial test think return least summer me hot law win often.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "PoE Switch",
+    "unit_buy_price": 566.49,
+    "unit_sell_price": 875.37
+  },
+  {
+    "name": "Vasquez, Brown and Bray Wi-Fi 6 Router Model-851SM",
+    "description": "Door town information serve improve population surface interest world whose quality blue on nature her want.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Wi-Fi 6 Router",
+    "unit_buy_price": 269.46,
+    "unit_sell_price": 444.69
+  },
+  {
+    "name": "Mitchell Inc Hosted Email Model-605SV",
+    "description": "Computer side church above spring structure hope bring.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "Hosted Email",
+    "unit_buy_price": 281.9,
+    "unit_sell_price": 335.38
+  },
+  {
+    "name": "Gibbs-Moore Network Switch (Unmanaged) Model-666Sr",
+    "description": "Probably simple commercial commercial goal place enough around yourself real.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "Network Switch (Unmanaged)",
+    "unit_buy_price": 543.31,
+    "unit_sell_price": 660.55
+  },
+  {
+    "name": "Duncan-Turner Dual WAN Router Model-577Lb",
+    "description": "System after quite behind discussion well radio break ready tonight.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Dual WAN Router",
+    "unit_buy_price": 405.78,
+    "unit_sell_price": 523.21
+  },
+  {
+    "name": "Mathews-Davidson Cloud PBX Model-144MP",
+    "description": "Bit person clearly view assume talk again method address traditional culture country than peace alone.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "Cloud PBX",
+    "unit_buy_price": 621.61,
+    "unit_sell_price": 898.71
+  },
+  {
+    "name": "Joseph-Clark Business Mobile Contract Model-154po",
+    "description": "System miss nature thousand pay long act three audience another medical.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Business Mobile Contract",
+    "unit_buy_price": 496.64,
+    "unit_sell_price": 790.13
+  },
+  {
+    "name": "Wallace-Bond VPN as a Service Model-587Ix",
+    "description": "Situation write live small hear pass score religious somebody.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "VPN as a Service",
+    "unit_buy_price": 240.85,
+    "unit_sell_price": 330.52
+  },
+  {
+    "name": "Hudson and Sons Satellite Broadband Model-929Ii",
+    "description": "Baby debate require fill actually particular Republican fund short company indeed although.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "Satellite Broadband",
+    "unit_buy_price": 295.8,
+    "unit_sell_price": 589.22
+  },
+  {
+    "name": "Bowen, Ellis and Jones Fibre Router Model-724ir",
+    "description": "Wonder debate blood high brother note investment him plan surface water assume now budget study.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Fibre Router",
+    "unit_buy_price": 248.7,
+    "unit_sell_price": 297.13
+  },
+  {
+    "name": "Jones, Logan and Wade VDSL Router Model-177Rz",
+    "description": "Worry garden sell total value child left manager the better produce art inside who wide somebody.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "VDSL Router",
+    "unit_buy_price": 551.51,
+    "unit_sell_price": 734.39
+  },
+  {
+    "name": "Ball, Walker and Evans 5G Router Model-438ii",
+    "description": "Participant red chance throughout clearly fly concern anyone administration blue they attention seat.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "5G Router",
+    "unit_buy_price": 269.26,
+    "unit_sell_price": 352.82
+  },
+  {
+    "name": "Peters, Sanchez and Hernandez Cloud Storage Model-424qd",
+    "description": "Religious keep entire political similar mother yet talk.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "Cloud Storage",
+    "unit_buy_price": 106.4,
+    "unit_sell_price": 126.08
+  },
+  {
+    "name": "Morton PLC ADSL Router Model-471DK",
+    "description": "Serious though everyone image affect discuss under statement huge people meet fear animal.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "ADSL Router",
+    "unit_buy_price": 172.36,
+    "unit_sell_price": 218.52
+  },
+  {
+    "name": "Benton-Massey Endpoint Security Model-665UK",
+    "description": "Power sense first he site authority president live your respond meet.",
+    "product_type_name": "Security Solutions",
+    "product_sub_type_name": "Endpoint Security",
+    "unit_buy_price": 607.83,
+    "unit_sell_price": 719.25
+  },
+  {
+    "name": "Todd, Robertson and Robinson Network Security Appliance Model-997Kc",
+    "description": "Morning long wall condition continue soon line every parent speech.",
+    "product_type_name": "Security Solutions",
+    "product_sub_type_name": "Network Security Appliance",
+    "unit_buy_price": 199.19,
+    "unit_sell_price": 398.35
+  },
+  {
+    "name": "Rodriguez, Maynard and Klein Unlimited Data Plan Model-156ip",
+    "description": "Actually theory happy show financial arm campaign how choose perhaps my top follow at economy.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Unlimited Data Plan",
+    "unit_buy_price": 203.12,
+    "unit_sell_price": 277.16
+  },
+  {
+    "name": "Robinson-Briggs Signal Boosters Model-030ad",
+    "description": "Although best window now center different whether visit executive throughout draw teach attention option.",
+    "product_type_name": "Accessories",
+    "product_sub_type_name": "Signal Boosters",
+    "unit_buy_price": 312.01,
+    "unit_sell_price": 409.35
+  },
+  {
+    "name": "Stephens, Santana and Baxter Endpoint Security Model-807hX",
+    "description": "Degree fast the prepare establish knowledge skill radio nature.",
+    "product_type_name": "Security Solutions",
+    "product_sub_type_name": "Endpoint Security",
+    "unit_buy_price": 230.27,
+    "unit_sell_price": 457.18
+  },
+  {
+    "name": "Moran-Duran Mounting Kits Model-162tr",
+    "description": "Guess ready possible rule seek sister health father institution resource say possible energy.",
+    "product_type_name": "Accessories",
+    "product_sub_type_name": "Mounting Kits",
+    "unit_buy_price": 357.66,
+    "unit_sell_price": 708.29
+  },
+  {
+    "name": "Herrera-Simpson Network Extenders Model-667pJ",
+    "description": "Point because political later through hospital head else deep move until five military especially just.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "Network Extenders",
+    "unit_buy_price": 479.1,
+    "unit_sell_price": 677.86
+  },
+  {
+    "name": "Cortez-Patterson Power Supplies Model-602HB",
+    "description": "Smile short Congress laugh card so very teach.",
+    "product_type_name": "Accessories",
+    "product_sub_type_name": "Power Supplies",
+    "unit_buy_price": 278.78,
+    "unit_sell_price": 399.94
+  },
+  {
+    "name": "Giles and Sons SIP Trunking Model-437ex",
+    "description": "Already recent rather serve think maybe between detail property police ahead draw late reduce worker change.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "SIP Trunking",
+    "unit_buy_price": 310.5,
+    "unit_sell_price": 423.3
+  },
+  {
+    "name": "Adams-Clark Business Mobile Contract Model-961pZ",
+    "description": "Husband trip first can study our suddenly condition.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Business Mobile Contract",
+    "unit_buy_price": 391.9,
+    "unit_sell_price": 540.11
+  },
+  {
+    "name": "Johnson LLC Hybrid Phone System Model-751HT",
+    "description": "Nor power among your bill serve responsibility movement during majority past work central maybe.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "Hybrid Phone System",
+    "unit_buy_price": 816.92,
+    "unit_sell_price": 966.64
+  },
+  {
+    "name": "Whitney Group Roaming Plans Model-020qn",
+    "description": "Out cold black information place art since population future notice law my face.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Roaming Plans",
+    "unit_buy_price": 493.72,
+    "unit_sell_price": 586.49
+  },
+  {
+    "name": "Smith, Foster and Williams Mounting Kits Model-180Pv",
+    "description": "Occur while project religious land computer lawyer put.",
+    "product_type_name": "Accessories",
+    "product_sub_type_name": "Mounting Kits",
+    "unit_buy_price": 262.6,
+    "unit_sell_price": 398.9
+  },
+  {
+    "name": "Hernandez Group Leased Line Model-201LM",
+    "description": "Find pay either such pretty or cause build least actually detail sound politics tough bar.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "Leased Line",
+    "unit_buy_price": 389.3,
+    "unit_sell_price": 704.46
+  },
+  {
+    "name": "Owens-King Network Security Appliance Model-454Ho",
+    "description": "Organization occur traditional that health movement fast weight foot.",
+    "product_type_name": "Security Solutions",
+    "product_sub_type_name": "Network Security Appliance",
+    "unit_buy_price": 342.02,
+    "unit_sell_price": 477.33
+  },
+  {
+    "name": "Jackson Ltd Cloud Storage Model-501Zo",
+    "description": "Available management us idea sign these never entire not certainly.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "Cloud Storage",
+    "unit_buy_price": 275.85,
+    "unit_sell_price": 425.86
+  },
+  {
+    "name": "Gonzalez, Munoz and Hoffman VoIP Phone System Model-893zm",
+    "description": "Will next tax race bad world chance own central of walk health behind collection.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "VoIP Phone System",
+    "unit_buy_price": 749.55,
+    "unit_sell_price": 990.44
+  },
+  {
+    "name": "Brown Ltd Managed Switch Model-749bP",
+    "description": "Oil expect which look focus story raise court stage.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "Managed Switch",
+    "unit_buy_price": 552.44,
+    "unit_sell_price": 778.64
+  },
+  {
+    "name": "Powell and Sons VDSL Router Model-577yv",
+    "description": "Road answer move lay here degree book medical head discover far husband.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "VDSL Router",
+    "unit_buy_price": 578.96,
+    "unit_sell_price": 959.63
+  },
+  {
+    "name": "Guerra, Yang and Edwards Unlimited Data Plan Model-047nn",
+    "description": "Evening old model service deal eye Mr too situation cell.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Unlimited Data Plan",
+    "unit_buy_price": 734.97,
+    "unit_sell_price": 940.32
+  },
+  {
+    "name": "Reeves, Rodriguez and Hoffman Hosted Email Model-843EN",
+    "description": "Glass wear voice several professional once reach night.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "Hosted Email",
+    "unit_buy_price": 283.87,
+    "unit_sell_price": 527.07
+  },
+  {
+    "name": "Shah, Watts and Brown Fibre Router Model-325eV",
+    "description": "Could enough report culture common economy nor level attention specific contain quite third.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Fibre Router",
+    "unit_buy_price": 577.93,
+    "unit_sell_price": 862.38
+  },
+  {
+    "name": "Kim and Sons UPS (Uninterruptible Power Supply) Model-952eh",
+    "description": "Night protect hold off majority interview pass either.",
+    "product_type_name": "Accessories",
+    "product_sub_type_name": "UPS (Uninterruptible Power Supply)",
+    "unit_buy_price": 261.16,
+    "unit_sell_price": 349.07
+  },
+  {
+    "name": "Johnson and Sons VDSL Model-296Br",
+    "description": "South catch police feeling man trip scientist role.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "VDSL",
+    "unit_buy_price": 199.51,
+    "unit_sell_price": 277.71
+  },
+  {
+    "name": "Olson-Guerra Ethernet First Mile (EFM) Model-763mz",
+    "description": "Media go win bank though of baby.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "Ethernet First Mile (EFM)",
+    "unit_buy_price": 476.43,
+    "unit_sell_price": 896.04
+  },
+  {
+    "name": "Cruz and Sons Virtual Numbers Model-011cA",
+    "description": "Behind help image those much explain news big indeed determine operation morning maybe.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "Virtual Numbers",
+    "unit_buy_price": 193.59,
+    "unit_sell_price": 249.74
+  },
+  {
+    "name": "Turner, Smith and Turner Business Mobile Contract Model-384Eb",
+    "description": "City tree will it financial or in eat hope relate seem.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Business Mobile Contract",
+    "unit_buy_price": 565.92,
+    "unit_sell_price": 691.61
+  },
+  {
+    "name": "Evans-Reynolds Roaming Plans Model-313Hx",
+    "description": "Particular effect follow pretty win serious throughout simple.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Roaming Plans",
+    "unit_buy_price": 796.37,
+    "unit_sell_price": 950.58
+  },
+  {
+    "name": "Harris and Sons Virtual Desktop Model-479yI",
+    "description": "Ball crime without likely state movement quality could power trial decision rule benefit generation image.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "Virtual Desktop",
+    "unit_buy_price": 278.32,
+    "unit_sell_price": 535.16
+  },
+  {
+    "name": "Kim, Sherman and Howard Integrated UC Platform Model-352bp",
+    "description": "Page tough memory forget other body think former collection place economic.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Integrated UC Platform",
+    "unit_buy_price": 295.0,
+    "unit_sell_price": 380.39
+  },
+  {
+    "name": "Rodriguez and Sons Team Collaboration Tools Model-262xE",
+    "description": "Behind effect animal take despite pick foot fall make with activity.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Team Collaboration Tools",
+    "unit_buy_price": 314.92,
+    "unit_sell_price": 574.59
+  },
+  {
+    "name": "Brown, Powell and Cook Wi-Fi 6 Router Model-496mV",
+    "description": "Issue artist leave southern suggest task single drop on teach on media safe writer foreign.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Wi-Fi 6 Router",
+    "unit_buy_price": 73.25,
+    "unit_sell_price": 140.26
+  },
+  {
+    "name": "Bass-Archer ADSL Model-805aJ",
+    "description": "Government owner half range answer address live young upon always.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "ADSL",
+    "unit_buy_price": 383.96,
+    "unit_sell_price": 517.24
+  },
+  {
+    "name": "Flores, Booker and Burgess Endpoint Security Model-061pD",
+    "description": "Agree whole early performance nothing daughter factor because.",
+    "product_type_name": "Security Solutions",
+    "product_sub_type_name": "Endpoint Security",
+    "unit_buy_price": 685.95,
+    "unit_sell_price": 830.55
+  },
+  {
+    "name": "Lee-Smith Business Mobile Contract Model-650EX",
+    "description": "Success fund result public each because statement hope.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Business Mobile Contract",
+    "unit_buy_price": 327.23,
+    "unit_sell_price": 590.06
+  },
+  {
+    "name": "Mosley-Anderson ADSL Router Model-865kz",
+    "description": "Training other direction everything summer watch reach foot environmental table himself fund will.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "ADSL Router",
+    "unit_buy_price": 452.81,
+    "unit_sell_price": 560.21
+  },
+  {
+    "name": "Lang PLC Integrated UC Platform Model-145Kt",
+    "description": "Item country local employee off also none kitchen.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Integrated UC Platform",
+    "unit_buy_price": 237.56,
+    "unit_sell_price": 288.42
+  },
+  {
+    "name": "Martinez-Keller Chat Solutions Model-433AP",
+    "description": "Law poor work president compare husband everything door hot.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Chat Solutions",
+    "unit_buy_price": 410.75,
+    "unit_sell_price": 757.62
+  },
+  {
+    "name": "Thompson, Scott and Cooley Video Conferencing Solutions Model-283su",
+    "description": "Easy size low discussion religious central where.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Video Conferencing Solutions",
+    "unit_buy_price": 730.95,
+    "unit_sell_price": 988.28
+  },
+  {
+    "name": "Owen Group Fibre to the Cabinet (FTTC) Model-458fc",
+    "description": "Eye small different room identify develop often.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "Fibre to the Cabinet (FTTC)",
+    "unit_buy_price": 68.82,
+    "unit_sell_price": 94.58
+  },
+  {
+    "name": "Mason and Sons Backup as a Service (BaaS) Model-459dR",
+    "description": "Organization production real become participant hit season suddenly relate hot.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "Backup as a Service (BaaS)",
+    "unit_buy_price": 705.45,
+    "unit_sell_price": 962.56
+  },
+  {
+    "name": "Saunders-Lewis Team Collaboration Tools Model-812Ll",
+    "description": "Me girl woman outside newspaper child general condition while school available.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Team Collaboration Tools",
+    "unit_buy_price": 565.79,
+    "unit_sell_price": 781.0
+  },
+  {
+    "name": "Hamilton, Boyd and Dalton Hosted VoIP Model-071fx",
+    "description": "Nothing specific single agent stuff possible morning.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "Hosted VoIP",
+    "unit_buy_price": 119.02,
+    "unit_sell_price": 150.9
+  },
+  {
+    "name": "Washington-Gomez Fibre to the Premises (FTTP) Model-504dH",
+    "description": "Yard ever ball detail someone start not deep traditional education practice study remain player former air.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "Fibre to the Premises (FTTP)",
+    "unit_buy_price": 63.83,
+    "unit_sell_price": 93.37
+  },
+  {
+    "name": "Chambers Group PoE Switch Model-470RV",
+    "description": "Remain husband participant low recently guess long last born.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "PoE Switch",
+    "unit_buy_price": 458.6,
+    "unit_sell_price": 680.13
+  },
+  {
+    "name": "Stein-Miranda On-Premise PBX Model-467hK",
+    "description": "Best up whatever history Mr traditional budget sound station number.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "On-Premise PBX",
+    "unit_buy_price": 424.61,
+    "unit_sell_price": 671.4
+  },
+  {
+    "name": "Velez PLC Business Mobile Contract Model-732xk",
+    "description": "Imagine wide red way nature pattern perhaps participant how us maybe born situation strong.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Business Mobile Contract",
+    "unit_buy_price": 444.58,
+    "unit_sell_price": 670.74
+  },
+  {
+    "name": "Torres Ltd VDSL Router Model-256Wb",
+    "description": "Summer figure trial third participant which force spring event ask.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "VDSL Router",
+    "unit_buy_price": 213.36,
+    "unit_sell_price": 260.48
+  },
+  {
+    "name": "Nash, Walker and Osborne Business Mobile Contract Model-408Dr",
+    "description": "Authority would thank remain present sort check simply take alone tonight imagine myself.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Business Mobile Contract",
+    "unit_buy_price": 673.6,
+    "unit_sell_price": 938.33
+  },
+  {
+    "name": "Ayala LLC Enterprise Router Model-582xp",
+    "description": "Bar agreement could per amount fast result in buy consider leader.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Enterprise Router",
+    "unit_buy_price": 451.37,
+    "unit_sell_price": 757.69
+  },
+  {
+    "name": "Jackson-Smith Chat Solutions Model-331jC",
+    "description": "Nearly medical financial surface peace exist fund minute phone trial energy although family between.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Chat Solutions",
+    "unit_buy_price": 511.2,
+    "unit_sell_price": 669.41
+  },
+  {
+    "name": "Leon Ltd Cloud PBX Model-190xv",
+    "description": "Mind successful community town how own everyone chance their fall provide.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "Cloud PBX",
+    "unit_buy_price": 72.58,
+    "unit_sell_price": 115.22
+  },
+  {
+    "name": "Alvarado-Booth Network Extenders Model-474Zx",
+    "description": "Big foreign into which control power so play second federal seat seven.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "Network Extenders",
+    "unit_buy_price": 290.82,
+    "unit_sell_price": 533.65
+  },
+  {
+    "name": "Mitchell, Mueller and Townsend Video Conferencing Solutions Model-876Ku",
+    "description": "Alone manager paper eye clear career administration space dream station may people us professor whole.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Video Conferencing Solutions",
+    "unit_buy_price": 583.9,
+    "unit_sell_price": 878.63
+  },
+  {
+    "name": "Gonzalez, Jackson and Kemp UPS (Uninterruptible Power Supply) Model-758DV",
+    "description": "Mean cold position decision land recognize treatment other Mrs account reflect deep.",
+    "product_type_name": "Accessories",
+    "product_sub_type_name": "UPS (Uninterruptible Power Supply)",
+    "unit_buy_price": 34.8,
+    "unit_sell_price": 47.71
+  },
+  {
+    "name": "Nguyen-Serrano Network Cables Model-661Jl",
+    "description": "Level physical window bill box board fill.",
+    "product_type_name": "Accessories",
+    "product_sub_type_name": "Network Cables",
+    "unit_buy_price": 193.16,
+    "unit_sell_price": 382.34
+  },
+  {
+    "name": "Harris Group ADSL Model-824qB",
+    "description": "Often stand view hundred become relate our assume let each because brother thank.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "ADSL",
+    "unit_buy_price": 230.66,
+    "unit_sell_price": 372.57
+  },
+  {
+    "name": "Hughes, Smith and Brock Endpoint Security Model-712vL",
+    "description": "First half effort success cold data north other.",
+    "product_type_name": "Security Solutions",
+    "product_sub_type_name": "Endpoint Security",
+    "unit_buy_price": 366.85,
+    "unit_sell_price": 667.2
+  },
+  {
+    "name": "Downs-Kane Fibre Router Model-867ZF",
+    "description": "Player with company avoid off computer laugh star budget.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Fibre Router",
+    "unit_buy_price": 31.39,
+    "unit_sell_price": 62.02
+  },
+  {
+    "name": "Singh Group 5G Broadband Model-005qI",
+    "description": "Serve religious war wrong list food heart never appear song.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "5G Broadband",
+    "unit_buy_price": 261.55,
+    "unit_sell_price": 393.11
+  },
+  {
+    "name": "Johnson, Porter and Ferguson VDSL Model-488va",
+    "description": "Two peace soon walk leg physical enough sister back read into expert person.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "VDSL",
+    "unit_buy_price": 525.22,
+    "unit_sell_price": 846.79
+  },
+  {
+    "name": "Benjamin-Phelps Mesh Router System Model-745Gr",
+    "description": "Walk newspaper world meeting PM television speech people plan serve.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Mesh Router System",
+    "unit_buy_price": 352.46,
+    "unit_sell_price": 670.92
+  },
+  {
+    "name": "Reynolds, Yu and Huerta VPN Gateway Model-226dS",
+    "description": "Town fill receive beautiful light part rule beautiful capital money agent lead should.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "VPN Gateway",
+    "unit_buy_price": 172.35,
+    "unit_sell_price": 217.65
+  },
+  {
+    "name": "Obrien-Chapman Data-Only Plan Model-312ee",
+    "description": "Responsibility type thousand sport poor star public experience especially debate finish simply major miss reveal likely.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "Data-Only Plan",
+    "unit_buy_price": 803.17,
+    "unit_sell_price": 948.2
+  },
+  {
+    "name": "Taylor-Monroe VPN as a Service Model-140zr",
+    "description": "Ability require family up animal society foot very resource behavior.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "VPN as a Service",
+    "unit_buy_price": 415.42,
+    "unit_sell_price": 799.16
+  },
+  {
+    "name": "Evans-Anderson Network Switch (Unmanaged) Model-970Gi",
+    "description": "International build green other allow control water economic change seem light save today among finally.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "Network Switch (Unmanaged)",
+    "unit_buy_price": 390.11,
+    "unit_sell_price": 484.62
+  },
+  {
+    "name": "Jackson-Mason Managed Switch Model-867QU",
+    "description": "Say artist begin word hair maybe nice either candidate level realize reason front.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "Managed Switch",
+    "unit_buy_price": 127.07,
+    "unit_sell_price": 188.45
+  },
+  {
+    "name": "Fletcher Group SIM-Only Plan Model-900Hl",
+    "description": "Save these save send hear pressure reduce.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "SIM-Only Plan",
+    "unit_buy_price": 368.53,
+    "unit_sell_price": 632.4
+  },
+  {
+    "name": "Harding, Huynh and Munoz VoIP Phone System Model-991lj",
+    "description": "Too recognize suddenly company recent recognize thank letter say many deal matter.",
+    "product_type_name": "Phone Systems",
+    "product_sub_type_name": "VoIP Phone System",
+    "unit_buy_price": 203.91,
+    "unit_sell_price": 404.62
+  },
+  {
+    "name": "Hanson Group Managed Switch Model-246LI",
+    "description": "Cultural course network foot who even pattern race set.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "Managed Switch",
+    "unit_buy_price": 359.37,
+    "unit_sell_price": 534.91
+  },
+  {
+    "name": "Sanders-Fox Network Switch (Unmanaged) Model-246ld",
+    "description": "Trade hospital bit opportunity sell glass blood score task which life discuss happy explain former national.",
+    "product_type_name": "Networking Hardware",
+    "product_sub_type_name": "Network Switch (Unmanaged)",
+    "unit_buy_price": 378.82,
+    "unit_sell_price": 661.51
+  },
+  {
+    "name": "Dalton-Osborne Fibre to the Cabinet (FTTC) Model-240Ry",
+    "description": "Brother make everybody long material interest reality.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "Fibre to the Cabinet (FTTC)",
+    "unit_buy_price": 650.03,
+    "unit_sell_price": 876.87
+  },
+  {
+    "name": "Kelly, Mcdonald and Ritter VDSL Model-264FB",
+    "description": "Coach include north her month what hair figure nearly north role.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "VDSL",
+    "unit_buy_price": 332.58,
+    "unit_sell_price": 516.53
+  },
+  {
+    "name": "Bernard, Reyes and Howard Signal Boosters Model-997MN",
+    "description": "Power difficult medical dream fish tonight pay environmental education she.",
+    "product_type_name": "Accessories",
+    "product_sub_type_name": "Signal Boosters",
+    "unit_buy_price": 27.6,
+    "unit_sell_price": 36.69
+  },
+  {
+    "name": "Morton Inc Integrated UC Platform Model-618MN",
+    "description": "Short poor floor forward show task enjoy.",
+    "product_type_name": "Unified Communications",
+    "product_sub_type_name": "Integrated UC Platform",
+    "unit_buy_price": 268.54,
+    "unit_sell_price": 513.46
+  },
+  {
+    "name": "Garcia, Vincent and Mitchell ADSL Router Model-100ll",
+    "description": "Professor once rich one young doctor long.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "ADSL Router",
+    "unit_buy_price": 481.84,
+    "unit_sell_price": 682.78
+  },
+  {
+    "name": "Gilmore Inc Backup as a Service (BaaS) Model-565lR",
+    "description": "Glass it want with security create beautiful push girl individual goal news campaign.",
+    "product_type_name": "Cloud Services",
+    "product_sub_type_name": "Backup as a Service (BaaS)",
+    "unit_buy_price": 73.09,
+    "unit_sell_price": 93.26
+  },
+  {
+    "name": "Quinn, Johnson and Phelps PAYG Plan (Pay As You Go) Model-103PE",
+    "description": "Player move easy eat claim when and treatment as human political require.",
+    "product_type_name": "Mobile Plans",
+    "product_sub_type_name": "PAYG Plan (Pay As You Go)",
+    "unit_buy_price": 540.04,
+    "unit_sell_price": 694.66
+  },
+  {
+    "name": "Fletcher, Jimenez and Sutton DDoS Protection Model-521Ay",
+    "description": "Get better machine create agency second imagine including goal off realize.",
+    "product_type_name": "Security Solutions",
+    "product_sub_type_name": "DDoS Protection",
+    "unit_buy_price": 540.15,
+    "unit_sell_price": 928.06
+  },
+  {
+    "name": "Washington, Ramirez and Johnson Wi-Fi 6 Router Model-972OZ",
+    "description": "Sit speak if half every somebody decision call feeling education test already population notice local certainly.",
+    "product_type_name": "Routers",
+    "product_sub_type_name": "Wi-Fi 6 Router",
+    "unit_buy_price": 587.34,
+    "unit_sell_price": 692.42
+  },
+  {
+    "name": "Coleman Inc Leased Line Model-314yd",
+    "description": "Popular consumer join sit meet big hair fact look child hope wonder bag accept all.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "Leased Line",
+    "unit_buy_price": 49.41,
+    "unit_sell_price": 89.06
+  },
+  {
+    "name": "Alvarado Ltd ADSL Model-107cd",
+    "description": "Court live soon back smile fund himself food where use economy her to out meeting.",
+    "product_type_name": "Broadband",
+    "product_sub_type_name": "ADSL",
+    "unit_buy_price": 631.71,
+    "unit_sell_price": 834.0
+  }
+]
