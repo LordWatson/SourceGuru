@@ -93,6 +93,7 @@
             @include('quotes.partials.add-product-or-package-modal', ['quoteId' => $quote->id])
 
             @include('quotes.partials.add-quote-item-modal', ['quoteId' => $quote->id])
+            @include('quotes.partials.add-catalogue-product-modal', ['quoteId' => $quote->id])
         </div>
     </div>
 </div>

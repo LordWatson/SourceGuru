@@ -17,7 +17,7 @@
                 <select id="product-dropdown" name="product_type" x-model="selectedOption" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                     <option disabled selected>{{ __('Choose an option') }}</option>
                     <option @click="$dispatch('open-modal', 'add-bespoke-product')">{{ __('Bespoke Product') }}</option>
-                    <option>{{ __('Catalogue Product') }}</option>
+                    <option @click="$dispatch('open-modal', 'add-catalogue-product')">{{ __('Catalogue Product') }}</option>
                     <option>{{ __('Package') }}</option>
                     <option>{{ __('Run Workflow') }}</option>
                     <option>{{ __('Live Billing') }}</option>
