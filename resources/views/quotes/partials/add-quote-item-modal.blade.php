@@ -1,4 +1,4 @@
-<x-modal name="add-quote-item" focusable>
+<x-modal name="add-bespoke-product" focusable>
     <form method="post" action="{{ route('quote-items.store') }}" class="p-6">
         @csrf
         @method('post')

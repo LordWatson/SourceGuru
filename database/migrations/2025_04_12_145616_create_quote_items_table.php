@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ProductTypeEnum;
 use App\Enums\QuoteItemStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +18,8 @@ return new class extends Migration
             $table->foreignId('quote_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
+            $table->string('product_type')->default(ProductTypeEnum::Bespoke->value);
+            $table->integer('product_id')->nullable();
             $table->string('product_source');
             $table->integer('quantity')->default(1);
             $table->decimal('unit_buy_price', 10, 2);

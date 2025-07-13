@@ -90,6 +90,8 @@
                 {{ __('+ Add Product') }}
             </x-edit-action>
 
+            @include('quotes.partials.add-product-or-package-modal', ['quoteId' => $quote->id])
+
             @include('quotes.partials.add-quote-item-modal', ['quoteId' => $quote->id])
         </div>
     </div>
