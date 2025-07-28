@@ -9,69 +9,46 @@ use Illuminate\Support\Facades\DB;
 
 abstract class CreateAction
 {
-    public function __construct(protected CreateActivityLog $createActivityLog)
-    {
+    public function __construct
+    (
+        protected CreateActivityLog $createActivityLog
+    ){
         //
     }
 
-    /**
-     * Execute the create operation.
-     */
     public function execute(array $data, string $message = 'Record created successfully'): array
     {
-        try {
-            // begin a db transaction
-            DB::beginTransaction();
-
-            // create the new model record
-            $model = $this->createModelInstance($data);
-
-            // log the creation success
-            $this->logActivity(
-                model: $model,
-                statusCode: 201,
-                message: $message
+        try{
+            // create the record
+            $model = $this->handleTransaction(
+                fn() => $this->createModelInstance($data)
             );
 
-            // commit the transaction
-            DB::commit();
+            // log the creation
+            $this->logActivity(model: $model, statusCode: 201, event: 'create', message: $message);
 
-        } catch (Exception $e) {
-            // undo the db transaction
-            DB::rollBack();
+            return $this->successResponse($model);
+        }catch (Exception $e){
+            // log the failed creation
+            $this->logActivity(model: null, statusCode: 500, event: 'create', message: $e->getMessage());
 
-            // log the failure
-            $this->logActivity(
-                model: null,
-                statusCode: 500,
-                message: $e->getMessage()
-            );
-
-            // return a failed message
-            return [
-                'success' => false
-            ];
+            return $this->errorResponse($e->getMessage());
         }
-
-        // success !!
-        return [
-            strtolower(class_basename($model)) => $model->fresh(),
-            'success' => true,
-        ];
     }
 
-    /**
-     * Log Activity
-     */
-    protected function logActivity(
+    protected function logActivity
+    (
         ?Model $model,
         int $statusCode,
+        string $event,
         ?string $message = null
-    ): void {
+    ): void
+    {
+
         $activityLog = [
             'model' => $model ? get_class($model) : null,
             'model_id' => $model?->id,
-            'event' => 'create',
+            'event' => $event,
             'changes' => $model ? json_encode($model->getAttributes()) : null,
             'status_code' => $statusCode,
             'message' => $message,
@@ -81,7 +58,41 @@ abstract class CreateAction
     }
 
     /**
-     * Provide the new model instance to create.
+     * @throws Exception
      */
+    protected function handleTransaction(callable $callback): mixed
+    {
+        // create the record
+        try{
+            DB::beginTransaction();
+
+            $result = $callback();
+
+            DB::commit();
+
+            return $result;
+        }catch(Exception $e){
+            DB::rollBack();
+
+            throw $e;
+        }
+    }
+
+    protected function successResponse(Model $model): array
+    {
+        return [
+            strtolower(class_basename($model)) => $model->fresh(),
+            'success' => true,
+        ];
+    }
+
+    protected function errorResponse(string $message): array
+    {
+        return [
+            'success' => false,
+            'message' => $message,
+        ];
+    }
+
     abstract protected function createModelInstance(array $data): Model;
 }

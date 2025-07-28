@@ -22,7 +22,7 @@ class FilterProductTypesAction
      * @param $search
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function execute($search): \Illuminate\Database\Eloquent\Collection
+    public function execute($search = null): \Illuminate\Database\Eloquent\Collection
     {
         /*
          * get product types, sub types, and products associated with it

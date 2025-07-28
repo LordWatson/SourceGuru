@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Companies;
+namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCompanyRequest extends FormRequest
+class CreateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,12 @@ class CreateCompanyRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'primary_contact_name' => 'required|string|max:255',
-            'primary_contact_email' => 'required|email|max:255',
-            'address' => 'required|string|max:255',
-            'primary_contact_phone' => 'required|string|regex:/^\+?[0-9]{7,15}$/',
-            'account_manager_id' => 'required|exists:users,id',
-            'notes' => 'sometimes|max:255',
+            'description' => 'required|string|max:255',
+            'product_type_id' => 'required|exists:product_types,id',
+            'product_sub_type_id' => 'required|exists:product_sub_types,id',
+            'unit_buy_price' => 'required|numeric|min:0',
+            'unit_sell_price' => 'required|numeric|min:0',
+            'source' => 'required|string|max:255',
         ];
     }
 }

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Products\CreateProductAction;
 use App\Actions\Products\FilterProductTypesAction;
 use App\Actions\Quotes\FilterQuotesAction;
 use App\Actions\Search\ParseSearchQueryAction;
+use App\Http\Requests\Products\CreateProductRequest;
 use App\Models\Product;
 use App\Models\ProductSubType;
 use App\Models\ProductType;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -34,17 +37,36 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(FilterProductTypesAction $filterProductTypesAction)
     {
-        //
+        $this->authorize('create', Product::class);
+
+        $productTypes = $filterProductTypesAction->execute();
+
+        return view('products.products-create', compact('productTypes'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request, CreateProductAction $createProductAction)
     {
-        //
+        // validate the request
+        $validated = $request->validated();
+
+        // trigger the product action
+        $action = $createProductAction->execute($validated);
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to create product.']);
+
+        // redirect to the products list
+        return Redirect::to("/products")
+            ->with('status', [
+                'type' => 'create',
+                'message' => 'Product created',
+                'colour' => 'green',
+            ]);
     }
 
     /**
@@ -96,7 +118,7 @@ class ProductController extends Controller
 
     public function getProducts(Request $request, int $typeId, int $subTypeId)
     {
-        $subTypes = Product::where('product_type_id', $typeId)->where('product_sub_type_id', $typeId)->get()->toArray();
+        $subTypes = Product::where('product_type_id', $typeId)->where('product_sub_type_id', $subTypeId)->get()->toArray();
 
         return response()->json($subTypes);
     }
