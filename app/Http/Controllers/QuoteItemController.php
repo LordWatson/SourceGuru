@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Company\UpdateCompanyAction;
 use App\Actions\QuoteItem\CreateQuoteItemAction;
+use App\Actions\QuoteItem\MapCatalogueProductToQuoteItemAction;
 use App\Actions\QuoteItem\UpdateQuoteItemAction;
 use App\Http\Requests\QuoteItem\CreateQuoteItemRequest;
 use App\Http\Requests\QuoteItem\UpdateQuoteItemRequest;
@@ -41,21 +42,13 @@ class QuoteItemController extends Controller
     /**
      * Store a catalogue product.
      */
-    public function addCatalogueProduct(Request $request, int $quoteId, CreateQuoteItemAction $createQuoteItemAction)
+    public function addCatalogueProduct(Request $request, int $quoteId, MapCatalogueProductToQuoteItemAction $mapCatalogueProductToQuoteItemAction, CreateQuoteItemAction $createQuoteItemAction)
     {
         // validate the request
         $product = Product::findOrFail($request->product);
 
-        $quoteItem = [
-            'quote_id' => $quoteId,
-            'name' => $product->name,
-            'description' => $product->description,
-            'unit_buy_price' => $product->unit_buy_price,
-            'unit_sell_price' => $product->unit_sell_price,
-            'quantity' => 1,
-            'product_type' => 'catalogue',
-            'product_source' => $product->source,
-        ];
+        // format the catalogue product into a manner that will be accepted by the createQuoteItemAction
+        $quoteItem = $mapCatalogueProductToQuoteItemAction->execute($product, $quoteId);
 
         // create action
         $action = $createQuoteItemAction->execute($quoteItem);
