@@ -7,6 +7,7 @@ use App\Actions\QuoteItem\CreateQuoteItemAction;
 use App\Actions\QuoteItem\UpdateQuoteItemAction;
 use App\Http\Requests\QuoteItem\CreateQuoteItemRequest;
 use App\Http\Requests\QuoteItem\UpdateQuoteItemRequest;
+use App\Models\Product;
 use App\Models\QuoteItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -24,6 +25,40 @@ class QuoteItemController extends Controller
 
         // create action
         $action = $createQuoteItemAction->execute($validated);
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to add product.']);
+
+        // redirect to the users show / edit page
+        return Redirect::to("/quotes/{$action['quoteitem']->quote_id}")
+            ->with('status', [
+                'type' => 'create',
+                'message' => 'Product added',
+                'colour' => 'green',
+            ]);
+    }
+
+    /**
+     * Store a catalogue product.
+     */
+    public function addCatalogueProduct(Request $request, int $quoteId, CreateQuoteItemAction $createQuoteItemAction)
+    {
+        // validate the request
+        $product = Product::findOrFail($request->product);
+
+        $quoteItem = [
+            'quote_id' => $quoteId,
+            'name' => $product->name,
+            'description' => $product->description,
+            'unit_buy_price' => $product->unit_buy_price,
+            'unit_sell_price' => $product->unit_sell_price,
+            'quantity' => 1,
+            'product_type' => 'catalogue',
+            'product_source' => $product->source,
+        ];
+
+        // create action
+        $action = $createQuoteItemAction->execute($quoteItem);
 
         // handle error
         if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to add product.']);

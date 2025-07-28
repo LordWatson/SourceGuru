@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('quote-items', QuoteItemController::class);
     Route::post('/quote-items/{quoteItem}/duplicate', [QuoteItemController::class, 'duplicate'])->name('quote-items.duplicate');
+    Route::post('/quote-items/addCatalogueProduct/{quoteId}', [QuoteItemController::class, 'addCatalogueProduct'])->name('quote-items.addCatalogueProduct');
 
     Route::resource('proposals', ProposalController::class);
 

@@ -1,5 +1,5 @@
 <x-modal name="add-catalogue-product" focusable>
-    <form method="post" action="{{ route('quote-items.store') }}" class="p-6" x-data="catalogueProductForm()" x-init="fetchProductTypes(), fetchProductSubTypes(), fetchProducts()">
+    <form method="post" action="{{ route('quote-items.addCatalogueProduct', ['quoteId' => $quote->id]) }}" class="p-6" x-data="catalogueProductForm()" x-init="fetchProductTypes(), fetchProductSubTypes(), fetchProducts()">
         @csrf
         @method('post')
 

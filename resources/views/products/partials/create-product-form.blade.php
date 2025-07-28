@@ -35,7 +35,7 @@
             <select id="product_type" name="product_type_id" x-data="{}" x-model="selectedProductType"
                     x-on:change="fetchProductSubTypes()"
                     class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                <option value="">{{ __('Select Product Type') }}</option>
+                <option value="">{{ __('') }}</option>
                 <template x-for="type in productTypes" :key="type.id">
                     <option :value="type.id" x-text="type.name"></option>
                 </template>
@@ -50,7 +50,7 @@
             <select id="product_sub_type" name="product_sub_type_id" x-data="{}" x-model="selectedProductSubType"
                     x-on:change="fetchProducts()"
                     class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                <option value="">{{ __('Select Product Sub Type') }}</option>
+                <option value="">{{ __('') }}</option>
                 <template x-for="subType in productSubTypes" :key="subType.id">
                     <option :value="subType.id" x-text="subType.name"></option>
                 </template>
@@ -77,11 +77,25 @@
                 {{ __('Product Source') }}
             </label>
             <select id="source" name="source" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                <option value="">{{ __('Select Product Source') }}</option>
+                <option value="">{{ __('') }}</option>
                 <option value="warehouse">Warehouse</option>
                 <option value="online">Online</option>
                 <option value="manufacturer">Manufacturer</option>
             </select>
+        </div>
+
+        <!-- Emission Benchmark -->
+        <div>
+            <x-input-label for="emission_benchmark" :value="__('Emission Benchmark (kg)')" />
+            <x-text-input id="emission_benchmark" name="emission_benchmark" type="number" step="0.01" class="mt-1 block w-full" value="0.00" />
+            <x-input-error :messages="$errors->get('emission_benchmark')" class="mt-2" />
+        </div>
+
+        <!-- Emission Result -->
+        <div>
+            <x-input-label for="emission_result" :value="__('Emission Result (kg)')" />
+            <x-text-input id="emission_result" name="emission_result" type="number" step="0.01" class="mt-1 block w-full" value="0.00" />
+            <x-input-error :messages="$errors->get('emission_result')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">
