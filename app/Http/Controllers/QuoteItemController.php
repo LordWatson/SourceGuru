@@ -42,8 +42,11 @@ class QuoteItemController extends Controller
     /**
      * Store a catalogue product.
      */
-    public function addCatalogueProduct(Request $request, int $quoteId, MapCatalogueProductToQuoteItemAction $mapCatalogueProductToQuoteItemAction, CreateQuoteItemAction $createQuoteItemAction)
-    {
+    public function addCatalogueProduct(
+        Request $request,
+        int $quoteId,
+        MapCatalogueProductToQuoteItemAction $mapCatalogueProductToQuoteItemAction, CreateQuoteItemAction $createQuoteItemAction
+    ){
         // validate the request
         $product = Product::findOrFail($request->product);
 
