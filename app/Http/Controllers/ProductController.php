@@ -12,6 +12,7 @@ use App\Models\ProductSubType;
 use App\Models\ProductType;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
@@ -22,6 +23,7 @@ class ProductController extends Controller
     {
         //
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -32,6 +34,18 @@ class ProductController extends Controller
         $productTypes = $filterProductTypesAction->execute($search);
 
         return view('products.products-index', compact('productTypes'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function productList(Request $request, int $typeId, int $subTypeId)
+    {
+        $products = Product::where('product_type_id', $typeId)
+            ->where('product_sub_type_id', $subTypeId)
+            ->get();
+
+        return view('products.products-list', compact('products'));
     }
 
     /**

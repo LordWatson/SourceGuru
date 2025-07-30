@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('companies', CompanyController::class);
     Route::resource('reports', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::get('products/{typeId}/{subTypeId}', [ProductController::class, 'productList'])->name('products.productList');
+
     Route::get('api/get-product-types', [ProductController::class, 'getProductTypes'])->name('products.getProductTypes');
     Route::get('api/get-product-sub-types/{typeId}', [ProductController::class, 'getProductSubTypes'])->name('products.getProductSubTypes');
     Route::get('api/get-products/{typeId}/{subTypeId}', [ProductController::class, 'getProducts'])->name('products.getProducts');

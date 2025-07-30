@@ -36,9 +36,9 @@
                                         <li class="py-2 flex items-center justify-between hover:bg-gray-100">
                                             <!-- Product SubType -->
                                             <div class="cursor-pointer flex items-center justify-between px-4 py-2 w-full">
-                                                <p class="text-base font-medium text-gray-800">
+                                                <a href="/products/{{ $productType->id }}/{{ $productSubType->id }}" class="text-base font-medium text-gray-800">
                                                     {{ $productSubType->name }}
-                                                </p>
+                                                </a>
                                                 <!-- Count of Products -->
                                                 <span class="text-sm text-gray-500">
                                                     {{ count($productSubType->products) }}
