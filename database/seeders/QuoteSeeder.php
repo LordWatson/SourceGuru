@@ -36,7 +36,7 @@ class QuoteSeeder extends Seeder
 
             $createdDate = $faker->dateTimeBetween('-6 months', 'now');
 
-            DB::table('quotes')->insert([
+            Quote::insert([
                 'user_id' => $faker->numberBetween(2, 5),
                 'company_id' => $faker->numberBetween(1, 10),
                 'quote_name' => $faker->text(20),

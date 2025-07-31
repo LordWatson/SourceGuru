@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProposalController;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('companies', CompanyController::class);
     Route::resource('reports', UserController::class);
+    Route::resource('packages', PackageController::class);
+
     Route::resource('products', ProductController::class);
     Route::get('products/{typeId}/{subTypeId}', [ProductController::class, 'productList'])->name('products.productList');
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Actions\Products\CreateProductAction;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\ProductType;
@@ -12,7 +13,7 @@ class ProductSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run(CreateProductAction $createProductAction): void
     {
         $json = file_get_contents(database_path('data/products.json'));
         $products = json_decode($json, 1);
@@ -28,7 +29,7 @@ class ProductSeeder extends Seeder
                 ->first();
 
             // create
-            Product::create([
+            $createProductAction->execute([
                 'name' => $product['name'],
                 'description' => $product['description'],
                 'image' => $product['image'] ?? null,

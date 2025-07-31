@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Package extends Model
 {
-    // package has many products
-    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
+    // packages belongs to many products through a package_products pivot table
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class, 'package_products');
     }
 }

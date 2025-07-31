@@ -16,6 +16,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->is('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
                     <!-- Quotes -->
                     <x-nav-link :href="route('quotes.index')" :active="request()->is('quotes')">
                         {{ __('Quotes') }}
@@ -26,10 +27,26 @@
                         {{ __('Companies') }}
                     </x-nav-link>
 
-                    <!-- Products -->
-                    <x-nav-link :href="route('products.index')" :active="request()->is('products')">
-                        {{ __('Products') }}
-                    </x-nav-link>
+                    <!-- Catalogue Dropdown -->
+                    <div class="relative flex items-center group">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    <div>Catalogue</div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('packages.index')">
+                                    {{ __('Packages') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('products.index')">
+                                    {{ __('Products') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
 
                     @if(Auth::user()->role->level > 2)
                         <!-- Users -->

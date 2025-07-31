@@ -17,4 +17,10 @@ class Product extends Model
     {
         return $this->belongsTo(ProductSubType::class);
     }
+
+    // products belong to many Packages
+    public function packages(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Package::class);
+    }
 }
