@@ -32,6 +32,7 @@ class MapCatalogueProductToQuoteItemAction
             'quantity' => 1,
             'product_type' => 'catalogue',
             'product_source' => $catalogueProduct->source,
+            'type_id' => $catalogueProduct->id,
             'emission_benchmark' => $catalogueProduct->emission_benchmark ?? 0.00,
             'emission_result' => $catalogueProduct->emission_result ?? 0.00,
         ];

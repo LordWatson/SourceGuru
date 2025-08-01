@@ -13,10 +13,7 @@
                     Description
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
-                    Source
-                </th>
-                <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
-                    Quantity
+                    Qty
                 </th>
                 <th scope="col" class="px-4 py-2 text-sm text-gray-500 font-medium">
                     Unit Buy
@@ -37,10 +34,9 @@
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
             @foreach($quote->products as $product)
-                <tr class="hover:bg-gray-100">
-                    <td class="px-4 py-2 text-sm text-gray-900">{{ $product->name }}</td>
-                    <td class="px-4 py-2 text-sm text-gray-900">{{ \Illuminate\Support\Str::words($product->description, 3, '...') }}</td>
-                    <td class="px-4 py-2 text-sm text-gray-900">{{ $product->product_source }}</td>
+                <tr class="{{ \App\Enums\ProductTypeEnum::from($product->product_type)->hoverColour() }}">
+                    <td class="px-4 py-2 text-sm text-gray-900">{{ Str::words($product->name, 3, '...') }}</td>
+                    <td class="px-4 py-2 text-sm text-gray-900">{{ Str::words($product->description, 3, '...') }}</td>
                     <td class="px-4 py-2 text-sm text-gray-900">{{ $product->quantity }}</td>
                     <td class="px-4 py-2 text-sm">£{{ number_format($product->unit_buy_price, 2) }}</td>
                     <td class="px-4 py-2 text-sm">£{{ number_format($product->unit_sell_price, 2) }}</td>

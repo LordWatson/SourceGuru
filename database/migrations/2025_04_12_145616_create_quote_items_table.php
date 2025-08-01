@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('product_type')->default(ProductTypeEnum::Bespoke->value);
-            $table->integer('product_id')->nullable();
-            $table->string('product_source');
+            $table->integer('type_id')->nullable();
+            $table->string('product_source')->nullable();
             $table->integer('quantity')->default(1);
             $table->decimal('unit_buy_price', 10, 2);
             $table->decimal('total_buy_price', 10, 2);
