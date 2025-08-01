@@ -3,12 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Package extends Model
 {
-    // packages belongs to many products through a package_products pivot table
-    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'package_products');
+        return $this->belongsToMany(Product::class, 'package_products')
+            ->withTimestamps();
+    }
+
+    public function versions(): HasMany
+    {
+        return $this->hasMany(PackageVersion::class);
+    }
+
+    public function currentVersion(): BelongsTo
+    {
+        return $this->belongsTo(PackageVersion::class, 'current_version_id');
     }
 }

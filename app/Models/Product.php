@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -18,9 +19,16 @@ class Product extends Model
         return $this->belongsTo(ProductSubType::class);
     }
 
-    // products belong to many Packages
-    public function packages(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function packages(): BelongsToMany
     {
-        return $this->belongsToMany(Package::class);
+        return $this->belongsToMany(Package::class, 'package_products')
+            ->withTimestamps();
+    }
+
+    public function packageVersions(): BelongsToMany
+    {
+        return $this->belongsToMany(PackageVersion::class, 'package_version_products')
+            ->withPivot(['unit_buy_price', 'unit_sell_price'])
+            ->withTimestamps();
     }
 }
