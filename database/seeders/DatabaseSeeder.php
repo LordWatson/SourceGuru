@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ProductTypeSeeder::class,
             ProductSeeder::class,
             PackageSeeder::class,
+            FulfillmentSeeder::class,
         ]);
 
         Schema::enableForeignKeyConstraints();

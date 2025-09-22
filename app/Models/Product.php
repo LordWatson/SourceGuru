@@ -3,18 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
     // products belong to a ProductType
-    public function productType(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function productType(): BelongsTo
     {
         return $this->belongsTo(ProductType::class);
     }
 
+    public function fulfillmentSteps(): HasMany
+    {
+        return $this->hasMany(ProductFulfillmentStep::class)->orderBy('step_order');
+    }
+
     // products belong to a ProductSubType
-    public function productSubType(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function productSubType(): BelongsTo
     {
         return $this->belongsTo(ProductSubType::class);
     }
