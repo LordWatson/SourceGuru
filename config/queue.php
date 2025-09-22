@@ -72,6 +72,14 @@ return [
             'after_commit' => false,
         ],
 
+        'rabbitmq' => [
+            'host' => env('RABBITMQ_HOST'),
+            'port' => env('RABBITMQ_PORT'),
+            'user' => env('RABBITMQ_USER'),
+            'pass' => env('RABBITMQ_PASS'),
+            'exchange' => env('RABBITMQ_EXCHANGE', 'sourceguru.exchange'),
+        ],
+
     ],
 
     /*
