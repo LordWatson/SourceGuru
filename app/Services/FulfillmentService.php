@@ -15,7 +15,9 @@ class FulfillmentService implements FulfillmentInterface
     public function createTasks(Order $order): void
     {
         foreach($order->items as $item){
-            $steps = ProductFulfillmentStep::where('product_id', $item->product_id)
+            // skip bespoke products for now, we'll revisit later with a default set of steps
+            if(!isset($item->type_id)) continue;
+            $steps = ProductFulfillmentStep::where('product_id', $item->type_id)
                 ->orderBy('step_order')
                 ->get();
 
@@ -97,10 +99,16 @@ class FulfillmentService implements FulfillmentInterface
 
     protected function sendToQueue(OrderFulfillmentTask $task): void
     {
-        $connection = new AMQPStreamConnection('rabbitmq-host', 5672, 'user', 'password');
+        $connection = new AMQPStreamConnection(
+            config('queue.connections.rabbitmq.host'),
+            config('queue.connections.rabbitmq.port'),
+            config('queue.connections.rabbitmq.user'),
+            config('queue.connections.rabbitmq.pass'),
+        );
 
         $channel = $connection->channel();
-        $channel->queue_declare('fulfillment', false, true, false, false);
+        $exchange = config('queue.connections.rabbitmq.exchange');
+        $channel->queue_declare($exchange, false, true, false, false);
 
         $payload = json_encode([
             'task_id' => $task->id,

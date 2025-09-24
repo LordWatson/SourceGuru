@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('quote-items', QuoteItemController::class);
     Route::post('/quote-items/{quoteItem}/duplicate', [QuoteItemController::class, 'duplicate'])->name('quote-items.duplicate');
     Route::post('/quote-items/addCatalogueProduct/{quoteId}', [QuoteItemController::class, 'addCatalogueProduct'])->name('quote-items.addCatalogueProduct');
+
+    Route::resource('orders', OrderController::class);
 
     Route::resource('proposals', ProposalController::class);
 

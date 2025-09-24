@@ -39,18 +39,23 @@
             </a>
         @endif
 
-        <!--Generate Invoice Action -->
-        @if(!$quote?->proposal?->signed_ip)
+        <!-- Place Order -->
+{{--        @if(!$quote?->proposal?->signed_ip)--}}
+        @if(!$quote?->proposal)
             <p
                 class="inline-flex items-center justify-center px-4 py-8 col-span-2 row-span-2 border border-gray-200 rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none disabled:opacity-25 transition ease-in-out duration-150 line-through text-red-500 cursor-not-allowed"
             >
-                Generate Invoice
+                Place Order
             </p>
         @else
-            <a href="{{ route('reports.index') }}"
-               class="inline-flex items-center justify-center px-4 py-8 col-span-2 row-span-2 border border-gray-200 rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-gray-400 hover:text-white focus:outline-none disabled:opacity-25 transition ease-in-out duration-150">
-                Generate Invoice
-            </a>
+            <x-edit-action
+                class="text-black inline-flex items-center justify-center px-4 py-8 col-span-2 row-span-2 border rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-gray-400 hover:text-white focus:outline-none disabled:opacity-25 transition ease-in-out duration-150 border-gray-200"
+                x-data="{{ $quote }}"
+                x-on:click.prevent="$dispatch('open-modal', 'place-order')"
+                style="color: black;"
+            >
+                {{ __('Place Order') }}
+            </x-edit-action>
         @endif
 
         <!-- Duplicate -->
@@ -64,6 +69,7 @@
         </x-edit-action>
 
         @include('quotes.partials.duplicate-quote-modal', ['quote' => $quote])
+        @include('quotes.partials.place-order-modal', ['quote' => $quote])
 
     </div>
 </div>

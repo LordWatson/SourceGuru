@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Services\FulfillmentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class OrderController extends Controller
 {
@@ -26,9 +28,29 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, FulfillmentService $service)
     {
-        //
+        $order = Order::create([
+            'quote_id' => $request->quote_id,
+            'status' => 'new',
+        ]);
+
+        // update the quote status
+        $order->quote->update(['status' => 'ordered']);
+
+        $service->createTasks($order);
+        $service->dispatchPendingTasks($order);
+
+        /*
+         * redirect to the quotes show / edit page
+         * this is temporary until we have a proper order page
+         * */
+        return Redirect::to("/quotes/$request->quote_id")
+            ->with('status', [
+                'type' => 'create',
+                'message' => 'Order created',
+                'colour' => 'green',
+            ]);
     }
 
     /**
