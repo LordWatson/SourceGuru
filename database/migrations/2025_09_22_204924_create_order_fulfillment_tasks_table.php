@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('order_fulfillment_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('quote_item_id')->constrained('quote_items')->cascadeOnDelete();
+            $table->foreignId('order_item_id')->references('id')->on('quote_items')->cascadeOnDelete();
             $table->foreignId('fulfillment_step_id')->constrained()->cascadeOnDelete();
             $table->integer('step_order');
             $table->string('status')->default('blocked'); // 'pending', 'in_progress', 'success', 'failed', 'blocked'
