@@ -1,15 +1,43 @@
-<section>
+<section x-data="{ open: false }">
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Quote Information') }}
-        </h2>
+        <button
+            type="button"
+            class="w-[200%] flex items-center justify-between text-left group"
+            @click="open = !open"
+            :aria-expanded="open.toString()"
+            aria-controls="quote-info-form"
+        >
+            <div class="flex-1">
+                <h2 class="text-lg font-medium text-gray-900">
+                    {{ __('Quote Information') }}
+                </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update the quote details.") }}
-        </p>
+                <p class="mt-1 text-sm text-gray-600">
+                    {{ __("Update the quote details.") }}
+                </p>
+            </div>
+
+            <svg
+                class="ml-4 h-5 w-5 shrink-0 text-gray-500 transition-transform duration-200 group-hover:text-gray-700"
+                :class="open ? 'rotate-180' : 'rotate-0'"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+            >
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.173l3.71-2.942a.75.75 0 111.04 1.08l-4.24 3.363a.75.75 0 01-.94 0L5.21 8.31a.75.75 0 01.02-1.1z" clip-rule="evenodd" />
+            </svg>
+        </button>
     </header>
 
-    <form method="post" action="{{ route('quotes.update', ['quote' => $quote->id]) }}" class="mt-6 space-y-6">
+
+    <form
+        id="quote-info-form"
+        x-show="open"
+        x-transition
+        method="post"
+        action="{{ route('quotes.update', ['quote' => $quote->id]) }}"
+        class="mt-6 space-y-6"
+    >
         @csrf
         @method('patch')
 
@@ -18,6 +46,7 @@
             <x-text-input id="quote_name" name="quote_name" type="text" class="mt-1 block w-full" :value="old('quote_name', $quote->quote_name)" required/>
             <x-input-error class="mt-2" :messages="$errors->get('quote_name')" />
         </div>
+
 
         <div>
             <x-input-label for="company_id" :value="__('Company')" />

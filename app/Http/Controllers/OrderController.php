@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Orders\CreateOrderAction;
 use App\Models\Order;
 use App\Services\FulfillmentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class OrderController extends Controller
@@ -28,18 +30,13 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, FulfillmentService $service)
+    public function store(Request $request, CreateOrderAction $createOrderAction)
     {
-        $order = Order::create([
-            'quote_id' => $request->quote_id,
-            'status' => 'new',
-        ]);
+        // trigger the order action
+        $action = $createOrderAction->execute(['quote_id' => $request->quote_id]);
 
-        // update the quote status
-        $order->quote->update(['status' => 'ordered']);
-
-        $service->createTasks($order);
-        $service->dispatchPendingTasks($order);
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to create order']);
 
         /*
          * redirect to the quotes show / edit page
