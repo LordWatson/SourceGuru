@@ -17,7 +17,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2 gap-6 mb-6">
 
                 <!-- Charts Section -->
-                @include('dashboard.partials.performance-chart')
+                @include('dashboard.partials.status-stats-chart')
 
                 @include('dashboard.partials.monthly-chart')
             </div>
@@ -25,7 +25,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-2 gap-6 mb-6">
 
                 <!-- Charts Section -->
-                @include('dashboard.partials.status-stats-chart')
+                @include('dashboard.partials.performance-chart')
 
                 <!-- Dashboard Actions Section -->
                 @include('dashboard.partials.dashboard-actions')

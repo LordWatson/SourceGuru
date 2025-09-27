@@ -19,10 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 // user the quote counts for the data / bars in the chart
                 data: data,
                 backgroundColor: [
-                    'rgba(62,200,191,0.24)'
+                    'rgb(255, 215, 0, 0.24)',
+                    'rgb(192, 192, 192, 0.24)',
+                    'rgba(205, 127, 50, 0.24)',
                 ],
                 borderColor: [
-                    'rgb(51,168,160)'
+                    'rgb(255, 215, 0)',
+                    'rgb(192, 192, 192)',
+                    'rgba(205, 127, 50)',
                 ],
                 borderWidth: 1
             }]
