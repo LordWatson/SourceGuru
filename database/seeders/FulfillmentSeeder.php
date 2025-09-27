@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\ProductFulfillmentStepDependency;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\FulfillmentStep;
@@ -57,32 +58,32 @@ class FulfillmentSeeder extends Seeder
         $mobileData = Product::firstOrCreate(['name' => 'Guerra, Yang and Edwards Unlimited Data Plan Model-047nn']);
 
         // broadband steps
-        ProductFulfillmentStep::firstOrCreate([
+        $bbSurveyStep = ProductFulfillmentStep::firstOrCreate([
             'product_id' => $broadband->id,
             'fulfillment_step_id' => $survey->id,
             'step_order' => 1,
         ]);
 
-        ProductFulfillmentStep::firstOrCreate([
+        $bbApiStep = ProductFulfillmentStep::firstOrCreate([
             'product_id' => $broadband->id,
             'fulfillment_step_id' => $apiOrder->id,
             'step_order' => 2,
         ]);
 
         // router steps
-        ProductFulfillmentStep::firstOrCreate([
+        $routerAssignIpStep = ProductFulfillmentStep::firstOrCreate([
             'product_id' => $router->id,
             'fulfillment_step_id' => $assignIp->id,
             'step_order' => 1,
         ]);
 
-        ProductFulfillmentStep::firstOrCreate([
+        $configureRouterStep = ProductFulfillmentStep::firstOrCreate([
             'product_id' => $router->id,
             'fulfillment_step_id' => $configureRouter->id,
             'step_order' => 2,
         ]);
 
-        ProductFulfillmentStep::firstOrCreate([
+        $shipRouterStep = ProductFulfillmentStep::firstOrCreate([
             'product_id' => $router->id,
             'fulfillment_step_id' => $ship->id,
             'step_order' => 3,
@@ -105,6 +106,22 @@ class FulfillmentSeeder extends Seeder
             'product_id' => $mobileData->id,
             'fulfillment_step_id' => $data->id,
             'step_order' => 3,
+        ]);
+
+        // dependencies
+        ProductFulfillmentStepDependency::firstOrCreate([
+            'product_fulfillment_step_id' => $bbApiStep->id,
+            'depends_on_step_id' => $bbSurveyStep->id,
+        ]);
+
+        ProductFulfillmentStepDependency::firstOrCreate([
+            'product_fulfillment_step_id' => $configureRouterStep->id,
+            'depends_on_step_id' => $routerAssignIpStep->id,
+        ]);
+
+        ProductFulfillmentStepDependency::firstOrCreate([
+            'product_fulfillment_step_id' => $shipRouterStep->id,
+            'depends_on_step_id' => $configureRouterStep->id,
         ]);
     }
 }

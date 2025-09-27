@@ -17,7 +17,9 @@ class FulfillmentService implements FulfillmentInterface
         foreach($order->items as $item){
             // skip bespoke products for now, we'll revisit later with a default set of steps
             if(!isset($item->type_id)) continue;
-            $steps = ProductFulfillmentStep::where('product_id', $item->type_id)
+
+            $steps = ProductFulfillmentStep::with('dependencies')
+                ->where('product_id', $item->type_id)
                 ->orderBy('step_order')
                 ->get();
 
@@ -35,16 +37,13 @@ class FulfillmentService implements FulfillmentInterface
             }
 
             // build dependencies (configure_router depends on assign_ip)
-            foreach($tasks as $task){
-                if($task->step->key === 'configure_router'){
-                    $assignIpTask = collect($tasks)->first(fn($t) => $t->step->key === 'assign_ip');
-
-                    if($assignIpTask){
-                        TaskDependency::create([
-                            'task_id' => $task->id,
-                            'depends_on_task_id' => $assignIpTask->id,
-                        ]);
-                    }
+            foreach($steps as $step){
+                if(empty($step->dependencies)) continue;
+                foreach($step->dependencies as $dependency){
+                    TaskDependency::create([
+                        'task_id' => $tasks[$dependency->id]->id,
+                        'depends_on_task_id' => $tasks[$dependency->depends_on_step_id]->id,
+                    ]);
                 }
             }
         }
@@ -119,7 +118,7 @@ class FulfillmentService implements FulfillmentInterface
         ]);
 
         $msg = new AMQPMessage($payload, ['delivery_mode' => 2]);
-        $channel->basic_publish($msg, '', 'fulfillment');
+        $channel->basic_publish($msg, '', $exchange);
 
         $channel->close();
         $connection->close();

@@ -30,13 +30,24 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, CreateOrderAction $createOrderAction)
+    public function store(Request $request, CreateOrderAction $createOrderAction, FulfillmentService $service)
     {
         // trigger the order action
         $action = $createOrderAction->execute(['quote_id' => $request->quote_id]);
 
         // handle error
         if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to create order']);
+
+        // update the quote status
+        $action['order']->quote->update(['status' => 'ordered']);
+
+        /*
+         * @see FulfillmentService
+         * create the tasks to fulfill the order
+         * dispatch the pending tasks to the queue (RabbitMQ)
+         * */
+        $service->createTasks($action['order']);
+        $service->dispatchPendingTasks($action['order']);
 
         /*
          * redirect to the quotes show / edit page
