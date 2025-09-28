@@ -2,6 +2,8 @@
 
 namespace App\Enums;
 
+use App\Models\Quote;
+
 enum QuoteStatusEnum: string
 {
     case Draft = 'draft';
@@ -15,19 +17,50 @@ enum QuoteStatusEnum: string
 
     public function colour(): string {
         return match($this) {
-            QuoteStatusEnum::Draft, QuoteStatusEnum::Sent => 'yellow',
-            QuoteStatusEnum::Accepted, QuoteStatusEnum::Shipped => 'blue',
-            QuoteStatusEnum::Rejected, QuoteStatusEnum::Expired => 'red',
-            QuoteStatusEnum::Completed, QuoteStatusEnum::Ordered => 'green',
+            self::Draft, self::Sent => 'yellow',
+            self::Accepted, self::Shipped => 'blue',
+            self::Rejected, self::Expired => 'red',
+            self::Completed, self::Ordered => 'green',
         };
     }
 
     public function labelClass(): string {
         return match($this) {
-            QuoteStatusEnum::Draft, QuoteStatusEnum::Sent => 'bg-yellow-100 text-yellow-800',
-            QuoteStatusEnum::Accepted, QuoteStatusEnum::Shipped => 'bg-blue-100 text-blue-800',
-            QuoteStatusEnum::Rejected, QuoteStatusEnum::Expired => 'bg-red-100 text-red-800',
-            QuoteStatusEnum::Completed, QuoteStatusEnum::Ordered => 'bg-green-100 text-green-800',
+            self::Draft, self::Sent => 'bg-yellow-100 text-yellow-800',
+            self::Accepted, self::Shipped => 'bg-blue-100 text-blue-800',
+            self::Rejected, self::Expired => 'bg-red-100 text-red-800',
+            self::Completed, self::Ordered => 'bg-green-100 text-green-800',
         };
     }
+
+    public function display(): string
+    {
+        return ucfirst($this->value);
+    }
+
+    public function statusBlock(Quote $quote): array
+    {
+        $display = $this->display();
+
+        return match ($this) {
+            self::Completed => [
+                'label' => 'Completed',
+                'content' => $quote->completed_date,
+            ],
+            self::Expired => [
+                'label' => 'Expires In',
+                'content' => $display,
+            ],
+            self::Draft, self::Sent => [
+                'label' => 'Expires In',
+                'content' => $quote->expires_in . ' days',
+            ],
+            default => [
+                'label' => $display,
+                'content' => $display,
+            ],
+        };
+    }
+
+
 }

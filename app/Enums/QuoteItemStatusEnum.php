@@ -14,19 +14,19 @@ enum QuoteItemStatusEnum: string
 
     public function colour(): string {
         return match($this) {
-            QuoteItemStatusEnum::Quoted => 'yellow',
-            QuoteItemStatusEnum::Approved, QuoteItemStatusEnum::Shipped, QuoteItemStatusEnum::Ordered => 'blue',
-            QuoteItemStatusEnum::Rejected, QuoteItemStatusEnum::Cancelled => 'red',
-            QuoteItemStatusEnum::Delivered => 'green',
+            self::Quoted => 'yellow',
+            self::Approved, self::Shipped, self::Ordered => 'blue',
+            self::Rejected, self::Cancelled => 'red',
+            self::Delivered => 'green',
         };
     }
 
     public function labelClass(): string {
         return match($this) {
-            QuoteItemStatusEnum::Quoted => 'bg-yellow-100 text-yellow-800',
-            QuoteItemStatusEnum::Approved, QuoteItemStatusEnum::Shipped, QuoteItemStatusEnum::Ordered => 'bg-blue-100 text-blue-800',
-            QuoteItemStatusEnum::Rejected, QuoteItemStatusEnum::Cancelled => 'bg-red-100 text-red-800',
-            QuoteItemStatusEnum::Delivered => 'bg-green-100 text-green-800',
+            self::Quoted => 'bg-yellow-100 text-yellow-800',
+            self::Approved, self::Shipped, self::Ordered => 'bg-blue-100 text-blue-800',
+            self::Rejected, self::Cancelled => 'bg-red-100 text-red-800',
+            self::Delivered => 'bg-green-100 text-green-800',
         };
     }
 }

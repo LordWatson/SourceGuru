@@ -10,9 +10,9 @@ enum ProductTypeEnum: string
 
     public function hoverColour(): string {
         return match($this) {
-            ProductTypeEnum::Bespoke => 'hover:bg-gray-100',
-            ProductTypeEnum::Product => 'hover:bg-green-100',
-            ProductTypeEnum::Package => 'hover:bg-blue-100',
+            self::Bespoke => 'hover:bg-gray-100',
+            self::Product => 'hover:bg-green-100',
+            self::Package => 'hover:bg-blue-100',
         };
     }
 }

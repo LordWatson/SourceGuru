@@ -39,7 +39,10 @@ class FulfillmentService implements FulfillmentInterface
             // build dependencies (configure_router depends on assign_ip)
             foreach($steps as $step){
                 if(empty($step->dependencies)) continue;
+
                 foreach($step->dependencies as $dependency){
+                    if(!isset($tasks[$dependency->depends_on_step_id])) continue;
+
                     TaskDependency::create([
                         'task_id' => $tasks[$dependency->id]->id,
                         'depends_on_task_id' => $tasks[$dependency->depends_on_step_id]->id,
@@ -115,10 +118,17 @@ class FulfillmentService implements FulfillmentInterface
             'order_item_id' => $task->order_item_id,
             'step_key' => $task->step->key,
             'params' => $task->params,
+            // remove after testing
+            'message_id' => 'ascew-1234567890',
+            'occurred_at' => now(),
+            'order' => [
+                'id' => "$task->order_id",
+                'product_type' => 'router',
+            ],
         ]);
 
         $msg = new AMQPMessage($payload, ['delivery_mode' => 2]);
-        $channel->basic_publish($msg, '', $exchange);
+        $channel->basic_publish($msg, '', 'sourceguru.processor.queue');
 
         $channel->close();
         $connection->close();
