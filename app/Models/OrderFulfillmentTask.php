@@ -22,4 +22,24 @@ class OrderFulfillmentTask extends Model
     {
         return $this->belongsTo(FulfillmentStep::class, 'fulfillment_step_id');
     }
+
+    public function paramMappings(): HasMany
+    {
+        return $this->hasMany(TaskParamMapping::class, 'task_id');
+    }
+
+    public function resolveParams(): array
+    {
+        $resolved = $this->params ?? [];
+
+        foreach($this->paramMappings as $map){
+            $sourceOutput = $map->sourceTask->output ?? [];
+
+            if(isset($sourceOutput[$map->source_output_key])){
+                $resolved[$map->param_key] = $sourceOutput[$map->source_output_key];
+            }
+        }
+
+        return $resolved;
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Services\FulfillmentInterface;
+use App\Jobs\SendFulfillmentTaskToWorkerJob;
 use App\Models\Order;
 use App\Models\OrderFulfillmentTask;
 use App\Models\ProductFulfillmentStep;
@@ -101,36 +102,14 @@ class FulfillmentService implements FulfillmentInterface
 
     protected function sendToQueue(OrderFulfillmentTask $task): void
     {
-        $connection = new AMQPStreamConnection(
-            config('queue.connections.rabbitmq.host'),
-            config('queue.connections.rabbitmq.port'),
-            config('queue.connections.rabbitmq.user'),
-            config('queue.connections.rabbitmq.pass'),
-        );
-
-        $channel = $connection->channel();
-        $exchange = config('queue.connections.rabbitmq.exchange');
-        $channel->queue_declare($exchange, false, true, false, false);
-
-        $payload = json_encode([
-            'task_id' => $task->id,
+        $payload = [
+            'task_id'  => $task->id,
             'order_id' => $task->order_id,
-            'order_item_id' => $task->order_item_id,
             'step_key' => $task->step->key,
-            'params' => $task->params,
-            // remove after testing
-            'message_id' => 'ascew-1234567890',
-            'occurred_at' => now(),
-            'order' => [
-                'id' => "$task->order_id",
-                'product_type' => 'router',
-            ],
-        ]);
+            'params'   => $task->resolveParams(),
+            'product_type' => 'router',
+        ];
 
-        $msg = new AMQPMessage($payload, ['delivery_mode' => 2]);
-        $channel->basic_publish($msg, '', 'sourceguru.processor.queue');
-
-        $channel->close();
-        $connection->close();
+        SendFulfillmentTaskToWorkerJob::dispatch($payload);
     }
 }
