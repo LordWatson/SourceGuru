@@ -27,15 +27,15 @@ class ConsumeFulfillmentResults extends Command
         $callback = function (AMQPMessage $msg){
             $data = json_decode($msg->body, true);
 
-            if(!$data || !isset($data['task_id'], $data['status'])){
+            if(!$data || !isset($data['order']['task_id'], $data['order']['status'])){
                 $this->error("Invalid message format: {$msg->body}");
 
                 return;
             }
 
-            ProcessFulfillmentJob::dispatch($data);
+            ProcessFulfillmentJob::dispatch($data['order']);
 
-            $this->info(" [x] Dispatched job for task {$data['task_id']}");
+            $this->info(" [x] Dispatched job for task {$data['order']['task_id']}");
         };
 
         $channel->basic_consume('sourceguru.results', '', false, true, false, false, $callback);
