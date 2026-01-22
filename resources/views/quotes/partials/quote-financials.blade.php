@@ -26,6 +26,9 @@
         </h3>
         <p class="mt-1 text-3xl font-bold text-gray-900 flex items-center">
             £{{ number_format($quote->revenue, 2) }}
+            <span class="ml-2 text-sm font-medium flex {{ $quote->margin >= 15 ? 'text-green-600' : 'text-red-600' }}">
+                {{ number_format($quote->margin, 1) }}%
+            </span>
         </p>
     </div>
 

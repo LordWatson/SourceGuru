@@ -8,6 +8,7 @@ use App\Actions\QuoteItem\MapCatalogueProductToQuoteItemAction;
 use App\Actions\QuoteItem\UpdateQuoteItemAction;
 use App\Http\Requests\QuoteItem\CreateQuoteItemRequest;
 use App\Http\Requests\QuoteItem\UpdateQuoteItemRequest;
+use App\Models\Package;
 use App\Models\Product;
 use App\Models\QuoteItem;
 use Illuminate\Http\Request;
@@ -77,10 +78,12 @@ class QuoteItemController extends Controller
         MapCatalogueProductToQuoteItemAction $mapCatalogueProductToQuoteItemAction, CreateQuoteItemAction $createQuoteItemAction
     ){
         // validate the request
-        $product = Product::findOrFail($request->product);
+        $package = Package::findOrFail($request->package);
 
-        // format the catalogue product into a manner that will be accepted by the createQuoteItemAction
-        $quoteItem = $mapCatalogueProductToQuoteItemAction->execute($product, $quoteId);
+        foreach($package->products as $product){
+            // format the catalogue product into a manner that will be accepted by the createQuoteItemAction
+            $quoteItem = $mapCatalogueProductToQuoteItemAction->execute($product, $quoteId);
+        }
 
         // create action
         $action = $createQuoteItemAction->execute($quoteItem);

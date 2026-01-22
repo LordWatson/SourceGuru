@@ -62,6 +62,15 @@ class Quote extends Model
         );
     }
 
+    public function margin(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => $this->total_buy_price > 0
+                ? (($this->total_sell_price - $this->total_buy_price) / $this->total_sell_price) * 100
+                : 0
+        );
+    }
+
     public function expiresIn(): Attribute
     {
         return new Attribute(
