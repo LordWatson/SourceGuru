@@ -62,4 +62,12 @@ class PackageController extends Controller
     {
         //
     }
+
+
+    public function getPackages(Request $request)
+    {
+        $packages = Package::all()->toArray();
+
+        return response()->json($packages);
+    }
 }

@@ -36,7 +36,7 @@ class GetMonthlyQuotesAction
             ],
             0,
             // only give us months up to the current month
-            $currentMonth
+            //$currentMonth
         );
 
         // array of months range as keys and default counts as 0

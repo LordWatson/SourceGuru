@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('quote-items', QuoteItemController::class);
     Route::post('/quote-items/{quoteItem}/duplicate', [QuoteItemController::class, 'duplicate'])->name('quote-items.duplicate');
     Route::post('/quote-items/addCatalogueProduct/{quoteId}', [QuoteItemController::class, 'addCatalogueProduct'])->name('quote-items.addCatalogueProduct');
+    Route::post('/quote-items/addPackage/{quoteId}', [QuoteItemController::class, 'addPackage'])->name('quote-items.addPackage');
 
     Route::resource('orders', OrderController::class);
 
@@ -38,7 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('companies', CompanyController::class);
     Route::resource('reports', UserController::class);
+
     Route::resource('packages', PackageController::class);
+    Route::get('api/get-packages', [PackageController::class, 'getPackages'])->name('packages.getPackages');
 
     Route::resource('products', ProductController::class);
     Route::get('products/{typeId}/{subTypeId}', [ProductController::class, 'productList'])->name('products.productList');

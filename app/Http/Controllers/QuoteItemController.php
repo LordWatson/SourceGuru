@@ -69,6 +69,35 @@ class QuoteItemController extends Controller
     }
 
     /**
+     * Store a catalogue product.
+     */
+    public function addPackage(
+        Request $request,
+        int $quoteId,
+        MapCatalogueProductToQuoteItemAction $mapCatalogueProductToQuoteItemAction, CreateQuoteItemAction $createQuoteItemAction
+    ){
+        // validate the request
+        $product = Product::findOrFail($request->product);
+
+        // format the catalogue product into a manner that will be accepted by the createQuoteItemAction
+        $quoteItem = $mapCatalogueProductToQuoteItemAction->execute($product, $quoteId);
+
+        // create action
+        $action = $createQuoteItemAction->execute($quoteItem);
+
+        // handle error
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to add product.']);
+
+        // redirect to the users show / edit page
+        return Redirect::to("/quotes/{$action['quoteitem']->quote_id}")
+            ->with('status', [
+                'type' => 'create',
+                'message' => 'Product added',
+                'colour' => 'green',
+            ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateQuoteItemRequest $request, QuoteItem $quoteItem, UpdateQuoteItemAction $updateQuoteItemAction)
