@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QuoteItem extends Model
 {
+    protected $casts = [
+        'squashed_products' => 'array',
+    ];
+
     public function quote(): BelongsTo
     {
         return $this->belongsTo(Quote::class);
@@ -15,6 +19,11 @@ class QuoteItem extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function package(): BelongsTo
+    {
+        return $this->belongsTo(Package::class, 'type_id');
     }
 
     /*

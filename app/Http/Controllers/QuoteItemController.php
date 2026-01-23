@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Company\UpdateCompanyAction;
 use App\Actions\QuoteItem\CreateQuoteItemAction;
 use App\Actions\QuoteItem\MapCatalogueProductToQuoteItemAction;
+use App\Actions\QuoteItem\MapPackageToQuoteItemAction;
 use App\Actions\QuoteItem\UpdateQuoteItemAction;
 use App\Http\Requests\QuoteItem\CreateQuoteItemRequest;
 use App\Http\Requests\QuoteItem\UpdateQuoteItemRequest;
@@ -75,27 +76,26 @@ class QuoteItemController extends Controller
     public function addPackage(
         Request $request,
         int $quoteId,
-        MapCatalogueProductToQuoteItemAction $mapCatalogueProductToQuoteItemAction, CreateQuoteItemAction $createQuoteItemAction
+        MapPackageToQuoteItemAction $mapPackageToQuoteItemAction,
+        CreateQuoteItemAction $createQuoteItemAction
     ){
         // validate the request
         $package = Package::findOrFail($request->package);
 
-        foreach($package->products as $product){
-            // format the catalogue product into a manner that will be accepted by the createQuoteItemAction
-            $quoteItem = $mapCatalogueProductToQuoteItemAction->execute($product, $quoteId);
-        }
+        // format the package into a manner that will be accepted by the createQuoteItemAction
+        $quoteItem = $mapPackageToQuoteItemAction->execute($package, $quoteId);
 
         // create action
         $action = $createQuoteItemAction->execute($quoteItem);
 
         // handle error
-        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to add product.']);
+        if(!$action['success']) return Redirect::back()->withErrors(['error' => 'Failed to add package.']);
 
-        // redirect to the users show / edit page
+        // redirect to the quote show / edit page
         return Redirect::to("/quotes/{$action['quoteitem']->quote_id}")
             ->with('status', [
                 'type' => 'create',
-                'message' => 'Product added',
+                'message' => 'Package added',
                 'colour' => 'green',
             ]);
     }

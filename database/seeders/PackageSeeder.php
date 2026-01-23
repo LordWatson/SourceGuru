@@ -16,9 +16,12 @@ class PackageSeeder extends Seeder
      */
     public function run(CreatePackageAction $createPackageAction): void
     {
-        for($i = 0; $i < 50; $i++){
+        $json = file_get_contents(database_path('data/packages.json'));
+        $packages = json_decode($json, 1);
+
+        foreach($packages as $packageName){
             $package = $createPackageAction->execute([
-                'name' => fake()->words(3, true),
+                'name' => $packageName,
                 'description' => fake()->sentence(),
                 'status' => 'active',
             ]);

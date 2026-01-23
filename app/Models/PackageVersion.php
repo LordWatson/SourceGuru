@@ -22,8 +22,7 @@ class PackageVersion extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'package_version_products')
-            ->withPivot(['unit_buy_price', 'unit_sell_price'])
-            ->wherePivot('package_id', $this->package_id)
+            ->withPivot(['unit_buy_price', 'unit_sell_price', 'package_id'])
             ->withTimestamps();
     }
 }
