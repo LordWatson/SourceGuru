@@ -46,7 +46,7 @@
                         <p>
                             <x-edit-action
                                 x-data="{{ $product }}"
-                                x-on:click.prevent="$dispatch('open-modal', 'edit-quote-item-{{ $product->id }}')"
+                                x-on:click.prevent="$dispatch('open-modal', '{{ $product->product_type === 'package' ? 'edit-package-' . $product->id : 'edit-quote-item-' . $product->id }}')"
                             >
                                 {{ __('Edit') }}
                             </x-edit-action>
@@ -65,7 +65,11 @@
                                 {{ __('Delete') }}
                             </x-delete-action>
 
-                            @include('quotes.partials.edit-quote-item-modal', ['product' => $product])
+                            @if($product->product_type === 'package')
+                                @include('quotes.partials.edit-package-modal', ['product' => $product])
+                            @else
+                                @include('quotes.partials.edit-quote-item-modal', ['product' => $product])
+                            @endif
 
                             @include('quotes.partials.duplicate-quote-item-modal', ['product' => $product])
 

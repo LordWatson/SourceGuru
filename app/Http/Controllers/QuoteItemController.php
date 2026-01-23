@@ -6,6 +6,7 @@ use App\Actions\Company\UpdateCompanyAction;
 use App\Actions\QuoteItem\CreateQuoteItemAction;
 use App\Actions\QuoteItem\MapCatalogueProductToQuoteItemAction;
 use App\Actions\QuoteItem\MapPackageToQuoteItemAction;
+use App\Actions\QuoteItem\UpdatePackageQuoteItemAction;
 use App\Actions\QuoteItem\UpdateQuoteItemAction;
 use App\Http\Requests\QuoteItem\CreateQuoteItemRequest;
 use App\Http\Requests\QuoteItem\UpdateQuoteItemRequest;
@@ -122,6 +123,40 @@ class QuoteItemController extends Controller
             ->with('status', [
                 'type' => 'update',
                 'message' => 'Product updated',
+                'colour' => 'green',
+            ]);
+    }
+
+    /**
+     * Update a package's squashed products.
+     */
+    public function updatePackage(Request $request, QuoteItem $quoteItem, UpdatePackageQuoteItemAction $updatePackageAction)
+    {
+        // validate that squashed_products is present and is valid JSON
+        $request->validate([
+            'squashed_products' => 'required|json',
+        ]);
+
+        // decode the squashed products
+        $squashedProducts = json_decode($request->squashed_products, true);
+
+        // trigger the update package action
+        $action = $updatePackageAction->execute([
+            'id' => $quoteItem->id,
+            'squashed_products' => $squashedProducts,
+        ]);
+
+        // handle error
+        if(!$action['success']) {
+            return Redirect::to("/quotes/{$quoteItem->quote_id}")
+                ->withErrors(['error' => 'Failed to update package.']);
+        }
+
+        // redirect to the quote show / edit page
+        return Redirect::to("/quotes/{$quoteItem->quote_id}")
+            ->with('status', [
+                'type' => 'update',
+                'message' => 'Package updated',
                 'colour' => 'green',
             ]);
     }

@@ -26,14 +26,10 @@ class MapPackageToQuoteItemAction
     public function execute(Package $package, int $quoteId): array
     {
         // load the current version with products
-        $currentVersion = $package->currentVersion()->with('products')->first();
-
-        if(!$currentVersion){
-            throw new \Exception("Package has no current version set.");
-        }
+        $package->with('products')->first();
 
         // get all products from the current version
-        $versionProducts = $currentVersion->products;
+        $products = $package->products;
 
         // calculate totals from all products in the package
         $totalBuyPrice = 0;
@@ -42,15 +38,13 @@ class MapPackageToQuoteItemAction
         $totalEmissionResult = 0;
         $squashedProducts = [];
 
-        foreach($versionProducts as $product){
+        foreach($products as $product){
             // Use prices from the pivot table (package_version_products)
             $buyPrice = $product->pivot->unit_buy_price ?? $product->unit_buy_price;
             $sellPrice = $product->pivot->unit_sell_price ?? $product->unit_sell_price;
 
             $totalBuyPrice += $buyPrice;
             $totalSellPrice += $sellPrice;
-            $totalEmissionBenchmark += $product->emission_benchmark ?? 0.00;
-            $totalEmissionResult += $product->emission_result ?? 0.00;
 
             // store product details for reference
             $squashedProducts[] = [
@@ -58,8 +52,7 @@ class MapPackageToQuoteItemAction
                 'name' => $product->name,
                 'unit_buy_price' => $buyPrice,
                 'unit_sell_price' => $sellPrice,
-                'emission_benchmark' => $product->emission_benchmark ?? 0.00,
-                'emission_result' => $product->emission_result ?? 0.00,
+                'qty' => 1,
             ];
         }
 
@@ -73,8 +66,6 @@ class MapPackageToQuoteItemAction
             'product_type' => 'package',
             'product_source' => 'catalogue',
             'type_id' => $package->id,
-            'emission_benchmark' => $totalEmissionBenchmark,
-            'emission_result' => $totalEmissionResult,
             'squashed_products' => json_encode($squashedProducts),
         ];
     }

@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('quote-items', QuoteItemController::class);
     Route::post('/quote-items/{quoteItem}/duplicate', [QuoteItemController::class, 'duplicate'])->name('quote-items.duplicate');
+    Route::patch('/quote-items/{quoteItem}/package', [QuoteItemController::class, 'updatePackage'])->name('quote-items.updatePackage');
     Route::post('/quote-items/addCatalogueProduct/{quoteId}', [QuoteItemController::class, 'addCatalogueProduct'])->name('quote-items.addCatalogueProduct');
     Route::post('/quote-items/addPackage/{quoteId}', [QuoteItemController::class, 'addPackage'])->name('quote-items.addPackage');
 
