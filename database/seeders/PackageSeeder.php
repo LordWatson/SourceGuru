@@ -31,7 +31,7 @@ class PackageSeeder extends Seeder
                 ->select('id', 'unit_buy_price', 'unit_sell_price')
                 ->get();
 
-            $package['package']->products()->sync([1, 2, 3]);
+            $package['package']->products()->sync($products->pluck('id')->toArray());
 
             PackageVersion::create([
                 'package_id' => $package['package']->id,
