@@ -9,6 +9,7 @@ class QuoteItem extends Model
 {
     protected $casts = [
         'squashed_products' => 'array',
+        'selected_options' => 'array',
     ];
 
     public function quote(): BelongsTo

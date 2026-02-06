@@ -43,6 +43,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('packages', PackageController::class);
     Route::get('api/get-packages', [PackageController::class, 'getPackages'])->name('packages.getPackages');
+    Route::get('api/packages/{package}/options', [PackageController::class, 'getPackageWithOptions'])->name('packages.getPackageWithOptions');
+
+    // package option routes
+    Route::post('packages/{package}/options', [PackageController::class, 'storeOption'])->name('packages.options.store');
+    Route::patch('package-options/{option}', [PackageController::class, 'updateOption'])->name('package-options.update');
+    Route::delete('package-options/{option}', [PackageController::class, 'destroyOption'])->name('package-options.destroy');
+    Route::post('package-options/{option}/products', [PackageController::class, 'addProductsToOption'])->name('package-options.products.add');
+    Route::delete('package-options/{option}/products/{product}', [PackageController::class, 'removeProductFromOption'])->name('package-options.products.remove');
 
     Route::resource('products', ProductController::class);
     Route::get('products/{typeId}/{subTypeId}', [ProductController::class, 'productList'])->name('products.productList');

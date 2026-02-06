@@ -72,7 +72,7 @@ class QuoteItemController extends Controller
     }
 
     /**
-     * Store a catalogue product.
+     * Store a package with options.
      */
     public function addPackage(
         Request $request,
@@ -81,10 +81,17 @@ class QuoteItemController extends Controller
         CreateQuoteItemAction $createQuoteItemAction
     ){
         // validate the request
+        $request->validate([
+            'package' => 'required|exists:packages,id',
+            'options' => 'nullable|array',
+            'options.*' => 'required|exists:products,id',
+        ]);
+
         $package = Package::findOrFail($request->package);
+        $selectedOptions = $request->options ?? [];
 
         // format the package into a manner that will be accepted by the createQuoteItemAction
-        $quoteItem = $mapPackageToQuoteItemAction->execute($package, $quoteId);
+        $quoteItem = $mapPackageToQuoteItemAction->execute($package, $quoteId, $selectedOptions);
 
         // create action
         $action = $createQuoteItemAction->execute($quoteItem);

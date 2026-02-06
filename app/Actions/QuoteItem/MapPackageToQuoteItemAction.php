@@ -3,6 +3,7 @@
 namespace App\Actions\QuoteItem;
 
 use App\Models\Package;
+use App\Models\PackageOption;
 
 class MapPackageToQuoteItemAction
 {
@@ -21,39 +22,66 @@ class MapPackageToQuoteItemAction
      *
      * @param Package $package
      * @param int $quoteId
+     * @param array $selectedOptions Array of package_option_id => product_id
      * @return array
      */
-    public function execute(Package $package, int $quoteId): array
+    public function execute(Package $package, int $quoteId, array $selectedOptions = []): array
     {
-        // load the current version with products
-        $package->with('products')->first();
-
-        // get all products from the current version
-        $products = $package->products;
-
-        // calculate totals from all products in the package
         $totalBuyPrice = 0;
         $totalSellPrice = 0;
-        $totalEmissionBenchmark = 0;
-        $totalEmissionResult = 0;
         $squashedProducts = [];
+        $selectedOptionsData = [];
 
-        foreach($products as $product){
-            // Use prices from the pivot table (package_version_products)
-            $buyPrice = $product->pivot->unit_buy_price ?? $product->unit_buy_price;
-            $sellPrice = $product->pivot->unit_sell_price ?? $product->unit_sell_price;
+        // if options are provided, use them
+        if(!empty($selectedOptions)){
+            foreach($selectedOptions as $optionId => $productId){
+                $option = PackageOption::with(['products' => function($query) use ($productId) {
+                    $query->where('products.id', $productId);
+                }])->find($optionId);
 
-            $totalBuyPrice += $buyPrice;
-            $totalSellPrice += $sellPrice;
+                if($option && $option->products->isNotEmpty()){
+                    $product = $option->products->first();
+                    $buyPrice = $product->pivot->unit_buy_price ?? $product->unit_buy_price;
+                    $sellPrice = $product->pivot->unit_sell_price ?? $product->unit_sell_price;
 
-            // store product details for reference
-            $squashedProducts[] = [
-                'product_id' => $product->id,
-                'name' => $product->name,
-                'unit_buy_price' => $buyPrice,
-                'unit_sell_price' => $sellPrice,
-                'qty' => 1,
-            ];
+                    $totalBuyPrice += $buyPrice;
+                    $totalSellPrice += $sellPrice;
+
+                    $squashedProducts[] = [
+                        'product_id' => $product->id,
+                        'name' => $product->name,
+                        'unit_buy_price' => $buyPrice,
+                        'unit_sell_price' => $sellPrice,
+                        'qty' => 1,
+                        'option_name' => $option->name,
+                    ];
+
+                    $selectedOptionsData[] = [
+                        'option_id' => $optionId,
+                        'option_name' => $option->name,
+                        'product_id' => $productId,
+                    ];
+                }
+            }
+        }else{
+            $package->load('products');
+            $products = $package->products;
+
+            foreach($products as $product){
+                $buyPrice = $product->pivot->unit_buy_price ?? $product->unit_buy_price;
+                $sellPrice = $product->pivot->unit_sell_price ?? $product->unit_sell_price;
+
+                $totalBuyPrice += $buyPrice;
+                $totalSellPrice += $sellPrice;
+
+                $squashedProducts[] = [
+                    'product_id' => $product->id,
+                    'name' => $product->name,
+                    'unit_buy_price' => $buyPrice,
+                    'unit_sell_price' => $sellPrice,
+                    'qty' => 1,
+                ];
+            }
         }
 
         return [
@@ -67,6 +95,7 @@ class MapPackageToQuoteItemAction
             'product_source' => 'catalogue',
             'type_id' => $package->id,
             'squashed_products' => json_encode($squashedProducts),
+            'selected_options' => json_encode($selectedOptionsData),
         ];
     }
 }
