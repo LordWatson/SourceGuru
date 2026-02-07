@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="mt-6 flex justify-end">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent border-gray-500 rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                                 Update Package
                             </button>
                         </div>
@@ -54,7 +54,7 @@
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-medium text-gray-900">Package Options</h3>
                         <button @click="showAddOptionForm = !showAddOptionForm" type="button"
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700">
+                                class="inline-flex items-center px-4 py-2 border border-transparent border-gray-500 rounded-md font-semibold text-xs uppercase tracking-widest hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                             Add Option
                         </button>
                     </div>
@@ -121,7 +121,7 @@
                                         <div class="flex justify-between items-center mb-2">
                                             <h5 class="text-sm font-medium text-gray-700">Products</h5>
                                             <button @click="showAddProductForm[{{ $option->id }}] = !showAddProductForm[{{ $option->id }}]" type="button"
-                                                    class="text-indigo-600 hover:text-indigo-900 text-sm">
+                                                    class="text-blue-900 cursor-pointer hover:text-blue-300 text-sm">
                                                 Add Products
                                             </button>
                                         </div>
@@ -177,7 +177,7 @@
                                                             <form method="POST" action="{{ route('package-options.products.remove', [$option, $product]) }}" class="inline">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Remove this product?')">
+                                                                <button type="submit" class="text-red-600 hover:text-red-900">
                                                                     Remove
                                                                 </button>
                                                             </form>

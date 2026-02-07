@@ -142,15 +142,18 @@ class QuoteItemController extends Controller
         // validate that squashed_products is present and is valid JSON
         $request->validate([
             'squashed_products' => 'required|json',
+            'selected_options' => 'nullable|json',
         ]);
 
         // decode the squashed products
         $squashedProducts = json_decode($request->squashed_products, true);
+        $selectedOptions = $request->selected_options ? json_decode($request->selected_options, true) : null;
 
         // trigger the update package action
         $action = $updatePackageAction->execute([
             'id' => $quoteItem->id,
             'squashed_products' => $squashedProducts,
+            'selected_options' => $selectedOptions,
         ]);
 
         // handle error

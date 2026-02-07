@@ -2,81 +2,43 @@
 
 namespace App\Actions\QuoteItem;
 
-use App\Actions\CreateActivityLog;
-use App\Actions\UpdateAction;
 use App\Models\QuoteItem;
-use Illuminate\Database\Eloquent\Model;
 
-class UpdatePackageQuoteItemAction extends UpdateAction
+class UpdatePackageQuoteItemAction
 {
-    /**
-     * Execute the update package operation.
-     */
-    public function execute(array $data, string $message = 'Package updated successfully'): array
+    public function execute(array $data): array
     {
-        // get the record
-        $model = $this->getModelInstance($data['id']);
-
         try {
-            // begin a db transaction
-            \DB::beginTransaction();
+            $quoteItem = QuoteItem::findOrFail($data['id']);
 
-            // get the original data (used for the activity log)
-            $originalData = $model->getOriginal();
+            // Update squashed products
+            $squashedProducts = $data['squashed_products'];
 
-            // calculate the new unit prices based on all products in the package
-            $unitBuyPrice = 0;
-            $unitSellPrice = 0;
+            // Calculate new totals
+            $totalBuyPrice = 0;
+            $totalSellPrice = 0;
 
-            foreach($data['squashed_products'] as $product){
-                $unitBuyPrice += ($product['qty'] ?? 0) * ($product['unit_buy_price'] ?? 0);
-                $unitSellPrice += ($product['qty'] ?? 0) * ($product['unit_sell_price'] ?? 0);
+            foreach ($squashedProducts as $product) {
+                $qty = $product['qty'] ?? 1;
+                $totalBuyPrice += ($product['unit_buy_price'] ?? 0) * $qty;
+                $totalSellPrice += ($product['unit_sell_price'] ?? 0) * $qty;
             }
 
-            // update the record with calculated prices
-            $model->update([
-                'squashed_products' => $data['squashed_products'],
-                'unit_buy_price' => $unitBuyPrice,
-                'unit_sell_price' => $unitSellPrice,
-            ]);
+            // Update the quote item
+            $quoteItem->squashed_products = $squashedProducts;
+            $quoteItem->unit_buy_price = $totalBuyPrice;
+            $quoteItem->unit_sell_price = $totalSellPrice;
 
-            // log the success
-            $this->logActivity(
-                model: $model,
-                originalData: $originalData,
-                statusCode: 201,
-                message: $message
-            );
+            // Update selected options if provided
+            if (isset($data['selected_options'])) {
+                $quoteItem->selected_options = $data['selected_options'];
+            }
 
-            // commit the changes
-            \DB::commit();
+            $quoteItem->save();
+
+            return ['success' => true, 'quoteitem' => $quoteItem];
         } catch (\Exception $e) {
-            // undo the db transaction
-            \DB::rollBack();
-
-            // log the failure
-            $this->logActivity(
-                model: $model,
-                originalData: $model->getOriginal() ?? null,
-                statusCode: 500,
-                message: $e->getMessage()
-            );
-
-            // return a failed message
-            return [
-                'success' => false
-            ];
+            return ['success' => false, 'error' => $e->getMessage()];
         }
-
-        // success !!
-        return [
-            strtolower(class_basename($model)) => $model->fresh(),
-            'success' => true,
-        ];
-    }
-
-    protected function getModelInstance(int $id): Model
-    {
-        return QuoteItem::findOrFail($id);
     }
 }
